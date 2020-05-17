@@ -1,3 +1,7 @@
+* Check out the book
+  [[https://doc.rust-lang.org/stable/book/title-page.html][Rust book]]
+* Clone this repo and complete the exercises
+  - Run: *cargo test* to check your solution
 * Variables (Scalar type), control flow, functions
   Defining variables and functions
   - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]].
