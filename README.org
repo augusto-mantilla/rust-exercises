@@ -1,5 +1,5 @@
 * Variables (Scalar type), control flow, functions
-  Define a function call fibonacci that receives an argument n a 32 bit integer and returns the nth number in the Fibonacci series
+  Defining variables and functions
   Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]].
 * Tuples: definition and indexing
   Calculate the transposition of a 2x2 matrix [[https://en.wikipedia.org/wiki/Matrix_(mathematics)#Addition,_scalar_multiplication,_and_transposition][more about matrices]]
