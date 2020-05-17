@@ -1,0 +1,139 @@
+* Data types
+** Defined like this
+   let <varname> : <type> = value
+** Example
+   #+begin_src rust
+        let guess: i32 = 20;
+   #+end_src
+** Scalar Types
+   A scalar types represents a single value
+*** Integers
+    - [iu]size(bits)
+      - i -> signed integer size (8, 16, 32, 64, 128) bits
+      - u -> unsigned integer
+      - isize -> depends on the architecture of the system
+      - usize -> depends on the architecture of the system
+    Integer literals (all number literals except the byte literal allow a type a type suffix such as 57u8 and _ as a visual separator such as 1_000)    
+
+    | Number lit    | Example     |
+    | Decimal       | 98_222      |
+    | Hex           | 0xff        |
+    | Octal         | 0o77        |
+    | Binary        | 0b1111_0000 |
+    | Byte(u8 only) | b'A'        |
+
+*** Floating-point numbers
+    f64 or f32, default f64
+*** Booleans
+    true or false
+*** Characters
+    - Type char
+    - Specified with single quotes
+    - 4 bytes in size
+** Compound types
+    - Can group multiple values into one type
+    - Rust has two primary types:
+*** Tuples
+    A general way of grouping together a number of values into one compound type.
+    - Tuples have a fixed length
+    - Comma separated list of values inside parenthesis
+    - Each position in the tuple has a type (and they don't have to be the same)
+    - To get the individuals values of the tuple we can use pattern matching to destructure a tuple value like this:
+      #+begin_src rust
+        fn main() {
+            let tup = (500, 64, 1);
+            let (x,y,z) = tup;
+        }
+      #+end_src
+    - We can access a tuple element directly by using a period (.) followed by the index of the value we want to access. For example:
+      #+begin_src rust
+        fn main() {
+            let x: (i32, f64, u8) = (500, 6.4, 1);
+            let five_hundred = x.0;
+            let six_point_four = x.1;
+            let one = x.2;
+        }
+      #+end_src
+*** Arrays
+    - Arrays have a fixed length
+    - An array is a single chunk of memory on the stack
+    - Comma separated list of elements of the same type inside square brackets
+    - Example declaration:
+      #+begin_src rust
+        let a: [i32;5] = [1, 2, 3, 4, 5]; // With type annotation
+        let a = [1, 2, 3, 4, 5];
+        let a = [3;5]; // Produces the array [3,3,3,3,3]
+      #+end_src
+    - Indexing an array with array[index]
+    - Indexing an array out of bound creates a runtime error
+* Functions
+  - The convention for the name of the functions is snake_case (lowercase words separated by underscores)
+  - Starts with the keyword fn
+  - Rust doesn't care where you define your functions just that they are defined somewhere
+** Function parameters
+   - Parameters are special variables that are part of a functions signature.
+   - The concrete value of a parameter is called an argument
+   - Parameters are defined like so (name: type)
+** Functions Bodies Contain Statements and Expressions
+   - Rust is an expression-based language
+   - Statements are instructions that perform some action and do not return a value
+   - Expressions evaluate to a resulting value
+   - Statement end with semicolon
+   - Expression don't need semicolon
+** To Indicate the Return Value of a Function
+   - Use the -> to indicate the return type
+	 #+begin_src rust
+	   fn value(n: i32) -> i32 {
+		   ...
+	   }
+	 #+end_src
+   - Function will return the last expression type without a semicolon
+   - It is possible to return before with the return keyword
+   - Using if in a let statement
+   - Because `if` is an expression, we can use it on the right side of a let statement
+     #+begin_src rust
+       let number = if condition {
+           5
+       } else {
+           6
+       };
+     #+end_src
+   - To use this kind of construct the return types must be the same
+     #+begin_src rust
+       let number = if condition {
+           5
+       } else {
+           "six"
+       }
+     #+end_src
+     This code will give a compilation error
+** Repetition with loops
+   Rust has three kinds of loops:
+*** Loop
+    - Executes a block of code indefinitely
+**** Returning values from loops
+     - Add the value that should be returned after the break expression
+*** While
+    - Conditional loop
+    - While a condition is true the loop runs; otherwise it exists the loop
+*** For
+    - Loop through a collection with for
+    - Ex:
+      #+begin_src rust
+		fn main() {
+			let a = [10, 20, 30, 40, 50];
+			for element in a.iter() {
+				println!("the value is: {}", element);
+			}
+		}
+      #+end_src
+      - Increases safety and speed (preferred over while is better loop when possible)
+      - To loop through  a range instead of using while loop is better to use a Range
+        #+begin_src rust
+          fn main() {
+              for number in (1..4).rev() {
+                  println!("{}!", number);
+              }
+              println!("LIFTOFF!!!");
+          }
+        #+end_src
