@@ -5,5 +5,5 @@
   Calculate the transposition of a 2x2 matrix [[https://en.wikipedia.org/wiki/Matrix_(mathematics)#Addition,_scalar_multiplication,_and_transposition][more about matrices]]
   - Exercises: [[file:matrix_transposition/src/main.rs][matrix_transposition]]
 * Tuples: definition and destructuring
-  Calculate a the division of two numbers and the rest of the division in the same function
+  Calculate the division of two numbers and the rest of the division in the same function
   - Exercises: [[file:division_and_remainder/src/main.rs][division_and_remainder]]
