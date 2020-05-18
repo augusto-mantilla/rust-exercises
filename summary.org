@@ -1,10 +1,17 @@
 * Data types
 ** Defined like this
-   let <varname> : <type> = value
+   let var_name : <type> = value
 ** Example
    #+begin_src rust
         let guess: i32 = 20;
    #+end_src
+** Variables and Mutability
+   - In Rust all variables are immutable by default.
+   - Immutable variable cannot be changed after the first assignment.
+   - They can be made mutable by adding the `mut` key word to the variable declaration:
+	 #+begin_src rust
+	   let mut s = String::from("hello");
+	 #+end_src
 ** Scalar Types
    A scalar types represents a single value
 *** Integers
@@ -13,14 +20,14 @@
       - u -> unsigned integer
       - isize -> depends on the architecture of the system
       - usize -> depends on the architecture of the system
-    Integer literals (all number literals except the byte literal allow a type a type suffix such as 57u8 and _ as a visual separator such as 1_000)    
+    Integer literals (all number literals except the byte literal allow a type suffix such as 57u8 and underscore (_) as a visual separator such as 1_000)    
 
-    | Number lit    | Example     |
-    | Decimal       | 98_222      |
-    | Hex           | 0xff        |
-    | Octal         | 0o77        |
-    | Binary        | 0b1111_0000 |
-    | Byte(u8 only) | b'A'        |
+    | Number lit     | Example     |
+    | Decimal        | 98_222      |
+    | Hex            | 0xff        |
+    | Octal          | 0o77        |
+    | Binary         | 0b1111_0000 |
+    | Byte (u8 only) | b'A'        |
 
 *** Floating-point numbers
     f64 or f32, default f64
@@ -36,9 +43,9 @@
 *** Tuples
     A general way of grouping together a number of values into one compound type.
     - Tuples have a fixed length
-    - Comma separated list of values inside parenthesis
+    - Comma-separated list of values inside parenthesis
     - Each position in the tuple has a type (and they don't have to be the same)
-    - To get the individuals values of the tuple we can use pattern matching to destructure a tuple value like this:
+    - To get the individual values of the tuple we can use pattern matching to destructure a tuple value like this:
       #+begin_src rust
         fn main() {
             let tup = (500, 64, 1);
@@ -57,7 +64,7 @@
 *** Arrays
     - Arrays have a fixed length
     - An array is a single chunk of memory on the stack
-    - Comma separated list of elements of the same type inside square brackets
+    - Comma-separated list of elements of the same type inside square brackets
     - Example declaration:
       #+begin_src rust
         let a: [i32;5] = [1, 2, 3, 4, 5]; // With type annotation
@@ -68,29 +75,46 @@
     - Indexing an array out of bound creates a runtime error
 * Functions
   - The convention for the name of the functions is snake_case (lowercase words separated by underscores)
-  - Starts with the keyword fn
+    #+begin_src rust
+      fn my_function() {
+          //body of the function
+      }
+    #+end_src
+  - Starts with the keyword `fn`
   - Rust doesn't care where you define your functions just that they are defined somewhere
 ** Function parameters
-   - Parameters are special variables that are part of a functions signature.
+   - Parameters are special variables that are part of a function's signature.
    - The concrete value of a parameter is called an argument
-   - Parameters are defined like so (name: type)
+   - Parameters are defined like so: (name: type)
+   - Example:
+     #+begin_src rust
+       fn print_number(n: i32*/a function parameter*/) ->{
+           println!("{}", n);
+           n
+       }
+     #+end_src
 ** Functions Bodies Contain Statements and Expressions
    - Rust is an expression-based language
    - Statements are instructions that perform some action and do not return a value
    - Expressions evaluate to a resulting value
-   - Statement end with semicolon
-   - Expression don't need semicolon
+   - Statements end with semicolon
+   - Expressions don't need semicolon
+     #+begin_src rust
+       fn print_number(n: i32*/a function parameter*/) {
+           println!("{}", n);
+       }
+     #+end_src
 ** To Indicate the Return Value of a Function
    - Use the -> to indicate the return type
-	 #+begin_src rust
-	   fn value(n: i32) -> i32 {
-		   ...
-	   }
-	 #+end_src
+     #+begin_src rust
+       fn value(n: i32) -> i32 {
+           ...
+       }
+     #+end_src
    - Function will return the last expression type without a semicolon
-   - It is possible to return before with the return keyword
-   - Using if in a let statement
-   - Because `if` is an expression, we can use it on the right side of a let statement
+   - It is possible to return before with the `return` keyword
+   - Using `if` in a `let` statement
+   - Because `if` is an expression, we can use it on the right side of a `let` statement
      #+begin_src rust
        let number = if condition {
            5
@@ -98,7 +122,7 @@
            6
        };
      #+end_src
-   - To use this kind of construct the return types must be the same
+   - To use this kind of construct the returned types must be the same
      #+begin_src rust
        let number = if condition {
            5
@@ -107,33 +131,262 @@
        }
      #+end_src
      This code will give a compilation error
+* Control Flow
+** If Expressions
+   - Start with the `if` keyword and it's followed by a condition.
+   - The condition must have a boolean expression.
+   - Allows you to branch your code depending on conditions.
+   - Example:
+     #+begin_src rust
+       fn main() {
+           let number = 3;
+
+           if number < 5 {
+               println!("The condition was true");
+           } else {
+               println!("The condition was false");
+           }
+       }
+     #+end_src
 ** Repetition with loops
    Rust has three kinds of loops:
 *** Loop
-    - Executes a block of code indefinitely
+    - Execute a block of code indefinitely
+    - Example:
+      #+begin_src rust
+        fn main() {
+            loop {
+                println!("again!")
+            }
+        }
+      #+end_src
+      This code will print: `again!` until the program is interrupted.
 **** Returning values from loops
      - Add the value that should be returned after the break expression
+     - Example:
+       #+begin_src rust
+         fn main() {
+             let mut counter = 0;
+
+             let result = loop {
+                 counter += 1;
+
+                 if counter == 10 {
+                     break counter*2;
+                 }
+             };
+
+             println!("The result is {}", result);
+         }
+       #+end_src
 *** While
     - Conditional loop
-    - While a condition is true the loop runs; otherwise it exists the loop
-*** For
-    - Loop through a collection with for
-    - Ex:
+    - While a condition is `true` the loop runs; otherwise it exits the loop
+    - Example:
       #+begin_src rust
-		fn main() {
-			let a = [10, 20, 30, 40, 50];
-			for element in a.iter() {
-				println!("the value is: {}", element);
-			}
-		}
+        fn main() {
+            let mut number = 3;
+
+            while number != 0 {
+                println!("{}!", number);
+
+                number -= 1;
+            }
+
+            println!("LIFTOFF!!!");
+        }
       #+end_src
-      - Increases safety and speed (preferred over while is better loop when possible)
-      - To loop through  a range instead of using while loop is better to use a Range
+*** For
+    - Loop through a collection with `for`
+    - Example:
+      #+begin_src rust
+        fn main() {
+            let a = [10, 20, 30, 40, 50];
+            for element in a.iter() { // a.iter returns an iterator for the array
+                println!("the value is: {}", element);
+            }
+        }
+      #+end_src
+      - Increases safety and speed (preferred over `while`)
+      - To loop through a range of numbers, instead of using a `while` loop, it's better to use a `Range`.
         #+begin_src rust
           fn main() {
-              for number in (1..4).rev() {
+              for number in (1..4).rev() { // (1..4) creates an iterator for the numbers 1 to 3 
+                  //and the method rev() reverses the order
                   println!("{}!", number);
               }
               println!("LIFTOFF!!!");
           }
         #+end_src
+* Understanding Ownership
+  - It's the mechanism that enables Rust to make memory safety guarantees without needing a garbage collector.
+  - In Rust memory is manage through a system of ownership with a set of rules that the compiler checks at compile time.
+  - Keeping track of what part of the code is using what part of the heap, minimizing the amount of duplicated data on the heap and cleaning up unused data on the heap so you don't run out of space are all problems that ownership addresses.
+** The Heap and the Stack 
+*** The Stack
+	- It's a special region of the computer's memory that stores temporary variables created by each function (including the main function)
+	- The stack stores values in the order it gets them and removes them in the opposite order (last-in first-out)
+	- All data in the stack most have a known fixed size
+	- When a function exits all the variables pushed into the stack are freed
+	- Pushing to the stack is faster than allocating memory on the heap
+*** The Heap
+	- The heap is a region of the computer's memory that is not automatically managed for you, and it's not as tightly managed by the CPU.
+	- The heap is less organized
+	- When you put a data in the heap:
+	  - you request a certain amount of space
+	  - the operating system finds an empty space that is big enough
+	  - marks it as being in use and returns a pointer to it.
+	- Accessing data in the heap is slower than accessing data on the stack
+** Ownership Rules
+   - Each value in Rust has a variable that's called it's owner.
+   - There can be only one owner at a time.
+   - When the owner goes out of scope, the value will be dropped.
+** Variable Scope
+   - When a variable comes into scope is valid.
+   - It remains valid until it goes out of scope.
+   - Example:
+	 #+begin_src rust
+	   {// s in not valid here, it's not yet declared
+		   let s = "hello"; // s is valid from this point forward
+
+		   // use variable s
+	   }// this scope is now over, and s is no longer valid
+	 #+end_src
+** Memory and Allocation
+   - For types that are stored in the stack (scalar types and tuples that only contain scalar types) Rust copies the value when a new variable is assigned to that variable
+   - Example:
+	 #+begin_src rust
+	   let x = 5;
+	   let y = x;
+	 #+end_src
+	 After this both x and y are valid and both evaluate to the value 5
+   - For types that are stored in the heap Rust just moves the value
+   - Example:
+	 #+begin_src rust
+	   let s1 = String::from("Hello");
+	   let s2 = s1;
+	 #+end_src
+	 After this operation the value of s1 was moved to s2 and s1 is no longer valid
+   - For types that are stored in the stack it's possible to copy the value using the clone method
+   - Example:
+	 #+begin_src rust
+	   let s1 = String::from("hello");
+	   let s2 = s1.clone();
+
+	   println!("s1 = {}, s2 = {}", s1, s2)
+	 #+end_src
+** Ownership and Functions
+   - It works exactly the same way than reassigning a value
+   - If a variable of a type that is stored in the heap is passed to a function then the function takes ownership of that value
+	 #+begin_src rust
+	   fn main() {
+		   let s = String::from("hello"); // s comes into scope
+		   takes_ownership(s);            // s's value moves into the
+		   // function so is no longer valid here
+
+		   let x = 5; 
+		   makes_copy(x); //x would move into the function,
+		   // but i32 is Copy, so it's okay to still
+		   // use x afterward
+	   }
+
+	   fn takes_ownership(some_string: String) {
+		   println!("{}", some_string);
+	   }
+
+	   fn makes_copy(some_integer: i32) {
+		   println!("{}", some_interger);
+	   }
+	 #+end_src
+   - After the function can return ownership by returning the value if you don't want that data to be freed after finishing the function.
+** References and Borrowing
+*** Rules of References
+	- At any time, you can have either one mutable reference or any number of immutable references.
+	- References must always be valid.
+*** Use cases
+   - When a reference is passed then we say that the variable is borrowed.
+	  #+begin_src rust
+		fn main() {
+			let s1 = String::from("hello");
+
+			let len = calculate_length(&s1);
+
+			println!("length of {} is {}", s1, len); // s1 is valid here
+			// because calculate_length only borrows s1
+		}
+
+		fn calculate_length(s: &String) -> usize {
+			s.len();
+		}
+	  #+end_src
+   - Reference can be made mutable to allow to change it's value without taking ownership of the value:
+	  #+begin_src rust
+		fn main() {
+			let mut s = String::from("hello");
+			change(&mut s);
+			// s is still valid here and the value is "hello, world"
+			println!("s = {}", s);
+		}
+
+		fn change(some_string: &mut String) {
+			some_string.push_str(", world");
+		}
+	  #+end_src 
+** String Slices
+   - A string slice is a reference to part of a string, and it looks like this:
+     #+begin_src rust
+       let s = String::from("hello world");
+
+       let hello = &s[0..5];
+       let world = &s[6..11];
+     #+end_src
+   - We can create slices using a range within brackets by specifying [starting_index..ending_index]
+     - where starting_index is the first position in the slice and ending_index is one more than the last position in the slice.
+   - With Rust's `..` range syntax if you want to start at the first index (zero), you can drop the value before the two periods. In other words, these are equal:
+     #+begin_src rust
+       let s = String::from("hello");
+
+       let slice = &s[0..2];
+       let slice = &s[..2];
+     #+end_src
+   - By the same token , if your slice includes the last byte of the `String` 
+     #+begin_src rust
+       let s = String::from("hello");
+
+       let len = s.len();
+
+       let slice = &s[3..len];
+       let slice = &s[3..];
+     #+end_src
+   - You can also drop both values to take a slice of the entire string. So these are equal:
+     #+begin_src rust
+       let s = String::from("hello");
+
+       let len = s.len();
+
+       let slice = &[0..len];
+       let slice = &[..];
+     #+end_src
+   - String Literals are String Slices
+   - Using &str allows both &str and &String.
+     #+begin_src rust
+       fn main() {
+           let my_string = String::from("hello world");
+
+           // first_word works on slices of `String`s
+           let word = first_word(&my_string[..]);
+
+           let my_string_literal = "hello world";
+
+           // first_word works on slices of string literals
+           let word = first_word(&my_string_literal[..]);
+
+           // Because string literals *are* string slices already,
+           // this works too, without the slice syntax!
+           let word = first_word(my_string_literal);
+       }
+
+       fn first_word(s: &str) -> &str {
+           ...
+       }
+     #+end_src
