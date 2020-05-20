@@ -1,4 +1,10 @@
 // Define a function that calculate the transpose matrix of a 2x2 matrix
+// You don't need to understand everything about matrices
+
+// Just convert line into columns and vice versa
+// ( a b )	__ transposition __> ( a d )
+// ( c d )  					 ( b d )
+
 // Only the body of the transpose function can be changed
 fn main() {
 	let matrix = Matrix((1, 3), (4, 5));

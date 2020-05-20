@@ -1,3 +1,62 @@
+* Formatted print
+  - format!: write formatted test to String
+	#+begin_src rust
+	  fn main() {
+		  let s : String = format!("{} days", 31); // now the variable s has
+		  // the value `31 days`
+	  }
+	#+end_src
+  - print!: same as format! but the text is printed to the console (io::stdout)
+  - println!: same as print! but a newline is appended
+	#+begin_src rust
+	  fn main() {
+		  println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob"); // prints: `Alice, this is Bob. Bob, this is Alice`
+	  }
+	#+end_src
+  - eprint!: same as format! but the text is printed to the standard error (io::stderr)
+  - eprintln!: same as eprint! but a newline is appended.
+	#+begin_src rust
+	  fn main() {
+		  eprintln!(
+			  "{subject} {verb} {object}",
+			  object = "the lazy dog",
+			  subject = "the quick brown fox",
+			  verb = "jumps over"
+		  ); // Prints `the quick brown fox jumps over the lazy dog` to
+		  // standard error
+	  }
+	#+end_src
+** Examples of formatting string
+   - In general the `{}` will be automatically replaced with any arguments. These will be stringified.
+	 #+begin_src rust
+	   println!("{} days", 31);
+	 #+end_src
+   - Positional and named arguments can be used in the patterns
+	 #+begin_src rust
+	   println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+	   println!(
+		   "{subject} {verb} {object}",
+		   object="the lazy dog",
+		   subject="the quick brown fox",
+		   verb="jumps over"
+	   );
+	 #+end_src
+   - Special formatting can be specified after a `:`.
+	 #+begin_src rust
+	   println!("{} of {:b} people know binary, the other half doesn't", 1, 2);
+	 #+end_src
+   - You can right-align text with a specified width
+	 #+begin_src rust
+	   // This will output "     1"
+	   println!("{number:>witdth$}", number=1, width=6);
+	 #+end_src
+   - You can pad with extra zeroes
+	 #+begin_src rust
+	   // This will output "000001"
+	   println!("{number:>0width$}", number=1, width=6);
+	 #+end_src
+   - For more info:
+	 [[https://doc.rust-lang.org/std/fmt/][Rust stardard formatting]]
 * Data types
 ** Defined like this
    let var_name : <type> = value
@@ -332,7 +391,7 @@
 			some_string.push_str(", world");
 		}
 	  #+end_src 
-** String Slices
+* String Slices
    - A string slice is a reference to part of a string, and it looks like this:
      #+begin_src rust
        let s = String::from("hello world");
