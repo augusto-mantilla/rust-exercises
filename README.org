@@ -8,7 +8,7 @@
   Defining variables and functions
   - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]].
 * Tuples: definition and indexing
-  Calculate the transposition of a 2x2 matrix [[https://en.wikipedia.org/wiki/Matrix_(mathematics)#Addition,_scalar_multiplication,_and_transposition][more about matrices]]
+  Practicing tuple definition and accessing.
   - Exercises: [[file:matrix_transposition/src/main.rs][matrix_transposition]]
 * Tuples: definition and destructuring
   Calculate the division of two numbers and the rest of the division in the same function
