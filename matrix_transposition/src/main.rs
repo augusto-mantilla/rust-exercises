@@ -1,7 +1,7 @@
 // Define a function that calculate the transpose matrix of a 2x2 matrix
 // You don't need to understand everything about matrices
 
-// Just convert line into columns and vice versa
+// Just convert lines into columns and vice versa
 // ( a b )	__ transposition __> ( a d )
 // ( c d )  					 ( b d )
 
