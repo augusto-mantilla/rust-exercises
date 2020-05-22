@@ -107,7 +107,7 @@
     - To get the individual values of the tuple we can use pattern matching to destructure a tuple value like this:
       #+begin_src rust
         fn main() {
-            let tup = (500, 64, 1);
+            let tup = (500, 6.4, 1);
             let (x,y,z) = tup;
         }
       #+end_src
@@ -131,6 +131,12 @@
         let a = [3;5]; // Produces the array [3,3,3,3,3]
       #+end_src
     - Indexing an array with array[index]
+	  #+begin_src rust
+		fn main() {
+			let a = [3, 2, 13, 5];
+			println!("Second element = {}", a[1]);
+		}
+	  #+end_src
     - Indexing an array out of bound creates a runtime error
 * Functions
   - The convention for the name of the functions is snake_case (lowercase words separated by underscores)
@@ -147,7 +153,7 @@
    - Parameters are defined like so: (name: type)
    - Example:
      #+begin_src rust
-       fn print_number(n: i32*/a function parameter*/) ->{
+       fn print_number(n: i32*/a function parameter*/) -> i32 {
            println!("{}", n);
            n
        }

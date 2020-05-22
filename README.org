@@ -13,3 +13,9 @@
 * Tuples: definition and destructuring
   Calculate the division of two numbers and the rest of the division in the same function
   - Exercises: [[file:division_and_remainder/src/main.rs][division_and_remainder]]
+* Structs
+** Definition
+** Accessing
+** Printing
+*** Using the debug formatting
+*** Implementing the fmt::Display trait

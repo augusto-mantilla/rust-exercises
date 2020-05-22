@@ -15,6 +15,14 @@ fn str_len() {
 	// Write you're code here
 }
 
+// Modify the function first_subword so that takes ownership of a string and returns the
+// first sub-word in it. It should work for camelCase as well as snake_case
+// first_subword(camelCase) returns camel
+// first_subword(snake_case) returns snake
+
+fn first_subword(s: ) -> String {
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -22,7 +30,7 @@ mod tests {
 	#[test]
 	// maybe not the best way to make the test, but I wanted to use
 	// lifetimes
-	fn it_works() {
+	fn str_len_test() {
 		struct TstLit<'a> {
 			str: &'a str,
 			l: usize,
@@ -52,15 +60,15 @@ mod tests {
 			},
 			TstString {
 				str: "how".to_string(),
-				l: 5,
+				l: 3,
 			},
 			TstString {
 				str: "are you".to_string(),
-				l: 5,
+				l: 7,
 			},
 			TstString {
 				str: "change".to_string(),
-				l: 5,
+				l: 6,
 			},
 		];
 
@@ -70,6 +78,37 @@ mod tests {
 
 		for t in o_tsts.iter() {
 			assert_eq!(t.l, str_len(&t.str));
+		}
+	}
+
+	#[test]
+	fn first_subword_test() {
+		struct TstString<'a> {
+			str: String,
+			l: &'a str,
+		}
+
+		let o_tsts = vec![
+			TstString {
+				str: "helloWorld".to_string(),
+				l: "hello",
+			},
+			TstString {
+				str: "how_you".to_string(),
+				l: "how",
+			},
+			TstString {
+				str: "Changeyou".to_string(),
+				l: "Changeyou",
+			},
+			TstString {
+				str: "CamelCase".to_string(),
+				l: "Camel",
+			},
+		];
+
+		for t in o_tsts.iter() {
+			assert_eq!(t.l.to_string(), first_subword(t.str.clone()));
 		}
 	}
 }
