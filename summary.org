@@ -2,9 +2,9 @@
 ** Defined like this
    let var_name : <type> = value
 ** Example
-   #+begin_src rust
+   #+BEGIN_SRC rust
         let guess: i32 = 20;
-   #+end_src
+   #+END_SRC
 ** Variables and Mutability
    - In Rust all variables are immutable by default.
    - Immutable variable cannot be changed after the first assignment.
@@ -367,7 +367,7 @@
 ** References and Borrowing
 *** Definition   
 	- A reference represents the address in memory of a variable
-	- A value it's reference by the `&` operator
+	- A value is referenced by the `&` operator
 	- They allow you to refer to a type without taking ownership of it
 	- References can be made mutable to modify the value without taking ownership of it
 *** Rules of References

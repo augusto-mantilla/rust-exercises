@@ -12,10 +12,7 @@
   - Exercises: [[file:matrix_transposition/src/main.rs][matrix_transposition]]
 * Tuples: definition and destructuring
   Calculate the division of two numbers and the rest of the division in the same function
-  - Exercises: [[file:division_and_remainder/src/main.rs][division_and_remainder]]
-* Structs
-** Definition
-** Accessing
-** Printing
-*** Using the debug formatting
-*** Implementing the fmt::Display trait
+  - Exercises: [[file:division_and_remainder/src/main.rs][division_and_remainder]], [[file:tuples/src/main.rs][tuples]]
+* Ownership
+  Understanding the ownership rules and how to deal with different types of data
+  - Exercises: [[file:ownership/src/main.rs][ownership]], [[file:borrow/src/main.rs][borrow]], [[file:mutability/src/main.rs][mutability]].
