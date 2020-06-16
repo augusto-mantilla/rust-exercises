@@ -2,25 +2,25 @@
 ** Defined like this
    let var_name : <type> = value
 ** Example
-   #+BEGIN_SRC rust
-        let guess: i32 = 20;
-   #+END_SRC
+   #+begin_src rust
+     let guess: i32 = 20;
+   #+end_src
 ** Variables and Mutability
    - In Rust all variables are immutable by default.
    - Immutable variable cannot be changed after the first assignment.
    - They can be made mutable by adding the `mut` key word to the variable declaration:
-	 #+begin_src rust
-	   let mut s = String::from("hello");
-	 #+end_src
+     #+begin_src rust
+       let mut s = String::from("hello");
+     #+end_src
 ** Scalar Types
    A scalar types represents a single value
 *** Integers
     - [iu]size(bits)
       - i -> signed integer size (8, 16, 32, 64, 128) bits
       - u -> unsigned integer
-      - isize -> depends on the architecture of the system
-      - usize -> depends on the architecture of the system
-    Integer literals (all number literals except the byte literal allow a type suffix such as 57u8 and underscore (_) as a visual separator such as 1_000)    
+    - isize -> depends on the architecture of the system
+    - usize -> depends on the architecture of the system
+    Integer literals (all number literals except the byte literal allow a type suffix such as 57u8 and underscore (_) as a visual separator such as 1_000)
 
     | Number lit     | Example     |
     | Decimal        | 98_222      |
@@ -72,72 +72,74 @@
         let a = [3;5]; // Produces the array [3,3,3,3,3]
       #+end_src
     - Indexing an array with array[index]
-	  #+begin_src rust
-		fn main() {
-			let a = [3, 2, 13, 5];
-			println!("Second element = {}", a[1]);
-		}
-	  #+end_src
+      #+begin_src rust
+        fn main() {
+            let a = [3, 2, 13, 5];
+            println!("Second element = {}", a[1]);
+        }
+      #+end_src
     - Indexing an array out of bound creates a runtime error
 * Formatted print
   - format!: write formatted test to String
-	#+begin_src rust
-	  fn main() {
-		  let s : String = format!("{} days", 31); // now the variable s has
-		                                           // the value `31 days`
-	  }
-	#+end_src
+    #+begin_src rust
+      fn main() {
+          let s : String = format!("{} days", 31); // now the variable s has
+                                                   // the value `31 days`
+      }
+    #+end_src
   - print!: same as format! but the text is printed to the console (io::stdout)
   - println!: same as print! but a newline is appended
-	#+begin_src rust
-	  fn main() {
-		  println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob"); // prints: `Alice, this is Bob. Bob, this is Alice`
-	  }
-	#+end_src
+    #+begin_src rust
+      fn main() {
+          println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob"); // prints: `Alice, this is Bob. Bob, this is Alice`
+      }
+    #+end_src
   - eprint!: same as format! but the text is printed to the standard error (io::stderr)
   - eprintln!: same as eprint! but a newline is appended.
-	#+begin_src rust
-	  fn main() {
-		  eprintln!(
-			  "{subject} {verb} {object}",
-			  object = "the lazy dog",
-			  subject = "the quick brown fox",
-			  verb = "jumps over"
-		  ); // Prints `the quick brown fox jumps over the lazy dog` to
-		     // standard error
-	  }
-	#+end_src
+    #+begin_src rust
+      fn main() {
+          eprintln!(
+              "{subject} {verb} {object}",
+              object = "the lazy dog",
+              subject = "the quick brown fox",
+              verb = "jumps over"
+          ); // Prints `the quick brown fox jumps over the lazy dog` to
+             // standard error
+      }
+    #+end_src
 ** Examples of formatting string
    - In general the `{}` will be automatically replaced with any arguments. These will be stringified.
-	 #+begin_src rust
-	   println!("{} days", 31);
-	 #+end_src
+     #+begin_src rust
+       println!("{} days", 31);
+     #+end_src
    - Positional and named arguments can be used in the patterns
-	 #+begin_src rust
-	   println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
-	   println!(
-		   "{subject} {verb} {object}",
-		   object="the lazy dog",
-		   subject="the quick brown fox",
-		   verb="jumps over"
-	   );
-	 #+end_src
+     #+begin_src rust
+       println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+       println!(
+           "{subject} {verb} {object}",
+           object="the lazy dog",
+           subject="the quick brown fox",
+           verb="jumps over"
+       );
+     #+end_src
    - Special formatting can be specified after a `:`.
-	 #+begin_src rust
-	   println!("{} of {:b} people know binary, the other half doesn't", 1, 2);
-	 #+end_src
+     #+begin_src rust
+       println!("{} of {:b} people know binary, the other half doesn't", 1, 2);
+     #+end_src
    - You can right-align text with a specified width
-	 #+begin_src rust
-	   // This will output "     1"
-	   println!("{number:>witdth$}", number=1, width=6);
-	 #+end_src
+     #+begin_src rust
+       // This will output "     1"
+       println!("{number:>witdth$}", number=1, width=6);
+     #+end_src
    - You can pad with extra zeroes
-	 #+begin_src rust
-	   // This will output "000001"
-	   println!("{number:>0width$}", number=1, width=6);
-	 #+end_src
+     #+begin_src rust
+       // This will output "000001"
+       println!("{number:>0width$}", number=1, width=6);
+     #+end_src
    - For more info:
-	 [[https://doc.rust-lang.org/std/fmt/][Rust stardard formatting]]
+     [[https://doc.rust-lang.org/std/fmt/][Rust stardard formatting]]
+** Formatting is controlled by Trait
+  - {} is controlled by the Display trait
 * Functions
   - The convention for the name of the functions is snake_case (lowercase words separated by underscores)
     #+begin_src rust
@@ -276,7 +278,7 @@
       - To loop through a range of numbers, instead of using a `while` loop, it's better to use a `Range`.
         #+begin_src rust
           fn main() {
-              for number in (1..4).rev() { // (1..4) creates an iterator for the numbers 1 to 3 
+              for number in (1..4).rev() { // (1..4) creates an iterator for the numbers 1 to 3
                   //and the method rev() reverses the order
                   println!("{}!", number);
               }
@@ -287,21 +289,21 @@
   - It's the mechanism that enables Rust to make memory safety guarantees without needing a garbage collector.
   - In Rust memory is manage through a system of ownership with a set of rules that the compiler checks at compile time.
   - Keeping track of what part of the code is using what part of the heap, minimizing the amount of duplicated data on the heap and cleaning up unused data on the heap so you don't run out of space are all problems that ownership addresses.
-** The Heap and the Stack 
+** The Heap and the Stack
 *** The Stack
-	- It's a special region of the computer's memory that stores temporary variables created by each function (including the main function)
-	- The stack stores values in the order it gets them and removes them in the opposite order (last-in first-out)
-	- All data in the stack most have a known fixed size
-	- When a function exits all the variables pushed into the stack are freed
-	- Pushing to the stack is faster than allocating memory on the heap
+    - It's a special region of the computer's memory that stores temporary variables created by each function (including the main function)
+    - The stack stores values in the order it gets them and removes them in the opposite order (last-in first-out)
+    - All data in the stack most have a known fixed size
+    - When a function exits all the variables pushed into the stack are freed
+    - Pushing to the stack is faster than allocating memory on the heap
 *** The Heap
-	- The heap is a region of the computer's memory that is not automatically managed for you, and it's not as tightly managed by the CPU.
-	- The heap is less organized
-	- When you put a data in the heap:
-	  - you request a certain amount of space
-	  - the operating system finds an empty space that is big enough
-	  - marks it as being in use and returns a pointer to it.
-	- Accessing data in the heap is slower than accessing data on the stack
+    - The heap is a region of the computer's memory that is not automatically managed for you, and it's not as tightly managed by the CPU.
+    - The heap is less organized
+    - When you put a data in the heap:
+      - you request a certain amount of space
+      - the operating system finds an empty space that is big enough
+      - marks it as being in use and returns a pointer to it.
+    - Accessing data in the heap is slower than accessing data on the stack
 ** Ownership Rules
    - Each value in Rust has a variable that's called its owner.
    - There can be only one owner at a time.
@@ -310,98 +312,110 @@
    - A variable it's valid when comes into scope.
    - It remains valid until it goes out of scope.
    - Example:
-	 #+begin_src rust
-	   {// s in not valid here, it's not yet declared
-		   let s = "hello"; // s is valid from this point forward
+     #+begin_src rust
+       {// s in not valid here, it's not yet declared
+           let s = "hello"; // s is valid from this point forward
 
-		   // use variable s
-	   }// this scope is now over, and s is no longer valid
-	 #+end_src
+           // use variable s
+       }// this scope is now over, and s is no longer valid
+     #+end_src
 ** Memory and Allocation
    - For types that are stored in the stack (for types that implement the `Copy` trait, i.e., scalar types and tuples that only contain scalar types) Rust copies the value when a new variable is assigned to that variable
    - Example:
-	 #+begin_src rust
-	   let x = 5;
-	   let y = x;
-	 #+end_src
-	 After this both x and y are valid and both evaluate to the value 5
+     #+begin_src rust
+       let x = 5;
+       let y = x;
+     #+end_src
+     After this both x and y are valid and both evaluate to the value 5
    - For types that are stored in the heap Rust just moves the value
    - Example:
-	 #+begin_src rust
-	   let s1 = String::from("Hello");
-	   let s2 = s1;
-	 #+end_src
-	 After this operation the value of s1 was moved to s2 and s1 is no longer valid
+     #+begin_src rust
+       let s1 = String::from("Hello");
+       let s2 = s1;
+     #+end_src
+     After this operation the value of s1 was moved to s2 and s1 is no longer valid
    - For types that are stored in the stack it's possible to copy the value using the clone method
    - Example:
-	 #+begin_src rust
-	   let s1 = String::from("hello");
-	   let s2 = s1.clone();
+     #+begin_src rust
+       let s1 = String::from("hello");
+       let s2 = s1.clone();
 
-	   println!("s1 = {}, s2 = {}", s1, s2)
-	 #+end_src
+       println!("s1 = {}, s2 = {}", s1, s2)
+     #+end_src
 ** Ownership and Functions
    - It works exactly the same way as reassigning a value
    - If a variable of a type that is stored in the heap is passed to a function, then the function takes ownership of that value
-	 #+begin_src rust
-	   fn main() {
-		   let s = String::from("hello"); // s comes into scope
-		   takes_ownership(s);            // s's value moves into the
-		                                  // function so is no longer valid here
+     #+begin_src rust
+       fn main() {
+           let s = String::from("hello"); // s comes into scope
+           takes_ownership(s);            // s's value moves into the
+                                          // function so is no longer valid here
 
-		   let x = 5; 
-		   makes_copy(x); //x would move into the function,
-		                  // but i32 implement the `Copy`, so it's okay to still
-		                  // use x afterward
-	   }
+           let x = 5;
+           makes_copy(x); //x would move into the function,
+                          // but i32 implement the `Copy`, so it's okay to still
+                          // use x afterward
+       }
 
-	   fn takes_ownership(some_string: String) {
-		   println!("{}", some_string);
-	   }
+       fn takes_ownership(some_string: String) {
+           println!("{}", some_string);
+       }
 
-	   fn makes_copy(some_integer: i32) {
-		   println!("{}", some_interger);
-	   }
-	 #+end_src
+       fn makes_copy(some_integer: i32) {
+           println!("{}", some_interger);
+       }
+     #+end_src
    - After, the function can return ownership by returning the value (if you don't want that data to be freed after finishing the function).
 ** References and Borrowing
-*** Definition   
-	- A reference represents the address in memory of a variable
-	- A value is referenced by the `&` operator
-	- They allow you to refer to a type without taking ownership of it
-	- References can be made mutable to modify the value without taking ownership of it
+*** Definition
+    - A reference represents the address in memory of a variable
+    - A value is referenced by the `&` operator
+      #+begin_src rust
+        // Declaring a pointer to the integer 5
+        let x = &5;
+        let y = &mut 4;
+      #+end_src
+    - It's possible to use the `ref` keyword to create a reference
+      #+begin_src rust
+        let ref x = 4;
+        // And a mutable reference with
+        let mut ref s = String::from("hello");
+      #+end_src
+    - They allow you to refer to a type without taking ownership of it
+    - References can be made mutable to modify the value without taking ownership of it
+    - References are immutable by default
 *** Rules of References
-	- At any time, you can have either one mutable reference or any number of immutable references.
-	- References must always be valid.
+    - At any time, you can have either one mutable reference or any number of immutable references.
+    - References must always be valid.
 *** Use cases
    - When a reference is passed then we say that the variable is borrowed.
-	  #+begin_src rust
-		fn main() {
-			let s1 = String::from("hello");
+      #+begin_src rust
+        fn main() {
+            let s1 = String::from("hello");
 
-			let len = calculate_length(&s1);
+            let len = calculate_length(&s1);
 
-			println!("length of {} is {}", s1, len); // s1 is valid here
-			                                         // because calculate_length only borrows s1
-		}
+            println!("length of {} is {}", s1, len); // s1 is valid here
+                                                     // because calculate_length only borrows s1
+        }
 
-		fn calculate_length(s: &String) -> usize {
-			s.len();
-		}
-	  #+end_src
+        fn calculate_length(s: &String) -> usize {
+            s.len();
+        }
+      #+end_src
    - Reference can be made mutable to allow to change it's value without taking ownership of the value:
-	  #+begin_src rust
-		fn main() {
-			let mut s = String::from("hello");
-			change(&mut s);
-			// s is still valid here and the value is "hello, world"
-			println!("s = {}", s);
-		}
+      #+begin_src rust
+        fn main() {
+            let mut s = String::from("hello");
+            change(&mut s);
+            // s is still valid here and the value is "hello, world"
+            println!("s = {}", s);
+        }
 
-		fn change(some_string: &mut String) {
-			some_string.push_str(", world");
-		}
-	  #+end_src 
+        fn change(some_string: &mut String) {
+            some_string.push_str(", world");
+        }
+      #+end_src
 * String Slices
    - A string slice is a reference to part of a string, and it looks like this:
      #+begin_src rust
@@ -419,7 +433,7 @@
        let slice = &s[0..2];
        let slice = &s[..2];
      #+end_src
-   - By the same token , if your slice includes the last byte of the `String` 
+   - By the same token , if your slice includes the last byte of the `String`
      #+begin_src rust
        let s = String::from("hello");
 
@@ -460,3 +474,41 @@
            ...
        }
      #+end_src
+* Defining and Initializing Structs
+  - Let's see an example of a struct definition
+    #+begin_src rust
+      struct User {
+          username: String,
+          email: String,
+          sign_in_count: i64,
+          active: bool,
+      }
+    #+end_src
+    - Initialization:
+      #+begin_src rust
+        let user1 = User {
+            email: String::from("someone@something.com"),
+            username: String::from("name"),
+            active: true,
+            sign_in_count: 1,
+        };
+      #+end_src
+    - When a variable has the same name as the field of the structure you can use the shorthand notation:
+      #+begin_src rust
+        fn build_user(email: String, username: String) -> User {
+            User {
+                email,
+                username,
+                active: true,
+                sign_in_count: 1,
+            }
+        }
+      #+end_src
+    - The syntax .. specifies that the remaining fields not explicitly set should have the same value as the field in the given instance
+      #+begin_src rust
+        let user2 = User {
+            email: String::from("another@example.com"),
+            username: String::from("anotherusername567"),
+            ..user1
+        }
+      #+end_src
