@@ -18,3 +18,5 @@
   - Exercises: [[file:ownership/src/main.rs][ownership]], [[file:borrow/src/main.rs][borrow]], [[file:mutability/src/main.rs][mutability]].
 * Defining and creating structs and method syntax
   - Exercises: [[file:circle/src/main.rs][circle]].
+* Defining and creating enums
+  Exercise: [[file:card_deck/src/main.rs][card_deck]]
