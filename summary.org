@@ -474,7 +474,8 @@
            ...
        }
      #+end_src
-* Defining and Initializing Structs
+* Structs
+** Defining and Initializing Structs
   - Let's see an example of a struct definition
     #+begin_src rust
       struct User {
@@ -512,3 +513,133 @@
             ..user1
         }
       #+end_src
+** Printing
+   - To print a struct we can use the following annotation before the type definition to be able to use "{:?}" or {:#?} print the content with the macro println! 
+	 #+begin_src rust
+	   #[derive(Debug)]
+		   struct Rectangle {
+		   width: u32,
+		   height: u32,
+	   }
+
+	   fn main() {
+		   let rect1 = Rectangle {
+			   width: 30,
+			   height: 50,
+		   };
+
+		   println!(
+			   "Rectangle1 = {:?}",
+			   rect1
+		   );
+	   }
+	 #+end_src
+** Method syntax
+   - Methods are defined in the context of a struct, enums or trait object.
+   - They're first parameter is `self` which represents the instance of the structure the method is being called on.
+   - Example:
+	 #+begin_src rust
+	   #[derive(Debug)]
+	   struct Rectangle {
+		   width: u32,
+		   height: u32,
+	   }
+
+	   impl Rectangle {
+		   fn area(&self) -> u32 {
+			   self.width * self.height
+		   }
+	   }
+
+	   fn main() {
+		   let rect1 = Rectangle {
+			   width: 30,
+			   height: 50,
+		   };
+
+		   println!(
+			   "The area of the rectangle is {} square pixels.",
+			   rect1.area()
+		   );
+	   }
+	 #+end_src
+   - To define a method we start an impl (implementation) block.
+   - You can use &self, &mut self, and self as any other parameter.
+*** Automatic reference and dereferencing
+	- When you call a method width `object.something()` Rust automatically adds in &, &mut or * so `object` matches the signature of the method.
+*** Associated functions
+	- A function defined inside an `impl` block, but it doesn't receive self as the first argument is called an associated function.
+	- Is called in the program using the namespace of the structure and the `::` operator like we saw in the String::from function.
+*** Each structure is allowed to have multiple impl blocks
+* Enums and parent matching
+** Defining an enum
+   #+begin_src rust
+	 enum IpAddrKind {
+		 v4,
+		 v6,
+	 }
+
+	 // enum values
+	 let four = IpAddrKind::v4;
+	 let six = IpAddrKind::v6;
+
+	 // We can associate data (of any type) to an enum like this
+	 enum IpAddr {
+		 v4(String),
+		 v6(String),
+	 }
+   #+end_src
+   - Another example of enum
+	 #+begin_src rust
+	   enum Message {
+		   Quit,
+		   Move {x: i32, y: i32},
+		   Write(String),
+		   ChangeColor(i32,i32,i32),
+	   }
+	 #+end_src
+** The option Enum and its advantages over null values
+   #+begin_src rust
+	 enum Option<T> {
+		 Some(T),
+		 None,
+	 }
+
+	 let some_string = Some("a string");
+	 let absent_number: Option<i32> = None
+   #+end_src
+   If we use None rather than Some we need to tell Rust what type of Option<T> methods and associated functions
+** The `match` control flow operator
+   `match`allows you to compare a value against a series of patterns and then execute code base in which pattern matches.
+   - Example:
+	 #+begin_src rust
+	   enum Coin {
+		   Penny,
+		   Nickel,
+		   Dime,
+		   Quarter,
+	   }
+
+	   fn value_in_cents(coin: Coin) -> u8 {
+		   match coin {
+			   Coin::Penny => 1,
+			   Coin::Nickel => 5,
+			   Coin::Dime => 10,
+			   Coin::Quarter => 25,
+		   }
+	   }
+	 #+end_src
+   - `match` is exhaustive (it forces you to handle every case)
+   - For a single pattern matching use `if let`
+	 #+begin_src rust
+	   if let Some(3) = some_u8_value {
+		   println!("three");
+	   }
+
+	   // Equivalent to
+
+	   match some_u8_value {
+		   Some(3) => println!("three"),
+		   _ => (),
+	   }
+	 #+end_src
