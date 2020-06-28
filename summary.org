@@ -643,3 +643,67 @@
 		   _ => (),
 	   }
 	 #+end_src
+* Common Collections
+  Rust's standard library includes a number of very useful data structures called collections. Most other data types represent one specific value, but collections can contain multiple values.
+  - The data of these collections point to is stored in the heap, which means the amount of data does not need to be known at compile time and can grow or shrink as the program runs.
+** Vectors:
+   - Type Vec<T>
+   - Allows you to store a variable number of values next to each other.
+*** Creating a New Vector
+	#+begin_src rust
+	  let v: Vec<i32> = Vec::new();
+	#+end_src
+	- It's more common to create a vector width values inside
+	- In that case you don't need to annotate the type and Rust provides the `vec` macro
+	  #+begin_src rust
+		let v = vec![1,2,3];
+	  #+end_src
+	- Because we've given initial i32 values, Rust can infer the type of v is Vec<i32>, and the type annotation isn't necessary.
+** Updating a Vector
+   - You can use the push method
+	 #+begin_src rust
+	   let mut v = Vec::new();
+
+	   v.push(5);
+	   v.push(6);
+	   v.push(7);
+	   v.push(8);
+	 #+end_src
+   - As any variable, if we want to be able to change its value, we need to make it mutable using the mut keyword.
+   - The numbers we place inside are all of type i32, and Rust infers this from the data, so we don't need the Vec<i32> annotation.
+   - When the vector gets dropped, all f its contents are also dropped, meaning hose integers it holds will be cleaned up.
+   - This may seem like a straightforward point but can got a bit more complicated when you start to introduce references to the elements of the vector
+** Reading Elements of Vectors
+   - Indexing syntax
+	 #+begin_src rust
+	   let v = vec![1, 2, 3, 4, 5];
+	   let third: &i32 = &v[2];
+	   // selects the third element of the vector v
+	 #+end_src
+   - The get method
+   #+begin_src rust
+	 let v = vec![1, 2, 3, 4, 5];
+
+	 match v.get(2) {
+		 Some(third) => println!("The third element is {}", third),
+		 None => println!("There is no third element."),
+	 }
+   #+end_src
+** Choosing which one to use
+   - If you try to index an element of the vector that doesn't exist with the indexing syntax the program will panic
+   - Meanwhile using the get method will return `None` and logic can be added to handle what happens when an index out of range is accessed
+   - For situations where is normal to access the wrong position like in a user interface where the user must insert the index is better to give one opportunity to introduce the index and telling them what the index range must be it's a better option that panicking
+   - For cases where an index out of range implies an error of logic that the program cannot come back from then the best option is to use the indexing syntax
+   - The reference rules apply for vectors too
+   #+begin_src rust
+	 let mut v = vec![1, 2, 3, 4, 5];
+	 let first = &v[0];
+	 v.push(6);
+	 println!("The first element is {}", first);
+   #+end_src
+   Compiling this code will result in a compile error.
+** Strings:
+   Is a collection of characters.
+** Hash maps
+   Allows you to associate a value with a particular key. It's a particular implementation of the more general data structure called a map.
+** More Collections [[https://doc.rust-lang.org/stable/std/collections/index.html][see the documentation]]
