@@ -659,51 +659,248 @@
 		let v = vec![1,2,3];
 	  #+end_src
 	- Because we've given initial i32 values, Rust can infer the type of v is Vec<i32>, and the type annotation isn't necessary.
-** Updating a Vector
-   - You can use the push method
-	 #+begin_src rust
-	   let mut v = Vec::new();
+*** Updating a Vector
+	- You can use the push method
+	  #+begin_src rust
+		let mut v = Vec::new();
 
-	   v.push(5);
-	   v.push(6);
-	   v.push(7);
-	   v.push(8);
-	 #+end_src
-   - As any variable, if we want to be able to change its value, we need to make it mutable using the mut keyword.
-   - The numbers we place inside are all of type i32, and Rust infers this from the data, so we don't need the Vec<i32> annotation.
-   - When the vector gets dropped, all f its contents are also dropped, meaning hose integers it holds will be cleaned up.
-   - This may seem like a straightforward point but can got a bit more complicated when you start to introduce references to the elements of the vector
-** Reading Elements of Vectors
-   - Indexing syntax
-	 #+begin_src rust
-	   let v = vec![1, 2, 3, 4, 5];
-	   let third: &i32 = &v[2];
-	   // selects the third element of the vector v
-	 #+end_src
-   - The get method
-   #+begin_src rust
-	 let v = vec![1, 2, 3, 4, 5];
+		v.push(5);
+		v.push(6);
+		v.push(7);
+		v.push(8);
+	  #+end_src
+	- As any variable, if we want to be able to change its value, we need to make it mutable using the mut keyword.
+	- The numbers we place inside are all of type i32, and Rust infers this from the data, so we don't need the Vec<i32> annotation.
+	- When the vector gets dropped, all f its contents are also dropped, meaning hose integers it holds will be cleaned up.
+	- This may seem like a straightforward point but can got a bit more complicated when you start to introduce references to the elements of the vector
+*** Reading Elements of Vectors
+	- Indexing syntax
+	  #+begin_src rust
+		let v = vec![1, 2, 3, 4, 5];
+		let third: &i32 = &v[2];
+		// selects the third element of the vector v
+	  #+end_src
+	- The get method
+	#+begin_src rust
+	  let v = vec![1, 2, 3, 4, 5];
 
-	 match v.get(2) {
-		 Some(third) => println!("The third element is {}", third),
-		 None => println!("There is no third element."),
-	 }
-   #+end_src
-** Choosing which one to use
-   - If you try to index an element of the vector that doesn't exist with the indexing syntax the program will panic
-   - Meanwhile using the get method will return `None` and logic can be added to handle what happens when an index out of range is accessed
-   - For situations where is normal to access the wrong position like in a user interface where the user must insert the index is better to give one opportunity to introduce the index and telling them what the index range must be it's a better option that panicking
-   - For cases where an index out of range implies an error of logic that the program cannot come back from then the best option is to use the indexing syntax
-   - The reference rules apply for vectors too
-   #+begin_src rust
-	 let mut v = vec![1, 2, 3, 4, 5];
-	 let first = &v[0];
-	 v.push(6);
-	 println!("The first element is {}", first);
-   #+end_src
-   Compiling this code will result in a compile error.
+	  match v.get(2) {
+		  Some(third) => println!("The third element is {}", third),
+		  None => println!("There is no third element."),
+	  }
+	#+end_src
+*** Choosing which one to use
+	- If you try to index an element of the vector that doesn't exist with the indexing syntax the program will panic
+	- Meanwhile using the get method will return `None` and logic can be added to handle what happens when an index out of range is accessed
+	- For situations where is normal to access the wrong position like in a user interface where the user must insert the index is better to give one opportunity to introduce the index and telling them what the index range must be it's a better option that panicking
+	- For cases where an index out of range implies an error of logic that the program cannot come back from then the best option is to use the indexing syntax
+	- The reference rules apply for vectors too
+	#+begin_src rust
+	  let mut v = vec![1, 2, 3, 4, 5];
+	  let first = &v[0];
+	  v.push(6);
+	  println!("The first element is {}", first);
+	#+end_src
+	Compiling this code will result in a compile error.
 ** Strings:
-   Is a collection of characters.
+   - Is a collection of characters encoded in UTF-8.
+   - String are implemented as a collection of bytes, plus some methods to provide useful functionality when those byte are interpreted as text.
+   - What is a String? Usually "string" is referring to the both string slices and `String` slice.
+	 - Rust has only one string type in the core language, which is the string slice `str`.
+	 - The `String` type, which is provided by Rust's standard library.
+*** Creating a New String
+	#+begin_src rust
+	  let mut s = String::new();
+	#+end_src	
+*** Creating a String from a string slice
+	#+begin_src rust
+	  let data = "initial contents";
+	  let s = data.to_string();
+
+	  let s = "initial contents".to_string();
+
+	  let s = String::from("initial contents");
+	#+end_src
+*** Updating a string
+	#+begin_src rust
+	  let mut s = String::from("foo");
+	  s.push_str("bar");
+
+	  // Pushing a character
+	  let mut s = String::from("lo");
+	  s.push('l');
+	#+end_src
+**** Concatenation with the + operator or the format! macro
+	 #+begin_src rust
+	   let s1 = String::from("Hello, ");
+	   let s2 = String::from("world!");
+	   let s3 = s1 + &s2; // note s1 has been moved here and can no lnger be used
+	 #+end_src
+	 If we concatenate multiple string multiple strings, the behavior of the + operator gets unwieldy:
+	 #+begin_src rust
+	   let s1 = String::from("tic");
+	   let s2 = String::from("tac");
+	   let s3 = String::from("toe");
+
+	   let s = s1 + "-" + &s2 + "-" + &s3;
+	 #+end_src
+	For complicated string we can use the format! macro.
+	#+begin_src rust
+	  let s1 = String::from("tic");
+	  let s2 = String::from("tac");
+	  let s3 = String::from("toe");
+
+	  let s = format!("{}-{}-{}", s1, s2, s3);
+	#+end_src
+**** Indexing into strings is not allowed
+	 #+begin_src rust
+	   let s1 = String::from("hello");
+	   let h = s1[0];
+	 #+end_src
+	 Will produce a compilation error.
+	 Internal Representation
+**** Internal Representation 
+	 - A string is a wrapper over Vec<u8>.
+**** Slicing String
+	 - You can use [] with a range to create a string slice containing particular bytes:
+	 #+begin_src rust
+	   let hello = "Здравствуйте";
+	   let s = &hello[0..2];
+	   // Because the first character is 2 bytes long s has the value "З" and it's a string slice
+	 #+end_src
+**** Methods for iterating over strings
+	 - s.chars();
+	 #+begin_src rust
+	   for c in "नमस्ते".chars() {
+		   println!("{}", c);
+	   }
+	   // will print the following:
+	   // न
+	   // म
+	   // स
+	   // ्
+	   // त
+	   // े
+	 #+end_src
+	 - s.bytes();
+	 #+begin_src rust
+	   for b in "नमस्ते".bytes() {
+		   println!("{}", b);
+	   }
+	   // will print:
+	   224
+	   164
+	   // --snip--
+	   165
+	   135
+	 #+end_src
 ** Hash maps
    Allows you to associate a value with a particular key. It's a particular implementation of the more general data structure called a map.
+   - Type HashMap<K, V> stores a mapping of keys of type K to values of type V.
+*** Creating a new Hash Map
+	#+begin_src rust
+	  use std::collections::HashMap;
+
+	  let mut scores = HashMap::new();
+
+	  scores.insert(String::from("Blue"), 10);
+	  scores.insert(String::from("Yellow"), 50);
+	#+end_src
+	Like vectors, hash maps are homogeneous: all of the keys must have the same type and all of the values must have the same type.
+**** Creating a hash map by using iterators and the collect method
+	 - The `collect` method gathers data into a number of collections types, including HashMap.
+	 #+begin_src rust
+	   use std::collections::HashMap;
+
+	   let teams = vec![String::from("Blue"), String::from("Yellow")];
+	   let initial_scores = vec![10, 50];
+
+	   let mut scores: HashMap<_, _> = teams.into_iter().zip(initial_scores.into_iter()).collect();
+	   // zip creates a vector of tuples where "Blue" is paired with 10, and so forth.
+	   // then the collect method turns that vector of tuples into a hash map
+	   // The type annotation HashMap<_, _> is needed because it's possible
+	   // to collect into many different data structures and Rust doesn't
+	   // know which you want unless you specify. 
+	 #+end_src
+*** Hash maps and ownership
+	For types that implement the Copy trait, like i32, the values are copied into the hash map. For owned values like String, the values are moved and the hash map will be the owner of those values.
+*** Accessing values in a hash map
+	We can get a value out of the hash map by providing its key to the get method.
+	#+begin_src rust
+	  use std::collections::HashMap;
+
+	  let mut scores = HashMap::new();
+
+	  scores.insert(String::from("Blue"), 10);
+	  scores.insert(String::from("Yellow"), 50);
+
+	  let team_name = String::from("Blue");
+	  let score = scores.get(&team_name);
+	#+end_src
+	The method get returns an Option<&V>:
+	- If the value associated to the key doesn't exist the get returns None
+	- Otherwise returns Some(&value), in this case Some(&10).
+
+	We can iterate through over each key/value pair in a hash map in a similar manner as we do with vectors, using a for loop:
+	#+begin_src rust
+	  use std::collections::HashMap;
+
+	  let mut scores = HashMap::new();
+
+	  scores.insert(String::from("Blue"), 10);
+	  scores.insert(String::from( "Yellow" ), 50);
+
+	  for (key, value) in &scores {
+		  println!("{}: {}", key, value);
+	  }
+	#+end_src
+*** Updating a HashMap
+	- Overwriting a Value
+	  Use the `insert` method.
+	#+begin_src rust
+	  fn main() {
+		  use std::collections::HashMap;
+
+		  let mut scores = HashMap::new();
+
+		  scores.insert(String::from("Blue"), 10);
+		  scores.insert(String::from("Blue"), 25);
+
+		  println!("{:?}", scores);
+	  }
+
+	#+end_src
+	- Only inserting a Value If the Key Has no Value
+	  Use the `entry` method to get the entry of the given key in the map and `or_insert` method to insert if the element doesn't exist.
+	#+begin_src rust
+	  fn main() {
+		  use std::collections::HashMap;
+
+		  let mut scores = HashMap::new();
+		  scores.insert(String::from("Blue"), 10);
+
+		  scores.entry(String::from("Yellow")).or_insert(50);
+		  scores.entry(String::from("Blue")).or_insert(50);
+
+		  println!("{:?}", scores);
+	  }
+	#+end_src
+	- Updating a Value Based on the Old Value
+	  The `or_insert` method returns a mutable reference to the value
+	#+begin_src rust
+	  fn main() {
+		  use std::collections::HashMap;
+
+		  let text = "hello world wonderful world";
+
+		  let mut map = HashMap::new();
+
+		  for word in text.split_whitespace() {
+			  let count = map.entry(word).or_insert(0);
+			  *count += 1;
+		  }
+
+		  println!("{:?}", map);
+	  }
+	#+end_src
 ** More Collections [[https://doc.rust-lang.org/stable/std/collections/index.html][see the documentation]]
