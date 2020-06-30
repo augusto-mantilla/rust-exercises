@@ -904,3 +904,8 @@
 	  }
 	#+end_src
 ** More Collections [[https://doc.rust-lang.org/stable/std/collections/index.html][see the documentation]]
+* Error Handling 
+  Rust groups errors in two major categories: recoverable errors and unrecoverable errors. For a recoverable error such as a file not found error, it's reasonable to report the error to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, like trying to access a location beyond the end of an array.
+  - For recoverable error Rust has the type `Result<T, E>`
+  - And for unrecoverable error the `panic!` macro
+
