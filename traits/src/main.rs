@@ -1,10 +1,14 @@
 // Imagine you are designing a new video game and you have to create
 // food that they players can take to gain strength there are two
-// types of food for now fruits and meet: fruits increases the
-// strengths by 1 unit and meat increases it by 3 unit.
+// types of food, for now, fruits and meet
 
-// Define both structures fruits and meat
-// Define the std::fmt::Display trait of the Player structure so using
+// Create a trait `Food` that requires the method gives() -> u32.
+// Implement `Food` for both `Fruit` and `Meat` types
+// fruit give 4 units of strength for kilogram
+// Meat gives 4 units of strength for kilogram of non fat content and
+// 9 units of strength for every kilogram of fat
+
+// Implement the std::fmt::Display trait of the Player structure so using
 // the template {} inside a println! macro will print in the first
 // line the name of the player
 // in the second line the strength, score and the money
@@ -42,11 +46,17 @@ fn main() {
 		money: 0,
 		weapons: vec![String::from("knife")],
 	};
-	println!("Before eating {:?}", player1);
+	println!("Before eating {}", player1);
 	player1.eat(apple);
-	println!("After eating an apple\n{:?}", player1);
+	println!("After eating an apple\n{}", player1);
 	player1.eat(steak);
-	println!("After eating a steak\n{:?}", player1);
+	println!("After eating a steak\n{}", player1);
+}
+
+impl Player {
+	fn eat<T>(&mut self, food: T) {
+		self.strength += food.gives();
+	}
 }
 
 #[cfg(test)]

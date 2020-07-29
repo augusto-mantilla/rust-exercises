@@ -1,4 +1,4 @@
-// Write a function that tries to open a file and panics if the file
+// Write a function call `open_file` that tries to open a file and panics if the file
 // doesn't exist
 use std::fs::{self, File};
 
@@ -6,8 +6,7 @@ fn main() {
 	open_file("file.txt");
 }
 
-fn open_file(s: &str) -> {
-}
+fn open_file(s: &str) -> File {}
 
 #[cfg(test)]
 mod tests {

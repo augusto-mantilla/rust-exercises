@@ -1,18 +1,14 @@
 // Implement the function bubble_sort which receives a vector Vec<i32>
-// and return the same vector but in increasing order using the bubble
+// and return the same vector but sorted in increasing order using the bubble
 // sort algorithm
 
 fn main() {
 	let ref mut v = vec![3, 2, 4, 5, 1, 7];
-	let mut b = v.clone();
 	bubble_sort(v);
 	println!("{:?}", v);
-
-	b.sort();
-	println!("{:?}", b);
 }
 
-fn bubble_sort(vec: &Vec<i32>) {}
+fn bubble_sort(v: &mut Vec<i32>) {}
 
 #[cfg(test)]
 mod tests {

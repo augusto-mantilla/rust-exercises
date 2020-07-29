@@ -906,6 +906,987 @@
 ** More Collections [[https://doc.rust-lang.org/stable/std/collections/index.html][see the documentation]]
 * Error Handling 
   Rust groups errors in two major categories: recoverable errors and unrecoverable errors. For a recoverable error such as a file not found error, it's reasonable to report the error to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, like trying to access a location beyond the end of an array.
-  - For recoverable error Rust has the type `Result<T, E>`
-  - And for unrecoverable error the `panic!` macro
+** For recoverable error Rust has the type `Result<T, E>`
+	 - T and E represent generic types
+       #+begin_src rust
+		 enum Result<T, E> {
+			 Ok(T),
+			 Err(E),
+		 }
+	   #+end_src
+	 - Result types can be "matched" (use a match) expression to decide what to do in the occurrence of an error `Err`
+** And for unrecoverable error the `panic!` macro
+	 You're program will print a failure message, unwind and clean up the stack, and then quit. This commonly occurs when a bug of some kind has been detected and it's not clear to the programmer how to handle the error.
+	 - To make a program panic call the macro
+       #+begin_src rust
+		 fn main() {
+			 panic!("crash and burn");
+		 }
+       #+end_src
+* Generic Data Types
+  -  Generics are abstract stands-ins for concrete types or other properties.
+  -  We can use generics to create definitions for items like functions signatures or structs, which we can then use with many different concrete data types.
+** In a Function's Signature
+   - When we have to have to place the type name declaration inside angle brackets <>, between the name of the function and the parameter list.
+   #+begin_src rust
+	 fn largest<T>(list: &[T]) -> T {}
+   #+end_src
+** In Struct Definition
+   - We can also define structs to use a generic type parameter in one or more fields using the <> syntax.
+   #+begin_src rust
+	 struct Point<T> {
+		 x: T,
+		 y: T,
+	 }
 
+	 fn main() {
+		 let integer = Point { x: 5, y: 10 };
+		 let float = Point { x: 1.0, y: 4.0 };
+	 }
+   #+end_src
+** In Enum Definitions
+   - In the same way as in structs
+   #+begin_src rust
+	 enum Option<T> {
+		 Some(T),
+		 None,
+	 }
+   #+end_src
+** In Method Definition
+   - We have to specify the name of the abstract type in two places:
+	 - After the `impl` keyword
+	 - And after the name of the struct or enum that uses the generic
+   #+begin_src rust
+	 struct Point<T> {
+		 x: T,
+		 y: T,
+	 }
+
+	 impl<T> Point<T> {
+		 fn x(&self) -> &T {
+			 &self.x
+		 }
+	 }
+
+	 fn main() {
+		 let p = Point { x: 5, y: 10 };
+
+		 println!("p.x = {}", p.x());
+	 }
+   #+end_src
+
+* Traits
+  - In a lot of other programming languages this same feature is called interfaces.
+  - Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.
+  - To define a trait use the `trait` keyword.
+  #+begin_src rust
+	pub trait Summary {
+		fn summarize(&self) -> String;
+	}
+  #+end_src
+
+** Implementing a Trait on a Type
+   #+begin_src rust
+	 pub struct NewsArticle {
+		 pub headline: String,
+		 pub location: String,
+		 pub author: String,
+		 pub content: String,
+	 }
+
+	 impl Summary for NewsArticle {
+		 fn summarize(&self) -> String {
+			 format!("{}, by {} ({})", self.headline, self.author, self.location)
+		 }
+	 }
+
+	 pub struct Tweet {
+		 pub username: String,
+		 pub content: String,
+		 pub reply: bool,
+		 pub retweet: bool,	
+	 }
+
+	 impl Summary for Tweet {
+		 fn summarize(&self) -> String {
+			 format!("{}: {}", self.username, self.content)
+		 }
+	 }
+   #+end_src
+  
+** Default Implementations
+   Sometimes it's useful to have default for some or all of the methods in a trait instead of requiring implementation for all methods on every type.
+   #+begin_src rust
+	 pub trait Summary {
+		 fn summarize(&self) -> String {
+			 String::from("(Read more...)")
+		 }
+	 }
+   #+end_src
+* Lifetimes
+  In Rust every reference has a lifetime, which is the scope for which that reference is valid.
+  - Most of the time lifetimes are implicit and inferred.
+  - Generic lifetimes parameters are used for the compiler to ensure that a reference will definitely be valid.
+
+  #+begin_src rust
+	&i32        // a reference
+	&'a i32     // a reference with an explicit lifetime
+	&'a mut i32 // a mutable reference with an explicit lifetime
+  #+end_src
+** Lifetime Annotation in Function Signature
+   As with generic type parameters, we need to declare generic lifetime parameter inside angle brackets between the function name and the parameter list
+   #+begin_src rust
+	 fn main() {
+		 let string1 = String::from("abcd");
+		 let string2 = "xyz";
+
+		 let result = longest(string1.as_str(), string2);
+		 println!("The longest string is {}", result);
+	 }
+
+	 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+		 if x.len() > y.len() {
+			 x
+		 } else {
+			 y
+		 }
+	 }
+   #+end_src
+   The function signature now tells Rust that for some lifetime 'a. the function takes two parameters, both of which live at least as long as lifetime 'a. The function signature also tells Rust that the string slice returned from the function will live at least as long as lifetime 'a. In practice, it means that the lifetime of the reference returned by the longest function is the same as the smaller of the lifetimes of the references passed in. These constraints are what we want Rust to enforce.
+** Lifetime Elision
+   The patterns programmed into Rust's analysis of references are called the lifetime elision rules. These aren't rules for programmers to follow; they're a set of particular cases that the compiler will consider, and if your code fits these cases, you don't need to write the lifetimes explicitly.
+*** The First Rule
+	Each parameter that is a reference gets its own lifetime parameter.
+	In other words, a function with one parameter gets one lifetime parameter gets one lifetime parameter: fn foo<'a>(x: &'a i32); a function with two parameters gets two separate lifetimes parameters: fn foo<'a, 'b>(x: &'a i32, y: &'b i32); and so on
+*** The Second Rule
+	If there is exactly one input lifetime parameter, that lifetime is assigned to the all output lifetime parameters: fn foo<'a>(x: &'a i32) -> &'a i32
+*** The Third Rule
+	If there are multiple input lifetime parameters, but one of them is &self or &met self because this is a method the lifetime of self is assigned to all output lifetime parameters.
+** Lifetime Annotation in Struct Definition
+   #+begin_src rust
+	 struct ImportantExcerpt<'a> {
+		 part: &'a str,
+	 }
+   #+end_src
+** Lifetime Annotation in Method Definition
+   #+begin_src rust
+	 impl<'a> ImportantExcerpt<'a> {
+		 fn level(&self) -> i32 {
+			 3
+		 }
+	 }
+   #+end_src
+** The Static Lifetime
+   One special lifetime we need to discuss is 'static, which means that this reference can live for the entire duration of the program. All string literals have the 'static lifetime, which we can annotate as follows:
+   #+begin_src rust
+	 let s: &'static str = "I have a static lifetime.";
+   #+end_src
+   The text of this string is stored directly in the program's binary, which is always available. Therefore, the lifetime of all string literals is 'static.
+   You might see suggestions to use the 'static lifetime in error messages, But before specifying 'static as the lifetime for a reference, think about whether the reference actually lives the entire lifetime of your program or not. You might consider whether you want in to live that long, even if it could. Most of the time, the problem results from attempting to create a dangling or a mismatch f the available reference of the available lifetimes. In such cases, the solution is fixing those problems, not specifying the 'static lifetime.
+** Generic Type Parameters, Trait Bounds, and Lifetimes Together
+   #+begin_src rust
+	 use std::fmt::Display;
+
+	 fn longest_with_an_announcement<'a, T> (
+		 x: &'a str,
+		 y: &'a str,
+		 ann: T,
+	 ) &'a str
+	 where
+		 T: Display,
+	 {
+		 println!("Announcement! {}", ann);
+		 if x.len() > y.len() {
+			 x
+		 } else {
+			 y
+		 }
+	 }
+
+   #+end_src
+* Managing Growing Projects with Packages, Crates and Modules
+  - *Packages*: A cargo feature that lets you build, test and share crates
+  - *Crates*: A tree of modules that produces a library or executable
+  - *Modules* and *use*: Let you control the organization, scope and privacy of paths
+  - *Path*: A way of naming an item, such as a struct, function, or module
+** Defining Modules to Control Scope and Privacy
+   - Use the keyword `mod` to create a module.
+   - The `use` keyword that brings a path into scope.
+   - The `pub` keyword to make items public
+   - The `as` keyword
+*** Modules
+	- Let us organize the code within a crate into groups for readability and easy reuse.
+	- Also control the privacy of items
+	  - An item can be used by outside code if it's public
+	  - And it can't if it's private
+	- Example:
+	#+begin_src rust
+	  mod front_of_house {
+		  mod hosting {
+			  fn add_to_waitlist() {}
+
+			  fn seat_at_table() {}
+		  }
+
+		  mod serving {
+			  fn take_order() {}
+
+			  fn serve_order() {}
+
+			  fn take_payment() {}
+		  }
+	  }
+	#+end_src
+	- Tree structure of this module
+	#+begin_src sh
+	  crate
+	   └── front_of_house
+		   ├── hosting
+		   │   ├── add_to_waitlist
+		   │   └── seat_at_table
+		   └── serving
+			   ├── take_order
+			   ├── serve_order
+			   └── take_payment
+	#+end_src
+** Path for Referencing to an Item in the Module Tree
+   Both absolute and relative paths are followed by one or more identifiers separated by double colons (::).
+*** A Absolute path
+	Starts from a crate root by using a crate name or literal crate.
+*** A Relative Path
+	Starts from the current module and uses self, super, or an identifier in the current module
+*** Example
+	#+begin_src rust
+	  mod front_of_house {
+		  mod hosting {
+			  fn add_to_watinglist() {}
+		  }
+	  }
+
+	  pub fn eat_at_restaurant() {
+		  // Absolute Path
+		  crate::front_of_house::hosting::add_to_waitlist();
+
+		  // Relative Path
+		  front_of_house::hosting::add_to_waitlist();
+	  }
+	#+end_src
+** Exposing Path with the pub Keyword
+   - Everything is private by default
+	 #+begin_src rust
+	   mod front_of_house {
+		   pub fn in_front_of_house() {
+			   println!("In front of house");
+		   }
+		   pub mod hosting {
+			   fn add_to_waitlist() {
+				   super::in_front_of_house();
+				   println!("add to wait list");
+			   }
+		   }
+	   }
+	   fn main() {
+		   println!("Hello, world!");
+		   crate::front_of_house::hosting::add_to_waitlist();
+		   front_of_house::in_front_of_house();
+	   }
+	 #+end_src
+	 This code will give an error because `add_to_waitlist` is private.
+   - Use the `pub` keyword to make any element public.
+   - A module define at the same level is immediately accessible but every module after that needs to be public to be accessible
+	 #+begin_src rust
+	   mod front_of_house {
+		   pub fn in_front_of_house() {
+			   println!("In front of house");
+		   }
+		   pub mod hosting {
+			   pub fn add_to_waitlist() {
+				   super::in_front_of_house();
+				   println!("add to wait list");
+			   }
+		   }
+	   }
+
+	   fn main() {
+		   println!("Hello, world!");
+		   crate::front_of_house::hosting::add_to_waitlist();
+		   front_of_house::in_front_of_house();
+	   }
+	 #+end_src
+	 The module `front_of_house` doesn't need to be public to be access in the main function because they are at the same level, but the inner modules and function do.
+   - Functions have to be made public explicitly to be used in outside modules, but all the inside modules can use private functions defined in a parent module.
+   - You can use super to refer to parent modules.
+** Making Structs and Enums Public
+   We can also use pub to designate structs and enums as public,  but that doesn't make the fields immediately public each field can be private or public
+	 #+begin_src rust
+	   mod back_of_house {
+		   pub struct Breakfast {
+			   pub toast: String, // public
+			   seasonal_fruit: String, // private and cannot be accessed outside the module
+		   }
+
+		   impl Breakfast {
+			   pub fn summer(toast: &str) -> Breakfast {
+				   Breakfast {
+					   toast: String::from(toast),
+					   seasonal_fruit: String::from("peaches"),
+				   }
+			   }
+		   }
+	   }
+
+	   pub fn eat_at_restaurant() {
+		   let mut meal = back_of_house::Breakfast::summer("Rye");
+		   meal.toast = String::from("Wheat");
+		   println!("I'd like {} toast please", meal.toast);
+	   }
+	 #+end_src
+** Bringing Paths into Scope with the use Keyword
+   - Using the `use` keyword
+	 #+begin_src rust
+	   mod front_of_house {
+		   pub mod hosting {
+			   pub fn add_to_waitlist(){}
+		   }
+	   }
+
+	   use crate::front_of_house::hosting;
+
+	   pub fn eat_at_restaurant() {
+		   hosting::add_to_waitlist();
+		   hosting::add_to_waitlist();
+		   hosting::add_to_waitlist();
+	   }
+	 #+end_src
+
+   - For convention and also for convenience reasons it's recommended to write the use path until the parent module of the function or type that we want to use, as we can see in the following example that allow to differentiate between the two Result type.
+	 #+begin_src rust
+	   fn main() {
+	   use std::fmt::Result;
+	   use std::io::Result;
+
+	   fn function1() -> fmt::Result {
+		   // --snip--
+		   Ok(())
+	   }
+
+	   fn function2() -> io::Result<()> {
+		   // --snip--
+		   Ok(())
+	   }
+	   }
+	 #+end_src
+** Providing New Names with the `as` Keyword
+   #+begin_src rust
+	 use std::fmt::Result;
+	 use std::io::Result as IoResult;
+
+	 fn function1() -> Result {
+	
+	 }
+
+	 fn function2() -> IoResult {
+	
+	 }
+   #+end_src
+   In the second use statement, we chose the new name IoResult for the std::io::Result type which won't conflict with the Result from std::fmt.
+** Re-expoting Names with `pub use`
+   When we bring a name into scope with the use keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code's scope.
+   #+begin_src rust
+	 mod front_of_house {
+		 pub mod hosting {
+			 pub fn add_to_waitlist() {
+				 // some code	
+			 }
+		 }
+	 }
+
+	 pub use crate::front_of_house::hosting;
+
+	 pub fn eat_at_retaurant() {
+		 hosting::add_to_waitlist();
+		 hosting::add_to_waitlist();
+		 hosting::add_to_waitlist();
+	 }
+   #+end_src
+   By using `pub use`, external code can now call the add_to_waitlist function using hosting::add_to_waitlist.
+** Using External Packages
+   Add to the Cargo.toml file the entry of the external package under the dependencies tag.
+   To use the external package `rand` in our project we do as follows:
+   #+begin_src conf
+	 [dependencies]
+	 rand = "0.5.5"
+   #+end_src
+   Then to bring the rand definition into the scope of our package, we added a use line starting with the name of the package, rand.
+   #+begin_src rust
+	 use rand::Rng;
+
+	 fn main() {
+		 let secret_number = rand::thread_rng().gen_range(1, 101);
+	 }
+   #+end_src
+   Members of the Rust community have made many packages available at crates.io, and pulling any of them into your package involves these same steps: listing them in your package’s Cargo.toml file and using use to bring items into scope.
+** Using Nested Paths to Clean Up Large use Lists
+   #+begin_src rust
+	 use std::cmp::Ordering;
+	 use std::io;
+   #+end_src
+   Becomes
+   #+begin_src rust
+	 use std::{cmp::Ordering, io};
+   #+end_src
+   And
+   #+begin_src rust
+	 use std::io;
+	 use std::io::Write;
+   #+end_src
+   Becomes
+   #+begin_src rust
+	 use std::io::{self, Write}
+   #+end_src
+** The Glob Operator
+   If you want to bring all public items defined in a path into scope, we can specify that oath followed by `*`, the glob operator:
+   #+begin_src rust
+	 use std::collections::*;
+   #+end_src
+   This use statement brings all public items defined in std::collections into the current scope.
+   - Be careful when using the glob operator! Glob can make it harder to tell what names are in scope and where a name used in your program was defined.
+   - The glob operator is often used when testing to bring everything under test into the `tests` module;
+** Separating Modules into Different Files
+   - Create a file with the same name of the module that you want to move to its own file.
+   - Add the keyword mod followed by the path to that module to the file that is the root of the crate, i.e., main.rs for a binary crate or lib.rs for a library crate.
+	 Suppose you want to move the module front_of_house to it's own file:
+	 The content of src/lib.rs (the root of these crate) becomes as follows.
+	 #+begin_src rust
+	   mod front_of_house;
+
+	   pub use crate::front_of_house::hosting;
+
+	   pub fn eat_at_restaurant() {
+		   hosting::add_to_waitlist();
+		   hosting::add_to_waitlist();
+		   hosting::add_to_waitlist();
+	   }
+	 #+end_src
+	 And then you need to be create the file src/front_of_house.rs and put the content of the front_of_house there.
+	 The content of the src/front_of_house.rs:
+	 #+begin_src rust
+	   pub mod hosting {
+		   pub fn add_to_waitlist() {}
+	   }
+	 #+end_src
+   - To move the hosting module to its own file you need to add `mod hosting;` to the beginning of the file src/front_of_house.rs and create the folder src/front_of_house/ and place the content of the hosing module inside a file called hosting in the path src/front_of_house/
+	 Content of the file src/front_of_house/hosting.rs
+	 #+begin_src rust
+	   pub fn add_to_wailist() {}
+	 #+end_src
+   - The tree of the src/ directory now looks like this:
+	 #+begin_src sh
+	 $ tree src
+	   src
+	   ├── front_of_house
+	   │   └── hosting.rs
+	   ├── front_of_house.rs
+	   └── lib.rs
+	 #+end_src
+* Writing automated tests
+  - At it's simplest, a test in Rust is a function that's annotated with the `test` attribute.
+	- Attributes are metadata about pieces of code; one example is derive
+  - To change a function into a test function, add #[test] on the line before `fn`.
+  - When you run a test with the `cargo test` command, Rust builds a test runner binary that runs the functions annotated with the test attribute and reports on whether each test function passes or fails
+  - By default when you create a library crate using `cargo new project -lib` cargo creates a lib.rs file in the src directory with the content:
+	#+begin_src rust
+	  #[cfg(test)]
+	  mod tests {
+		  #[test]
+		  fn it_works() {
+			  assert_eq!(2 + 2, 4);
+		  }
+	  }
+	#+end_src
+	When you run cargo test the function `it_works` is executed and the result is shown in the output.
+	#+begin_src sh
+	  $ cargo test
+		 Compiling adder v0.1.0 (file:///projects/adder)
+		  Finished test [unoptimized + debuginfo] target(s) in 0.57s
+		   Running target/debug/deps/adder-92948b65e88960b4
+
+	  running 1 test
+	  test tests::it_works ... ok
+
+	  test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+		 Doc-tests adder
+
+	  running 0 tests
+
+	  test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+	#+end_src
+  - A test fails when it panics
+  - The macro `assert!`, `assert_eq!` and `assert_ne!` panic when the conditions are not met
+	- assert!(predicate) panics when the predicate is false.
+	- assert_eq!(a, b) (assert equal) panics when `a` is different from `b`.
+	- assert_ne!(a, b) (assert not equal) panics when `a` is equal to `b`.
+** Checking for Panic with `should_panic`
+   - If you what to check that a function is panicking when it should you can use the should_panic attribute in the line between the attribute test and fn
+	 #+begin_src rust
+	   #[cfg(test)]
+	   mod tests {
+		   use super::*;
+
+		   #[test]
+		   #[should_panic]
+		   fn greater_than_100() {
+			   Guess::new(200);
+		   }
+	   }
+	 #+end_src
+
+   - To make the error easier to find you can specify the error that is displayed you can add the message to the should_panic attribute
+	 #+begin_src rust
+	   #[cfg(test)]
+	   mod tests {
+		   use super::*;
+
+		   #[test]
+		   #[should_panic(expected = "Guess value must be less than or equal to 100")]
+		   fn greater_than_100() {
+			   Guess::new(200);
+		   }
+	   }
+	 #+end_src
+** Using Result<T, E> in Tests
+   - Instead of writing tests that panic when they fail we can write test that use Result<T, E>
+	 #+begin_src rust
+	   #[cfg(test)]
+	   mod tests {
+		   #[test]
+		   fn it_works() -> Result<(), String> {
+			   if 2 + 2 == 4 {
+				   Ok(())
+			   } else {
+				   Err(String::from("two plus two does not equal four"))
+			   }
+		   }
+	   }
+	 #+end_src
+   - You can’t use the #[should_panic] annotation on tests that use Result<T, E>. Instead, you should return an Err value directly when the test should fail.
+** Controlling How Tests Are Run
+   Just as cargo run compiles your code and then runs the resulting binary, cargo test compiles your code in test mode and runs the resulting code in test mode and runs the resulting test binary.
+   - When you run the command cargo test some command line options go to cargo test, and some go to the resulting test binary. To separate these two types of arguments, you list the arguments that go to cargo test followed by the separator -- and then the ones that go to the test binary.
+	 - Running cargo test --help displays the potions you can use with cargo test, and running cargo test -- --help displays the options you can use after the separator --.
+*** Running Tests in Parallel or Consecutively
+	- By default tests run in parallel using threads.
+	- This can be overwritten by using cargo test -- --test-threads=1 which runs all the tests in only one thread (consecutively).
+*** Showing Function Output
+	- By default the output of the functions ran by the test are captured
+	- This can be overwritten by using: cargo test -- --show-output
+*** Running Subset of Test by Name
+	- You can run a single test by specifying the name of the function after the cargo test
+	  - Ex: cargo test test_name, run only the test `test_name`
+	- Filtering to run multiple modules by specifying a partial name that matches more than one test.
+	  - Ex: imagine we have a test name add_three_and_two and another add_two_and_two by running cargo test add both test are going to run.
+*** Ignoring Tests Unless Specifically Requested
+	- Use the ignore attribute
+	  #+begin_src rust
+		#[test]
+		fn it_works() {
+			assert_eq!(2 + 2, 4);
+		}
+
+		#[test]
+		#[ignore]
+		fn expensive_test() {
+			// code that takes an hour to run
+		}
+	  #+end_src
+	  Now when you run cargo test `expensive_test` it's gonna be ignored and it's not gonna be executed.
+
+	- To run the ignored test you have to specify cargo test -- --ignored
+*** Read more about test organization in [[https://doc.rust-lang.org/stable/book/ch11-03-test-organization.html][Chapter 11.3.]] of the book
+* Functional Language Features: Iterators and Closures
+** Closures: Anonymous Functions that can Capture Their Environment
+   Rust's closures are anonymous functions you can save in variables or pass to other functions. You can create the closure in one place and call the closure to evaluate it in a different context.
+   Closures in Rust, also called lambda expression or lambdas, are functions that can capture the enclosing environment. For example, a closure that captures the x variable:
+   #+begin_src rust
+	 let closure = |val| val + x
+   #+end_src
+   - Calling a closure it's exactly like calling a function. However, both input and return types can be inferred and input variable must be specified.
+   - Closures use || instead of () around input variables.
+   - Optional body delimitation ({}).
+   - The ability to capture the outer environment variables.
+	 #+begin_src rust
+	   fn main() {
+		   // Increment via closures and functions.
+		   fn  function            (i: i32) -> i32 { i + 1 }
+
+		   // Closures are anonymous, here we are binding them to references
+		   // Annotation is identical to function annotation but is optional
+		   // as are the `{}` wrapping the body. These nameless functions
+		   // are assigned to appropriately named variables.
+		   let closure_annotated = |i: i32| -> i32 { i + 1 };
+		   let closure_inferred  = |i     |          i + 1  ;
+
+		   let i = 1;
+		   // Call the function and closures.
+		   println!("function: {}", function(i));
+		   println!("closure_annotated: {}", closure_annotated(i));
+		   println!("closure_inferred: {}", closure_inferred(i));
+
+		   // A closure taking no arguments which returns an `i32`.
+		   // The return type is inferred.
+		   let one = || 1;
+		   println!("closure returning one: {}", one());
+
+	   }
+	 #+end_src
+   - Closures are inherently flexible and will do what the functionality requires to make the closure work without annotation.
+   - This allows captured to flexibly adapt to use case, sometimes moving and sometimes borrowing.
+   - Closures can capture variables: by reference: &T, by mutable reference: &mut T and by value: T.
+   - They preferentially capture variables by reference and only go lower when required.
+** As Input Parameters
+   While Rust chooses how to capture variables on the fly mostly without type annotation, this ambiguity is not allowed when writing functions. Then taking a closure as an input parameter, the closure's complete type must be annotated using one of a few traits. In order of decreasing restriction, they are:
+   - Fn: the closure captures by reference (&T).
+   - FnMut: the closure captures by mutable reference (&mut T).
+   - FnOnce: the closure captures by value (T).
+	 #+begin_src rust
+	   fn apply<F>(f: F) where
+		   F: FnOnce() {
+		   f()
+	   }
+
+	   fn apply_to_3<F>(f: F) -> i32 where
+		   F: Fn(i32) -> i32 {
+		   f(3)
+	   }
+	 #+end_src
+* Smart Pointers
+  A pointer is a general concept for a variable that contains an address in memory. This address refers to, or "points at", some other data. The most common kind of pointer of pointer in Rust is a reference.
+** References 
+   - References are indicated by the by the & symbol and borrow the value they point to.
+   - They don't have any special capability other that referring to data.
+   - They don't have any overhead.
+   - They are the kind of pointer we use more often.
+** Smart Pointers
+   - They are data structures that act like a pointer.
+   - They also have additional metadata and capabilities.
+   - In many cases smart pointers own the data they point to, in contrast to references which only borrow data.
+   - Examples of smart pointers: Strings and Vec<T>.
+	 - Both of these own some memory and allow to manipulate it.
+	 - They also have metadata (such as their capacities) and extra capabilities or guarantees (such as with String ensuring its data will always be a valid UTF-8).
+   - Smart pointers are usually implementing using structs.
+   - Smart pointers implement the Deref and Drop traits.
+   - The Deref trait allows an instance of the smart pointer to behave like a reference so you can write a code that works with either references or smart pointers.
+   - The Drop trait allows you to customize the code that is run when an instance of the smart pointer goes out of scope.
+   - The most common smart pointers in the standard library are:
+	 - Box<T> for allocating values on the heap.
+	 - Rc<T>, a reference counting type that enables multiple ownership.
+	 - Ref<T> and RefMut<T>, accessed through RefCell<T>, a type that enforces the borrowing rules at runtime instead of compile time
+** Using Box<T> to Point to Data on the Heap
+   Boxes don't have performance overhead, other than storing their data on the heap instead of on the stack. But they don't have many extra capabilities either. You'll use them most often in these situations:
+   - When you have a type whose size can't be known at compile time and you want to use a value of that type in a context that requires an exact size.
+   - When you have a large amount of data and you want to transfer ownership but ensure the data won't be copied when you do so.
+   - When you want own a value and you care only that it's a type that implements a particular trait rather than being of a specific type.
+** Using a Box<T> to Store Data on the Heap
+   #+begin_src rust
+	 fn main() {
+		 let b = Box::new(5);
+		 println!("b = {}", b);
+	 }
+   #+end_src
+   We define the variable b to have the value of a Box that points to the value 5, which is allocated on the heap. This program will print `b = 5`.
+** Enabling Recursive Types with Boxes
+   At compile time, Rust needs to know how much space a type takes up. One type whose size can't be known at compile time s a recursive type, where a value can have a s part of itself another value of the same type. Because nesting of values could theoretically continue infinitely, Rust doesn't know how much space a value of a recursive type needs. However, boxes have a known size, so by inserting a box in a recursive type definition, you can have recursive types.
+*** Cons List
+	#+begin_src rust
+	  enum List {
+		  Cons(i32, List),
+		  Nil,
+	  }
+
+	  fn main() {
+		  let list = Cons(1, Cons(2, Cons(3, Nil)));
+	  }
+	#+end_src
+	This code doesn't compile because Rust cannot determine the size of the list at compile time. In the compilation error we get:
+	#+begin_src sh
+	  $ cargo run
+		 Compiling cons-list v0.1.0 (file:///projects/cons-list)
+	  error[E0072]: recursive type `List` has infinite size
+	   --> src/main.rs:1:1
+		|
+	  1 | enum List {
+		| ^^^^^^^^^ recursive type has infinite size
+	  2 |     Cons(i32, List),
+		|               ---- recursive without indirection
+		|
+		= help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `List` representable
+
+	  error[E0391]: cycle detected when processing `List`
+	   --> src/main.rs:1:1
+		|
+	  1 | enum List {
+		| ^^^^^^^^^
+		|
+		= note: ...which again requires processing `List`, completing the cycle
+		= note: cycle used when computing dropck types for `Canonical { max_universe: U0, variables: [], value: ParamEnvAnd { param_env: ParamEnv { caller_bounds: [], reveal: UserFacing, def_id: None }, value: List } }`
+
+	  error: aborting due to 2 previous errors
+
+	  Some errors have detailed explanations: E0072, E0391.
+	  For more information about an error, try `rustc --explain E0072`.
+	  error: could not compile `cons-list`.
+
+	  To learn more, run the command again with --verbose.
+	#+end_src
+	Rust cannot figure out how much space to allocate for recursively defined types, so the compiler gives the error in Listing 15-3. But the error does include this helpful suggestion:
+	#+begin_src sh
+		= help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `List` representable
+	#+end_src
+	Using boxes Rust can allocate memory because Box<T> is a pointer and Rust always knows how much space a Box<T> needs: a pointer's size doesn't change based on the amount of data it's pointing to.
+
+	#+begin_src rust
+	  enum List {
+		  Cons(i32, Box<List>),
+		  Nil,
+	  }
+
+	  use crate::List::{Cons, Nil};
+
+	  fn main() {
+		  let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+	  }
+	#+end_src
+
+	Defining `List` like this does compile.
+** Treating Smart Pointers Like Regular References with the Deref Trait
+   Implementing the Deref trait allows you to customize the behavior of the dereference operator, *. By implementing Deref in such a way that a smart pointer can be treated like a regular reference, you can write code that operates on references and use that code with smart pointers too.
+*** Following the Pointer to the Value with the Dereference Operator
+	A regular reference is a type of pointer, and one way to think of a pointer is as an arrow to a value stored somewhere else. In Listing 15-6, we create a reference to an i32 value and then use the dereference operator to follow the reference to the data:
+	#+begin_src rust
+	  fn main() {
+		  let x = 5;
+		  let y = &x;
+
+		  assert_eq!(5, x);
+		  assert_eq!(5, *y);
+	  }
+	#+end_src
+*** Using Box<T> Like a Reference
+	We can rewrite the code above to use a Box<T> instead of reference; the dereference operator will work as shown above.
+	#+begin_src rust
+	  fn main() {
+		  let x = 5;
+		  let y = Box::new(5);
+
+		  assert_eq!(5, x);
+		  assert_eq!(5, *y);
+	  }
+	#+end_src
+*** Defining Our Own Smart Pointer
+	Let's build a smart pointer similar to the Box<T> type provided by the standard library to experience how smart pointers behave differently from references by default
+	#+begin_src rust
+	  struct MyBox<T>(T);
+
+	  impl<T> MyBox<T> {
+		  fn new(x: T) -> MyBox<T> {
+			  MyBox(x)
+		  }
+	  }
+
+	  fn main() {
+		  let x = 5;
+		  let y = MyBox::new(x);
+
+		  assert_eq!(5, x);
+		  assert_eq!(5, *y);
+	  }
+	#+end_src
+	This code won't compile and in the error we can see that it's because the type `MyBox<{integer}>` cannot be dereferenced
+*** Treating a Type Like a Reference by Implementing the Deref Trait
+	#+begin_src rust
+	  use std::ops::Deref;
+
+	  impl<T> Deref for MyBox<T> {
+		  type Target = T;
+
+		  fn deref(&self) -> &T {
+			  &self.0
+		  }
+	  }
+	#+end_src
+	Now the code will compile and the work as expected.
+	When we entered *y in the code above Rust actually ran this code
+	#+begin_src rust
+	  *(y.deref())
+	#+end_src
+	Rust substitutes the * operator with a call to the deref method and then a plain reference so we don't have to think about whether or not we need to call the deref method.
+	- This feature lets us write code that functions identically whether we have a regular reference or a type that implements Deref.
+*** How Deref Coercion Interacts with Mutability
+	Similar to how you use the Deref trait to override the * operator on immutable references, you can use the DerefMut trait to override the * operator on mutable references.
+	Rust does deref coercion when it finds types and trait implementations in three cases:
+	- From &T to &U when T: Deref<Target=U>
+	- From &mut T to &mut U when T: DerefMut<Target=U>
+	- From &mut T to &U when T: Deref<Target=U>
+*** Running Code on Cleanup with the Drop Trait
+	- The Drop Trait lets us customize what happens when a value is about to go out of scope.
+	- You can provide an implementation for the Drop trait on any type, not only smart pointers.
+	- The drop method is called automatically when a variable of that type is going out of scope.
+*** Dropping a Value Early with std::mem::drop
+	- The drop method can't be called by your code and the automatic call of drop can't be disabled.
+	- For cases where you want to clean up a value early you can call the std::mem::drop function.
+	  #+begin_src rust
+		struct CustomSmartPointer {
+			data: String,
+		}
+
+		impl Drop for CustomSmartPointer {
+			fn drop(&mut self) {
+				println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+			}
+		}
+
+		fn main() {
+			let c = CustomSmartPointer {
+				data: String::from("some data"),
+			};
+			println!("CustomSmartPointer created.");
+			drop(c);
+			println!("CustomSmartPointer dropped before the end of main.");
+		}
+	  #+end_src
+** Rc<T>, the Reference Counted Smart Pointer
+   In the majority of cases, ownership is clear: you know exactly which variable owns a given value. However there are cases when a single value might have multiple owners.
+   - To enable multiple ownership, Rust has a type called Rc<T>, which is an abbreviation for reference counting.
+   - The Rc<T> type keeps track of the number of references to a value which determines whether or not a value is still in use.
+*** Using Rc<T> to Share Data
+	Let's return to our cons list example. Recall that we defined it using Box<T>. This time we'll create two list that share ownership of a third list. Conceptually, this similar to figure 15-3.
+	#+begin_src rust
+	  enum List {
+		  Cons(i32, Box<List>),
+		  Nil,	
+	  }
+
+	  use crate::List::{Cons, Nil};
+
+	  fn main() {
+		  let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
+		  let b = Cons(3, Box::new(a));
+		  let c = Cons(5, Box::new(a));
+	  }
+	#+end_src
+	This code won't compile because when we create the list `b` the list `a` is moved to `b`. So it's impossible to use `a` again to define `c`.
+
+	We can use Rc<T> to make this possible:
+	#+begin_src rust
+	  enum List {
+		  Cons(i32, Rc<List>),
+		  Nil,
+	  }
+
+	  use crate::List::{Cons, Nil};
+	  use std::rc::Rc;
+
+	  fn main() {
+		  let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+		  let b = Cons(3, Rc::clone(&a));
+		  let c = Cons(4, Rc::clone(&a));
+	  }
+	#+end_src
+
+	- Rc::clone doesn't make a deep copy of all the data.
+	- The call to Rc::clone only increments the reference count, which doesn't take much time.
+*** Cloning an Rc<T> Increases the Reference Count
+	Let's see how the reference count change as we create and drop references to the Rc<List> in a.
+	#+begin_src rust
+	  fn main() {
+		  let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+		  println!("count after creating a = {}", Rc::strong_count(&a));
+		  println!("count after creating b = {}", Rc::string_conut(&a));
+		  {
+			  let c Conts(4, Rc::clone(&a));
+			  pringln!("cont after creating c = {}", Rc::strong_count(&a));
+		  }
+		  println!("count after c goes out of scope = {}", Rc::strong_count(&a));
+	  }
+	#+end_src
+	This code prints the following:
+	#+begin_src sh
+	  $ cargo run
+		 Compiling cons-list v0.1.0 (file:///projects/cons-list)
+		  Finished dev [unoptimized + debuginfo] target(s) in 0.45s
+		   Running `target/debug/cons-list`
+	  count after creating a = 1
+	  count after creating b = 2
+	  count after creating c = 3
+	  count after c goes out of scope = 2
+	#+end_src
+** RefCell<T> and the Interior Mutability Pattern
+   Interior mutability is a design pattern in Rust that allows you to mutate data even when there are immutable references to that data; normally, this action is disallowed by the borrowing rules. To mutate data, the pattern uses `unsafe` cod inside a data structure to vend Rust's usual rules that govern mutation and borrowing.
+*** Enforcing Borrowing rules with RefCell<T>
+	Unlike Rc<T>, the Refcell<T> type represents single ownership over data it holds
+	- RefCell enforces the borrowing rules at runtime instead than at compile time
+	- Instead of not compiling when the borrowing rules are not followed the program will panic
+	- This is useful because sometimes the sometimes a program can be correct and the borrow checker cannot know that they are correct.
+	- Similar to Rc<T>, RefCell<T> is only for use in single-threaded scenarios and will give you a compile-time error if you try using it in a multi-threaded context. We'll talk about how to get the functionality of RefCell<T>
+*** Recap of the Reasons to Use Box<T>, Rc<T> or RefCell<T>
+	- Rc<T> enables multiple owners of the same data; Box<T> and RefCcell<T> have single owners.
+	- Box<T> allows immutable or mutable borrows checked at compile time; Rc<T> allows only immutable borrows checked at compile time; RefCell<T> allows immutable of mutable borrows checked at runtime
+	- Because RefCell<T> allows mutable borrows checked at runtime, you can mutate the value inside the RefCell<T> even when the RefCell<T> is immutable.
+*** Interior Mutability: A Mutable Borrow to an Immutable Value
+	A consequence of the borrowing rules is that when you have an immutable value, you can't borrow it mutably. For example, this code won't compile
+	#+begin_src rust
+	  fn main() {
+		  let x = 5;
+		  let y = &mut x;
+	  }
+	#+end_src
+	- However there are cases in which it would be useful for a value to mutate itself in it's methods but appear immutable to other code.
+	- RefCell<T> serves that purpose read [[https://doc.rust-lang.org/stable/book/ch15-05-interior-mutability.html#a-use-case-for-interior-mutability-mock-objects][A Use Case for Interior Mutability: Mock Objects]] for a practical example.
+*** Keeping Track of Borrows at Runtime with RefCell<T>
+	- When creating immutable and mutable references, we use the & and mut syntax, respectively.
+	- With RefCell<T>, we use the borrow and `borrow` and `borrow_mut` methods, which are part of the safe API that belongs to RefCell<T>.
+	- The `borrow` method returns the smart pointer Ref<T>
+	- The `borrow_mut` method returns the smart pointer type RefMut<T>
+	- Ref<T> and RefMut<T>, both implement the Deref trait so they can be used as regular references
+	- The RefCell<T> keeps track of how many Ref<T> and RefMut<T> smart pointers are currently active
+	- Just like the compile-time borrowing rules, RefCell<T> lets us have many immutable borrows or one mutable borrow t any point in time
+	- If we try to violate these rules, rather than getting a compiler error as we would with references, the implementation will panic at runtime.
+*** Having Multiple Owners of Mutable Data by Combining Rc<T> and RefCell<T>
+	A common way to use RefCell<T> is in combination with Rc<T>. Recall that Rc<T> lets you have multiple owners of some data, but in only gives immutable access to that data. If you have an Rc<T> that holds a RefCell<T>, you can get a value that can have multiple owners and that you can mutate! Let's see the example of the Cons list
+	#+begin_src rust
+	  #[derive(Debug)]
+	  enum List {
+		  Cons(Rc<RefCell<i32>>, Rc<List>),
+		  Nil,
+	  }
+
+	  use crate::List::{Cons, Nil};
+	  use std::cell::RefCell;
+	  use std::rc::Rc;
+
+	  fn main() {
+		  let value = Rc::new(RefCell::new(5));
+
+		  let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));
+
+		  let b = Cons(Rc::new(RefCell::new(6)), Rc::clone(&a));
+		  let c = Cons(Rc::new(RefCell::new(10)), Rc::clone(&a));
+
+		  ,*value.borrow_mut() += 10;
+
+		  println!("a after = {:?}", a);
+		  println!("b after = {:?}", b);
+		  println!("c after = {:?}", c);
+	  }
+	#+end_src
+	Now we have multiple ownership of the cons list with Rc<T> and we can mutate the values using the RefCell<T> type.
+*** Other Types in the Standard Library that Provide Interior Mutability
+	- Cell<T>, which is similar to RefCell except that instead of giving references to the inner value, the value is copied in and out of the Cell<T>.
+	- Mutex<T>, which offers interior mutability that is safe to use across threads.
+	- Check out the standard library docs for more details
+** Reference Cycles Can Leak Memory
+   Rust's memory safety guarantees makes it difficult but not impossible to accidentally create memory that is never cleaned up (known as a memory leak).
+   - Preventing memory leaks entirely is not one of Rust's guarantees.
+   - We can see that Rust allows memory leaks by using Rc<T> and RefCell<T>: it's possible to create references where items refer to each other in a cycle. this creates memory leaks because the references count of item in the cycle will never reach 0, and the values will never be dropped.
+   - 

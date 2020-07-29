@@ -1,9 +1,8 @@
 // Given a list of integers (Vec<i32>) write three functions
+// Write a function called `mean` that calculates the `mean` (the average value) of all the values in the list
 // Write a function called `median` that calculates the `median` (for a sorted list is the value in the middle)
 // Write a function called `mode` that calculates the mode (the value
 // that appears more often)
-
-use std::collections::HashMap;
 
 fn main() {
 	println!("Hello, world!");

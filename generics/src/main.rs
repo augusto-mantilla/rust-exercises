@@ -4,11 +4,9 @@
 fn main() {
 	println!("Hello, world!");
 	println!("{}", identity(3));
-	// Should print 3
 }
 
-fn identity(v: ) ->  {
-	
+fn identity() ->  {
 }
 
 #[cfg(test)]

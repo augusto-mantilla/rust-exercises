@@ -6,7 +6,7 @@
   - Run: *cargo test* to check your solution
 * Variables (Scalar type), control flow, functions
   Defining variables and functions
-  - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]].
+  - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]], [[file:looping/src/main.rs][looping]].
 * Tuples: definition and indexing
   Practicing tuple definition and accessing.
   - Exercises: [[file:matrix_transposition/src/main.rs][matrix_transposition]]
@@ -16,7 +16,26 @@
 * Ownership
   Understanding the ownership rules and how to deal with different types of data
   - Exercises: [[file:ownership/src/main.rs][ownership]], [[file:borrow/src/main.rs][borrow]], [[file:mutability/src/main.rs][mutability]].
+	- Reference rules: [[file:reference_rules/src/main.rs][reference_rules]], [[file:changes/src/main.rs][changes]]
 * Defining and creating structs and method syntax
   - Exercises: [[file:circle/src/main.rs][circle]].
 * Defining and creating enums
-  Exercise: [[file:card_deck/src/main.rs][card_deck]]
+  - Exercise: [[file:card_deck/src/main.rs][card_deck]]
+* Common Collections
+  - Exercises: 
+	- Arrays: [[file:arrays/src/main.rs][arrays]],
+	- Strings: [[file:strings/src/main.rs][strings]],
+	- HashMaps: [[file:hashing/src/main.rs][hashing]],
+	- The collect method: [[file:collect/src/main.rs][collect]]
+* Error Handling
+  - Exercises:
+	- Panic: [[file:panic/src/main.rs][panic]]
+	- Result<T,E>: [[file:handling/src/main.rs][handling]]
+* Packages, Crates and modules
+  - Modules: modules
+* Generic Types, Traits and Lifetimes
+  - Generics: [[file:generics/src/main.rs][generics]]
+  - Traits: [[file:traits/src/main.rs][traits]]
+  - Lifetimes: [[file:lifetimes/src/main.rs][lifetimes]]
+* Functional Languages Features
+  - Closures and Iterators: [[file:closures/src/main.rs][closures]]
