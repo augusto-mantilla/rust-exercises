@@ -1,7 +1,7 @@
-// Create a struct called Person that has two fields: name of type
-// string slice (&str) and age of type u8
+// Fix the declaration of the struct called Person so the code compiles
+// The type of the fields cannot change (name is &str and age is u8)
 // and create the associated function new which creates a new person
-// with age 0 and with the name given
+// with age 0 and with the name passed as an argument
 
 struct Person {
 	name: &str,

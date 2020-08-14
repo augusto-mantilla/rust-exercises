@@ -1890,3 +1890,110 @@
    - Preventing memory leaks entirely is not one of Rust's guarantees.
    - We can see that Rust allows memory leaks by using Rc<T> and RefCell<T>: it's possible to create references where items refer to each other in a cycle. this creates memory leaks because the references count of item in the cycle will never reach 0, and the values will never be dropped.
    - 
+* Pattern and Matching
+  Patterns are special syntax in Rust for matching against the structure of types, both complex and simple. Using patterns in conjunction with `match` expressions and other constructs gives you more control over a program's control flow. A pattern consists of some combination of the following:
+  - Literals
+  - Destructured arrays, enums, structs, or tuples
+  - Variables
+  - Wildcards
+  - Placeholders
+** match arms
+  #+begin_src rust
+	match VALUE {
+		PATTERN1 => EXPRESSION1,
+		PATTERN2 => EXPRESSION2,
+		PATTERN3 => EXPRESSION3,
+	}
+  #+end_src
+  - If PATTERN1 is met EXPRESSION1 is executed
+  - The patterns must be exhaustive (all the possibilities must be covered)
+  - A particular pattern _ will match anything, but it will never binds to a variable, so it's often used in the last match arm.
+	- The pattern _ is useful when you want to ignore any value not specified.
+** Conditional `if let` Expressions
+   - A shorter way to write the equivalent of a match that only matches one case.
+   - if let can have a corresponding else containing code to run if the pattern in the if let doesn't match.
+	 #+begin_src rust
+	   fn main() {
+		   let favorite_color: Option<&str> = None;
+		   let is_tuesday = false;
+		   let age: Result<u8, _> = "34".parse();
+
+		   if let Some(color) = favorite_color {
+			   println!("Using your favorite color, {}, as the background", color);
+		   } else if is_tuesday {
+			   println!("Tuesday is green day!");
+		   } else if let Ok(age) = age {
+			   if age > 30 {
+				   println!("Using purple as the background color");
+			   } else {
+				   println!("Using orange as the background color");
+			   }
+		   } else {
+			   println!("Using blue as the background color");
+		   }
+	   }
+	 #+end_src
+** while let Conditional Loops
+   - Allows a while loop to run for as long as a pattern continues to match
+	 #+begin_src rust
+	   fn main() {
+		   let mut stack = Vec::new();
+
+		   stack.push(1);
+		   stack.push(2);
+		   stack.push(3);
+
+		   while let Some(top) = stack.pop() {
+			   println!("{}", top);
+		   }
+	   }
+	 #+end_src
+** for Loops
+   - In a for loop, the pattern is the value that directly follows the keyword for, so in for x in y the x is the pattern.
+	 #+begin_src rust
+	   let vec!['a', 'b', 'c'];
+
+	   for (index, value) in v.iter().enumerate() {
+		   println!("{} is at index {}", value, index);
+	   }
+	 #+end_src
+** let Statement
+   In general a let statement has the following form:
+   #+begin_src rust
+	 let PATTERN = EXPRESSION;
+   #+end_src
+   - In statements like `let x = 5;` with a variable name in the `PATTERN` slot, the variable name is just a particularly simple form of a pattern.
+   - Rust compares the expression against the pattern and assigns any names it finds. 
+	 #+begin_src rust
+	   let (x, y, z) = (1, 2, 3);
+	 #+end_src
+	 In this example Rust compares the value (1, 2, 3) to the pattern (x, y, z) and sees that the value matches the pattern, so Rust binds 1 to x, 2 to y, and 3 to z.
+	 - If the number of elements in the pattern doesn't match the number of elements in the tuple, the overall type won't match and we'll get a compiler error.
+   - If we wanted to ignore one or more of the values in the tuple, we could use _ or ..
+** Function Parameters
+   Function parameters can also be patterns. 
+   #+begin_src rust
+	 fn print_coordinates(&(x,y): &(i32, i32)) {
+		 println!("Current location: ({}, {})", x, y);
+	 }
+
+	 fn main() {
+		 let point = (3, 5);
+		 print_coordinates(&point);
+	 }
+   #+end_src
+   We can also use patterns in closure parameter lists in the same way as in function parameter lists. 
+** Refutability: Whether a Pattern Might Fail to Match
+   Pattern come in two forms: refutable and irrefutable.
+   - Patterns that will match for any possible value passed are irrefutable.
+	 #+begin_src rust
+	   let x = 5;
+	 #+end_src
+	 Because x matches any pattern this match cannot fail
+   - Patterns that can fail to match for some possible value are refutable. An example would be Some(s) in the expression
+	 #+begin_src rust
+	   if let Some(x) = a_value {
+		   ...
+	   }
+	 #+end_src
+   - 

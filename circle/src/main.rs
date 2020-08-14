@@ -1,4 +1,5 @@
-// Create a structures Circle and Point and the methods necessary so this code compiles
+// Create the structures `Circle` and `Point` and the methods
+// necessary for this code to compile
 // Methods:
 //   - Point;
 //     distance()
@@ -8,9 +9,14 @@
 //     intersection -> returns true if the 2 circles intersect
 // Associated Functions
 //   - Circle:
-//     new -> receives three floating numbers 64 bits in order x, y
-//     coordinates of the center of the circle, and radius of the
+//     new -> receives three 64 bits floating numbers in order x and y
+//     coordinates of the center and the radius of the
 //     circle and returns a new circle
+
+struct Circle {
+	center
+	radius
+}
 
 fn main() {
 	let circle = Circle::new(500.0, 500.0, 150.0);
