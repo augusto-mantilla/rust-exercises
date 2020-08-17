@@ -9,9 +9,9 @@
 //     intersection -> returns true if the 2 circles intersect
 // Associated Functions
 //   - Circle:
-//     new -> receives three 64 bits floating numbers in order x and y
-//     coordinates of the center and the radius of the
-//     circle and returns a new circle
+//     new -> receives three 64 bits floating point numbers in the following
+//     order: x, y and radius (x and y are the coordinates of the center).
+//     and returns a new circle
 
 struct Circle {
 	center
