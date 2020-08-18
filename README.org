@@ -25,7 +25,7 @@
   - Exercises: 
 	- Arrays: [[file:arrays/src/main.rs][arrays]],
 	- Strings: [[file:strings/src/main.rs][strings]], [[file:edit_distance/src/main.rs][edit_distance]], [[file:to_url/src/main.rs][to_url]]
-	- HashMaps: [[file:hashing/src/main.rs][hashing]],
+	- HashMaps: [[file:hashing/src/main.rs][hashing]], [[file:string_permutation/src/main.rs][string_permutation]]
 	- The collect method: [[file:collect/src/main.rs][collect]]
 * Error Handling
   - Exercises:
