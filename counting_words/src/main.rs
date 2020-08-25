@@ -1,5 +1,5 @@
-// In this program you will have to create a function `counting_words`, that
-// receives a string and returns the number of times that the word appears on the string.
+// In this program you will have to complete the function `counting_words`, that
+// receives a `&string` and returns each word and the number of times it appears on the string.
 
 // The program will count as a word the following:
 //     A number like ("0" or "1234") will count as 1
@@ -13,68 +13,67 @@
 
 use std::collections::HashMap;
 
-/// Count occurrences of words.
 fn counting_words(words: &str) -> HashMap<String, u32> {
-    words
-        .to_lowercase()
-        .split(|c: char| !c.is_alphanumeric() && c != '\'')
-        .map(|w| w.trim_matches('\''))
-        .filter(|w| !w.is_empty())
-        .fold(HashMap::new(), |mut map, w| {
-            *map.entry(String::from(w)).or_default() += 1;
-            map
-        })
+ 
 }
 
 fn main() {
     println!("{:?}", counting_words("Hello, world!"));
     println!("{:?}", counting_words("“Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.”
     ― Albert Einstein "));
+    println!("{:?}", counting_words("Batman, BATMAN, batman, Stop stop"));
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use test;
 
+    fn test_counting(input: &str, expected: &[(&str, u32)]) {
+        let mut m: HashMap<String, u32> = counting_words(input);
+        for &(k, v) in expected.iter() {
+            assert_eq!((k, m.remove(&k.to_string().to_lowercase()).unwrap_or(0)), (k, v));
+        }
+        // may fail with a message that clearly shows all extra pairs in the map
+        assert_eq!(m.iter().collect::<Vec<(&String, &u32)>>(), vec![]);
+    }
     #[test]
     fn test_simple() {
-        assert_eq!(counting_words("Hello"), &[("Hello", 1)]);
-         assert_eq!(counting_words("hello big world"), &[("hello", 1), ("big", 1), ("world", 1)]);
-         assert_eq!(counting_words("one of each"), &[("one", 1), ("of", 1), ("each", 1)]);
-         assert_eq!(counting_words("HELLO, 1, 2 HELLO"), &[("HELLO", 2), ("1", 1), ("2", 1)]);
-         assert_eq!(counting_words(
-            "Batman, BATMAN, batman, Stop stop"),
+        test_counting("word", &[("word", 1)]);
+        test_counting("hello", &[("hello", 1)]);
+        test_counting("hello big world", &[("hello", 1), ("big", 1), ("world", 1)]);
+        test_counting("one of each", &[("one", 1), ("of", 1), ("each", 1)]);
+        test_counting("Hello, 1, 2 HELLO", &[("Hello", 2), ("1", 1), ("2", 1)]);
+        test_counting(
+            "Batman, BATMAN, batman, Stop stop",
             &[("batman", 3), ("stop", 2)],
         );
-         assert_eq!(counting_words(
-            " multiple   whitespace"),
+        test_counting(
+            " multiple   whitespace",
             &[("multiple", 1), ("whitespace", 1)],
         );
     }
 
     #[test]
-    #[ignore]
     fn test_count_multiple_occurrences() {
-         assert_eq!(counting_words(
-            "one fish two fish red fish blue fish"),
+        test_counting(
+            "one fish two fish red fish blue fish",
             &[("one", 1), ("fish", 4), ("two", 1), ("red", 1), ("blue", 1)],
         );
     }
 
     #[test]
-    #[ignore]
     fn test_multi_lines() {
-         assert_eq!(counting_words(
-            "Game\nNight\nTomorrow"),
+        test_counting(
+            "Game\nNight\nTomorrow",
             &[("Game", 1), ("Night", 1), ("Tomorrow", 1)],
         );
     }
 
     #[test]
-    #[ignore]
     fn test_punctuation() {
-         assert_eq!(counting_words(
-            "keyboard : mouse on the desk : Computer!!&@$%^&"),
+        test_counting(
+            "keyboard : mouse on the desk : Computer!!&@$%^&",
             &[
                 ("keyboard", 1),
                 ("mouse", 1),
@@ -87,10 +86,9 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn with_apostrophes() {
-         assert_eq!(counting_words(
-            "First: don't laugh. Then: don't cry."),
+        test_counting(
+            "First: don't laugh. Then: don't cry.",
             &[
                 ("first", 1),
                 ("don't", 2),
@@ -102,10 +100,9 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn test_apostrophe() {
-         assert_eq!(counting_words(
-            "Joe can't tell between 'large' and large."),
+        test_counting(
+            "Joe can't tell between 'large' and large.",
             &[
                 ("joe", 1),
                 ("can't", 1),

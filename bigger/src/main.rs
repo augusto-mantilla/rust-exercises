@@ -1,4 +1,4 @@
-//Create the function bigger that compares two i32 numbers
+//Create the function `bigger` that compares two i32 numbers
 //and returns the largest of those numbers
 // You can not use:
 // - another function call

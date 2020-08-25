@@ -1,16 +1,7 @@
 // Using your knowledge of generics
-// create a structure called `Types` with the ability to store any type of values
+// create a structure called `Types` and a method `new` with the ability to store any type of values
 
-#[derive(Debug)]
-struct Types<T> {
-    value: T,
-}
-
-impl<T> Types<T> {
-    pub fn new(value: T) -> Self {
-        Types { value }
-    }
-}
+// add your code here
 
 fn main() {
     let a = "hello";

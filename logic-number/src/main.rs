@@ -12,14 +12,9 @@
 //     154 returns false, because: 154 != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190
 
 pub fn number_logic(num: u32) -> bool {
-    let s = num.to_string();
-    let len = s.len();
-
-    num == s
-        .chars()
-        .map(|x| x.to_digit(10).unwrap().pow(len as u32))
-        .sum()
+    
 }
+
 fn main() {
     let array = [9, 10, 153, 154];
     for pat in &array {
