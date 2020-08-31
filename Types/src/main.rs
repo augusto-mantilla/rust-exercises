@@ -1,15 +1,15 @@
 // Using your knowledge of generics
-// create a structure called `Types` and a method `new` with the ability to store any type of values
-
-// add your code here
+// create a structure called `Types` and a method `new` with the ability
+// to store any type of values
 
 fn main() {
-    let a = "hello";
-    let b = 21;
-    let c = Types { value: a };
-    println!("{:?}", c);
-    let d = Types { value: b };
-    println!("{:?}", d)
+    let a = Types::new("hello");
+    let b = Types::new(21);
+    let c = Types::new(vec![1, 2, 3]);
+
+    println!("{:?}", a);
+    println!("{:?}", b);
+    println!("{:?}", c)
 }
 
 #[cfg(test)]
@@ -30,9 +30,9 @@ mod tests {
     fn wrapper_f64() {
         assert_eq!(Types::new(1.00).value, 1.00);
     }
-// arranjar isto 
+
     #[test]
     fn wrapper_vec() {
-        assert_eq!(Types::new(1.00).value, 1.00);
+        assert_eq!(Types::new(vec![1, 2, 3]).value, [1, 2, 3]);
     }
 }
