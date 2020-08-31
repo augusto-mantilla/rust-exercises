@@ -1,21 +1,21 @@
 // Create the function `contain` that checks a `HashMap` to see if it contains the given key.
 // Create the function `remove` that removes a given key from the `HashMap`.
 
-
 use std::collections::HashMap;
 
-fn contain(mut h: HashMap<&str, i32>, s: &str) -> bool {
+fn contain(h: HashMap<&str, i32>, s: &str) -> bool {
     match h.get(s) {
-        Some(hash) => true,
+        Some(_hash) => true,
         None => false,
     }
 }
+
 fn remove(mut h: HashMap<&str, i32>, s: &str) {
     h.remove(s);
 }
 
 fn main() {
-    let mut hash: HashMap< &str, i32> = HashMap::new();
+    let mut hash: HashMap<&str, i32> = HashMap::new();
     hash.insert("Daniel", 122);
     hash.insert("Ashley", 333);
     hash.insert("Katie", 334);
@@ -23,9 +23,14 @@ fn main() {
 
     println!(
         "Does the HashMap contains the name Roman? => {}",
-        contain(hash, "Roman")
+        contain(hash.clone(), "Roman")
     );
-    println!("Removing Robert {:?}", remove(hash, "Robert"));
+    println!(
+        "Does the HashMap contains the name Katie? => {}",
+        contain(hash.clone(), "Katie")
+    );
+    println!("Removing Robert {:?}", remove(hash.clone(), "Robert"));
+    println!("Hash {:?}", hash);
 }
 
 #[cfg(test)]
@@ -34,7 +39,6 @@ mod tests {
 
     #[test]
     fn test_contains() {
-        #[derive(Debug, Copy, Clone)]
         let mut s = HashMap::new();
 
         s.insert("Pedro", 43);
@@ -42,12 +46,25 @@ mod tests {
         s.insert("Johnny", 546);
         s.insert("Albert", 12323214);
 
-        #[derive(Debug, Copy, Clone)]
-        let x = s;
+        assert_eq!(true, contain(s.clone(), "Pedro"));
+        assert_eq!(true, contain(s.clone(), "Ralph"));
+        assert_eq!(true, contain(s.clone(), "Johnny"));
+        assert_eq!(true, contain(s.clone(), "Albert"));
+        assert_eq!(false, contain(s.clone(), "Marco"));
+        assert_eq!(false, contain(s.clone(), "Joan"));
+        assert_eq!(false, contain(s.clone(), "Louise"));
+    }
 
-        assert_eq!(true, contain(x, "Pedro"));
-        assert_eq!(true, contain(x, "Ralph"));
-        assert_eq!(true, contain(x, "Johnny"));
-        assert_eq!(true, contain(x, "Albert"));
+    #[test]
+    fn test_remove() {
+        let mut n = HashMap::new();
+        n.insert("Dani Sordo", 37);
+        n.insert("Sébastien Loeb", 46);
+        n.insert("Ott Tanak", 32);
+        n.insert("Thierry Neuville", 32);
+
+        remove(n.clone(), "Dani Sordo");
+        assert_eq!(true, contain(n.clone(), "Ott Tanak"));
+        assert_eq!(false, contain(n.clone(), "Dani Ŝordo"))
     }
 }
