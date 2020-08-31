@@ -1,19 +1,6 @@
 // Create the function `contain` that checks a `HashMap` to see if it contains the given key.
 // Create the function `remove` that removes a given key from the `HashMap`.
 
-use std::collections::HashMap;
-
-fn contain(h: HashMap<&str, i32>, s: &str) -> bool {
-    match h.get(s) {
-        Some(_hash) => true,
-        None => false,
-    }
-}
-
-fn remove(mut h: HashMap<&str, i32>, s: &str) {
-    h.remove(s);
-}
-
 fn main() {
     let mut hash: HashMap<&str, i32> = HashMap::new();
     hash.insert("Daniel", 122);
