@@ -30,7 +30,7 @@ mod tests {
     fn wrapper_f64() {
         assert_eq!(Types::new(1.00).value, 1.00);
     }
-
+// arranjar isto 
     #[test]
     fn wrapper_vec() {
         assert_eq!(Types::new(1.00).value, 1.00);
