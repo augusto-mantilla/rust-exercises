@@ -32,7 +32,7 @@
 	- Panic: [[file:panic/src/main.rs][panic]]
 	- Result<T,E>: [[file:handling/src/main.rs][handling]]
 * Packages, Crates and modules
-  - Exercises: [[file:drawing/src/main.rs][modules]]
+  - Exercises: [[file:drawing/src/main.rs][modules]], [[file:drawing/src/main.rs][drawing]]
 * Generic Types, Traits and Lifetimes
   - Generics: [[file:generics/src/main.rs][generics]]
   - Traits: [[file:traits/src/main.rs][traits]]
