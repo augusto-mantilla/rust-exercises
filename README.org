@@ -6,7 +6,7 @@
   - Run: *cargo test* to check your solution
 * Variables (Scalar type), control flow, functions
   Defining variables and functions
-  - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]], [[file:looping/src/main.rs][looping]].
+  - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]], [[file:looping/src/main.rs][looping]], [[file:speed_transformation/src/main.rs][speed_transformation]].
 * Tuples: definition and indexing
   Practicing tuple definition and accessing.
   - Exercises: [[file:matrix_transposition/src/main.rs][matrix_transposition]]
