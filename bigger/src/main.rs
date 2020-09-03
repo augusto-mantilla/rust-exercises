@@ -2,19 +2,7 @@
 
 use std::collections::HashMap;
 
-fn bigger(h: HashMap<&str, i32>) -> i32{
-
-   let mut max_val = 0;
-   if max_val >=0{
-   for (_, v) in h.iter() {
-       if *v > max_val {
-           max_val = *v;
-        }
-    }
-}
-    return max_val
-
-}
+fn bigger(h: HashMap<&str, i32>) -> i32{}
 
 fn main() {
     
