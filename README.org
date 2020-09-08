@@ -8,68 +8,62 @@
 ** Variables and Definitions (Quest 1 -> 1 day)
 *** Variables (Scalar type), control flow (if, while, loop, for), functions
     Defining and using the basic types with simple functions
-    - Exercises:
-      - [[file:fibonacci/src/main.rs][fibonacci]] (int, boolean)
-      - [[file:temperature_conv/src/main.rs][temperature_conv]] (float)
-      - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
-      - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
+    - [[file:fibonacci/src/main.rs][fibonacci]] (int, boolean)
+    - [[file:temperature_conv/src/main.rs][temperature_conv]] (float)
+    - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
+    - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
 *** Tuples:
-    Practicing tuple definition, accessing, destructuring and matching.
-    - Exercises:
-      - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
-      - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
-      - [[file:tuples/src/main.rs][tuples]]
+    Practicing tuple definition, accessing, destructuring and matching
+    - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
+    - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
+    - [[file:tuples/src/main.rs][tuples]]
 ** Memory Management (Quest 2 -> 2 days)
 *** Ownership
     Understanding the ownership rules and how to deal with different types of data
-    - Exercises:
-      - [[file:ownership/src/main.rs][ownership]]
-      - [[file:borrow/src/main.rs][borrow]]
-      - [[file:mutability/src/main.rs][mutability]]
+    - [[file:ownership/src/main.rs][ownership]]
+    - [[file:borrow/src/main.rs][borrow]]
+    - [[file:mutability/src/main.rs][mutability]]
 *** References
-    - Exercises:
-      - [[file:reference_rules/src/main.rs][reference_rules]]
-      - [[file:changes/src/main.rs][changes]]
+    - [[file:reference_rules/src/main.rs][reference_rules]]
+    - [[file:changes/src/main.rs][changes]]
 ** Complex Data Structures (Quest 3 -> 2 days)
 *** Structs
-     - Exercises:
-       -[[file:circle/src/main.rs][ circle]] (structs)
+    - [[file:circle/src/main.rs][circle]]
 *** Enums
-      - Exercises:
-        - [[file:card_deck/src/main.rs][card_deck]] (enums)
-*** Common Collections
-     - Exercises:
-       - Arrays:
-         - [[file:arrays/src/main.rs][arrays]]
-       - Strings:
-         - [[file:strings/src/main.rs][strings]]
-         - [[file:edit_distance/src/main.rs][edit_distance]]
-         - [[file:to_url/src/main.rs][to_url]]
-       - HashMaps:
-         - [[file:hashing/src/main.rs][hashing]]
-         - [[file:string_permutation/src/main.rs][string_permutation]]
-       - Methods:
-         - [[file:collect/src/main.rs][collect]]
+    - [[file:card_deck/src/main.rs][card_deck]]
+*** Array
+    - [[file:arrays/src/main.rs][arrays]]
+*** Strings
+    - [[file:strings/src/main.rs][strings]]
+    - [[file:edit_distance/src/main.rs][edit_distance]]
+    - [[file:to_url/src/main.rs][to_url]]
+*** HashMaps
+    - [[file:hashing/src/main.rs][hashing]]
+    - [[file:string_permutation/src/main.rs][string_permutation]]
+*** Methods
+    - [[file:collect/src/main.rs][collect]]
 ** Error Handling (Quest 4 -> 1 day)
 *** Panic
-    - Exercises:
-      - [[file:panic/src/main.rs][panic]]
+    - [[file:panic/src/main.rs][panic]]
 *** Result<T,E>
-    - Exercises:
-      - [[file:handling/src/main.rs][handling]]
+    - [[file:handling/src/main.rs][handling]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
-   - Exercises:
-     - [[file:drawing/src/main.rs][modules]]
-     - [[file:drawing/src/main.rs][drawing]]
+   - [[file:drawing/src/main.rs][modules]]
+   - [[file:drawing/src/main.rs][drawing]]
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
-   - Generics: [[file:generics/src/main.rs][generics]]
-   - Traits: [[file:traits/src/main.rs][traits]]
-   - Lifetimes: [[file:lifetimes/src/main.rs][lifetimes]]
+*** Generics
+    - [[file:generics/src/main.rs][generics]]
+*** Traits
+    - [[file:traits/src/main.rs][traits]]
+*** Lifetimes
+    - [[file:lifetimes/src/main.rs][lifetimes]]
 ** Functional Languages Features (Quest 7 -> 2 days)
-   - Closures and Iterators: [[file:closures/src/main.rs][closures]]
+*** Closures
+    - [[file:closures/src/main.rs][closures]]
+*** Iterators
 ** Object Oriented Programming Features (Quest 8 -> 1 day)
-*** Using Trait Objects That Allow for Values of Different Types.
+   Using Trait Objects That Allow for Values of Different Types.
 ** Pattern Matching (Quest 9 -> 1 day)
-*** Pattern matching syntax
+   Pattern matching syntax
