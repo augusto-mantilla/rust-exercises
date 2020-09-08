@@ -4,38 +4,72 @@
   [[https://doc.rust-lang.org/stable/rust-by-example/index.html][Rust by Example]]
 * Clone this repo and complete the exercises
   - Run: *cargo test* to check your solution
-* Variables (Scalar type), control flow, functions
-  Defining variables and functions
-  - Exercises: [[file:fibonacci/src/main.rs][fibonacci]], [[file:temperature_conv/src/main.rs][temperature_conv]], [[file:looping/src/main.rs][looping]], [[file:speed_transformation/src/main.rs][speed_transformation]].
-* Tuples: definition and indexing
-  Practicing tuple definition and accessing.
-  - Exercises: [[file:matrix_transposition/src/main.rs][matrix_transposition]]
-* Tuples: definition and destructuring
-  Calculate the division of two numbers and the rest of the division in the same function
-  - Exercises: [[file:division_and_remainder/src/main.rs][division_and_remainder]], [[file:tuples/src/main.rs][tuples]]
-* Ownership
-  Understanding the ownership rules and how to deal with different types of data
-  - Exercises: [[file:ownership/src/main.rs][ownership]], [[file:borrow/src/main.rs][borrow]], [[file:mutability/src/main.rs][mutability]].
-	- Reference rules: [[file:reference_rules/src/main.rs][reference_rules]], [[file:changes/src/main.rs][changes]]
-* Defining and creating structs and method syntax
-  - Exercises: [[file:circle/src/main.rs][circle]].
-* Defining and creating enums
-  - Exercise: [[file:card_deck/src/main.rs][card_deck]]
-* Common Collections
-  - Exercises: 
-	- Arrays: [[file:arrays/src/main.rs][arrays]],
-	- Strings: [[file:strings/src/main.rs][strings]], [[file:edit_distance/src/main.rs][edit_distance]], [[file:to_url/src/main.rs][to_url]]
-	- HashMaps: [[file:hashing/src/main.rs][hashing]], [[file:string_permutation/src/main.rs][string_permutation]]
-	- The collect method: [[file:collect/src/main.rs][collect]]
-* Error Handling
-  - Exercises:
-	- Panic: [[file:panic/src/main.rs][panic]]
-	- Result<T,E>: [[file:handling/src/main.rs][handling]]
-* Packages, Crates and modules
-  - Exercises: [[file:drawing/src/main.rs][modules]], [[file:drawing/src/main.rs][drawing]]
-* Generic Types, Traits and Lifetimes
-  - Generics: [[file:generics/src/main.rs][generics]]
-  - Traits: [[file:traits/src/main.rs][traits]]
-  - Lifetimes: [[file:lifetimes/src/main.rs][lifetimes]]
-* Functional Languages Features
-  - Closures and Iterators: [[file:closures/src/main.rs][closures]]
+* Content Structure
+** Variables and Definitions (Quest 1 -> 1 day)
+*** Variables (Scalar type), control flow (if, while, loop, for), functions
+    Defining and using the basic types with simple functions
+    - Exercises:
+      - [[file:fibonacci/src/main.rs][fibonacci]] (int, boolean)
+      - [[file:temperature_conv/src/main.rs][temperature_conv]] (float)
+      - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
+      - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
+*** Tuples:
+    Practicing tuple definition, accessing, destructuring and matching.
+    - Exercises:
+      - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
+      - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
+      - [[file:tuples/src/main.rs][tuples]]
+** Memory Management (Quest 2 -> 2 days)
+*** Ownership
+    Understanding the ownership rules and how to deal with different types of data
+    - Exercises:
+      - [[file:ownership/src/main.rs][ownership]]
+      - [[file:borrow/src/main.rs][borrow]]
+      - [[file:mutability/src/main.rs][mutability]]
+*** References
+    - Exercises:
+      - [[file:reference_rules/src/main.rs][reference_rules]]
+      - [[file:changes/src/main.rs][changes]]
+** Complex Data Structures (Quest 3 -> 2 days)
+*** Structs
+     - Exercises:
+       -[[file:circle/src/main.rs][ circle]] (structs)
+*** Enums
+      - Exercises:
+        - [[file:card_deck/src/main.rs][card_deck]] (enums)
+*** Common Collections
+     - Exercises:
+       - Arrays:
+         - [[file:arrays/src/main.rs][arrays]]
+       - Strings:
+         - [[file:strings/src/main.rs][strings]]
+         - [[file:edit_distance/src/main.rs][edit_distance]]
+         - [[file:to_url/src/main.rs][to_url]]
+       - HashMaps:
+         - [[file:hashing/src/main.rs][hashing]]
+         - [[file:string_permutation/src/main.rs][string_permutation]]
+       - Methods:
+         - [[file:collect/src/main.rs][collect]]
+** Error Handling (Quest 4 -> 1 day)
+*** Panic
+    - Exercises:
+      - [[file:panic/src/main.rs][panic]]
+*** Result<T,E>
+    - Exercises:
+      - [[file:handling/src/main.rs][handling]]
+** Packages, Crates and modules (Quest 5 -> 1 day)
+   Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
+   - Exercises:
+     - [[file:drawing/src/main.rs][modules]]
+     - [[file:drawing/src/main.rs][drawing]]
+** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
+   Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
+   - Generics: [[file:generics/src/main.rs][generics]]
+   - Traits: [[file:traits/src/main.rs][traits]]
+   - Lifetimes: [[file:lifetimes/src/main.rs][lifetimes]]
+** Functional Languages Features (Quest 7 -> 2 days)
+   - Closures and Iterators: [[file:closures/src/main.rs][closures]]
+** Object Oriented Programming Features (Quest 8 -> 1 day)
+*** Using Trait Objects That Allow for Values of Different Types.
+** Pattern Matching (Quest 9 -> 1 day)
+*** Pattern matching syntax
