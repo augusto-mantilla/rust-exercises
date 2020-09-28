@@ -1,5 +1,5 @@
 // Determine if a word or phrase has a letter that repeats itself or not.
-// If the word or phrase repeats one ore more letters, the function will return false
+// If the word or phrase repeats one or more letters, the function will return false
 // and if it does not repeat any letter the function will return true.
 // However spaces and punctuation are allowed to appear multiple times and an empty string will
 // return true.

@@ -1,7 +1,8 @@
 // Write a function `acronym` that turns a phrase into an acronym.
 // Example:
-//          "HyperText Markup Language" -> HML
+//          "HyperText Markup Language" -> HTML
 //          "Something - I made up" -> "SIMU"
+//          "GNU Image Manipulation Program" -> "GIMP"
 
 pub fn acronym(phrase: &str) -> String {
 
