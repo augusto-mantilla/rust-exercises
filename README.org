@@ -12,6 +12,9 @@
     - [[file:temperature_conv/src/main.rs][temperature_conv]] (float)
     - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
     - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
+    - [[file:groceries/src/main.rs][groceries]] (Vec)
+    - [[file:reverse-string/src/main.rs][reverse-string]]
+    - [[file:find_factorial/src/main.rs][find_factorial]]
 *** Tuples:
     Practicing tuple definition, accessing, destructuring and matching
     - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
@@ -37,9 +40,12 @@
     - [[file:strings/src/main.rs][strings]]
     - [[file:edit_distance/src/main.rs][edit_distance]]
     - [[file:to_url/src/main.rs][to_url]]
+    - [[file:capitalizing/src/main.rs][capitalizing]]
 *** HashMaps
     - [[file:hashing/src/main.rs][hashing]]
     - [[file:string_permutation/src/main.rs][string_permutation]]
+    - [[file:bigger/src/main.rs][bigger]]
+    - [[file:simple-hash/src/main.rs][simple-hash]]
 *** Methods
     - [[file:collect/src/main.rs][collect]]
 ** Error Handling (Quest 4 -> 1 day)
@@ -67,3 +73,5 @@
    Using Trait Objects That Allow for Values of Different Types.
 ** Pattern Matching (Quest 9 -> 1 day)
    Pattern matching syntax
+    - [[file:logic-number/src/main.rs][logic-number]]
+    - [[file:rot/src/main.rs][rot]]
