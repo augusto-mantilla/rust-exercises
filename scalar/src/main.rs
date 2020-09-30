@@ -23,7 +23,7 @@ fn main() {
     // diff
     println!("diff : {}", diff(234, 2));
     println!("diff : {}", diff(-32768, 32766)); // 'ERROR: attempt to subtract with overflow'
-                                                // product
+    // product
     println!("pro : {}", pro(23, 2));
     println!("pro : {}", pro(-128, 2)); // 'ERROR: attempt to multiply with overflow'
     // quotient
