@@ -9,6 +9,7 @@
 *** Variables (Scalar type), control flow (if, while, loop, for), functions
     Defining and using the basic types with simple functions
     - [[file:fibonacci/src/main.rs][fibonacci]] (int, boolean)
+    - [[file:scalar/src/main.rs][scalar]] (Scalar Types: integer types)
     - [[file:temperature_conv/src/main.rs][temperature_conv]] (float)
     - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
     - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
