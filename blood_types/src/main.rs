@@ -131,6 +131,24 @@ mod tests {
 	}
 
 	#[test]
+	fn test_o_neg_donors() {
+		let mut givers = "O-".parse::<BloodType>().unwrap().donors();
+		givers.sort();
+		let mut expected: Vec<BloodType> = vec!["O-".parse().unwrap()];
+		expected.sort();
+		assert_eq!(givers, expected);
+	}
+
+	#[test]
+	fn test_ab_pos_recipients() {
+		let mut recipients: Vec<BloodType> = "AB+".parse::<BloodType>().unwrap().recipients();
+		recipients.sort();
+		let mut expected: Vec<BloodType> = vec!["AB+".parse().unwrap()];
+		expected.sort();
+		assert_eq!(recipients, expected);
+	}
+
+	#[test]
 	fn test_a_neg_recipients() {
 		let mut recipients = "A-".parse::<BloodType>().unwrap().recipients();
 		recipients.sort();
