@@ -18,31 +18,6 @@ This function should return the `Option` value in the `Four` structure.
 - https://doc.rust-lang.org/stable/rust-by-example/error/option_unwrap/question_mark.html
 
 */
-#[derive(Clone, Copy)]
-struct One {
-    first_layer: Option<Two>
-}
-
-#[derive(Clone, Copy)]
-struct Two {
-    second_layer: Option<Three>
-}
-
-#[derive(Clone, Copy)]
-struct Three {
-    third_layer: Option<Four>
-}
-
-#[derive(Clone, Copy)]
-struct Four {
-    fourth_layer: Option<u16>
-}
-
-impl One {
-    fn get_fourth_layer(&self) -> Option<u16> {
-        self.first_layer?.second_layer?.third_layer?.fourth_layer
-    }
-}
 
 /*
 fn main() {
