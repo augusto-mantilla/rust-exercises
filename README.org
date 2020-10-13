@@ -52,8 +52,12 @@
 ** Error Handling (Quest 4 -> 1 day)
 *** Panic
     - [[file:panic/src/main.rs][panic]]
+*** Option
+    - [[file:options/src/lib.rs][options]]
+    - [[file:question_mark/src/lib.rs][question_mark]]
 *** Result<T,E>
     - [[file:handling/src/main.rs][handling]]
+    - [[file:banner/src/lib.rs][banner]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:drawing/src/main.rs][modules]]
