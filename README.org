@@ -22,6 +22,7 @@
     - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
     - [[file:tuples/src/main.rs][tuples]]
 ** Memory Management (Quest 2 -> 2 days)
+    - [[file:crud/src/lib.rs][crud]]
 *** Ownership
     Understanding the ownership rules and how to deal with different types of data
     - [[file:ownership/src/main.rs][ownership]]
@@ -50,14 +51,19 @@
 *** Methods
     - [[file:collect/src/main.rs][collect]]
 ** Error Handling (Quest 4 -> 1 day)
+*** unwrap and expect
+    - [[file:unwrap_or_expert/src/lib.rs][unwrap_and_expect]]
 *** Panic
     - [[file:panic/src/main.rs][panic]]
+    - [[file:handling/src/main.rs][handling]]
 *** Option
     - [[file:options/src/lib.rs][options]]
     - [[file:question_mark/src/lib.rs][question_mark]]
 *** Result<T,E>
-    - [[file:handling/src/main.rs][handling]]
     - [[file:banner/src/lib.rs][banner]]
+*** Multiple error types
+    - [[file:error_types/src/lib.rs][error_types]]
+    - [[file:boxing/src/lib.rs][boxing]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:drawing/src/main.rs][modules]]
@@ -70,7 +76,7 @@
     - [[file:traits/src/main.rs][traits]], [[file:blood_types/src/main.rs][blood_types]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
-** Functional Languages Features (Quest 7 -> 2 days)
+** Functional Languages Features (Quest 7 -> 2 days) 
 *** Closures
     - [[file:closures/src/main.rs][closures]]
 *** Iterators
