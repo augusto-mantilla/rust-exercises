@@ -18,7 +18,7 @@ For each data structure you will have to implement a function called `fmt` for t
 out the message **"Fail to parse todo"** in case it's a parsing error, otherwise it writes the message
 **"Failed to read todo file"**. And for the `Error` trait the following functions:
 
-- `description` that returns a reference to a string that says:
+- `description` that returns a string literal that says:
   - "Todo List parse failed: " for the `ParseErr`
   - "Todo List read failed: " for the `ReadErr`.
 
