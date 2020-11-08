@@ -67,7 +67,10 @@
 *** Generics
     - [[file:generics/src/main.rs][generics]]
 *** Traits
-    - [[file:traits/src/main.rs][traits]], [[file:blood_types/src/main.rs][blood_types]], [[file:vehicles/src/lib.rs][vehicles]]
+    - [[file:traits/src/main.rs][traits]]
+	- [[file:blood_types/src/main.rs][blood_types]]
+	- [[file:vehicles/src/lib.rs][vehicles]]
+	- [[file:roman_numbers/src/lib.rs][roman_numbers]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
 ** Functional Languages Features (Quest 7 -> 2 days)
