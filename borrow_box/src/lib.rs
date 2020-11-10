@@ -30,7 +30,7 @@ struct Game {
     id: u32,
     p1: (String, u16),
     p2: (String, u16),
-    nbr_of_games: u16
+    nbr_of_games: u16,
 }
 
 /*
@@ -49,7 +49,6 @@ fn main() {
     game = update_score(*game.clone(), String::from("Joao"));
     // this one will not count because it already 5 games played, the nbr_of_games
     game = update_score(*game.clone(), String::from("Susana"));
-    
     println!("{:?}", read_winner(&game));
     // output : ("Joao", 3)
 
@@ -62,7 +61,6 @@ fn main() {
 }
 */
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -71,7 +69,7 @@ mod tests {
         vec![
             create_game(0, String::from("player1"), String::from("player2"), 1),
             create_game(1, String::from("Alice"), String::from("Mark"), 3),
-            create_game(2, String::from("Jack"), String::from("Miller"), 5)
+            create_game(2, String::from("Jack"), String::from("Miller"), 5),
         ]
     }
 
@@ -80,7 +78,7 @@ mod tests {
         assert_eq!(game.p1, (results.1.to_string(), 0));
         assert_eq!(game.p2, (results.2.to_string(), 0));
         assert_eq!(game.nbr_of_games, results.3);
-    } 
+    }
 
     #[test]
     fn test_create() {
@@ -106,7 +104,10 @@ mod tests {
         games[2] = update_score(*games[2].clone(), String::from("Miller"));
         games[2] = update_score(*games[2].clone(), String::from("Miller"));
         // tie between players
-        assert_eq!(read_winner(&games[2]), (String::from("Same score! tied"), 2));
+        assert_eq!(
+            read_winner(&games[2]),
+            (String::from("Same score! tied"), 2)
+        );
 
         games[2] = update_score(*games[2].clone(), String::from("Jack"));
         assert_eq!(read_winner(&games[2]), (String::from("Jack"), 3));
