@@ -21,6 +21,7 @@
     - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
     - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
     - [[file:tuples/src/main.rs][tuples]]
+	-  Total: 11
 ** Memory Management (Quest 2 -> 2 days)
     - [[file:crud/src/lib.rs][crud]]
 *** Ownership
@@ -31,6 +32,7 @@
 *** References
     - [[file:reference_rules/src/main.rs][reference_rules]]
     - [[file:changes/src/main.rs][changes]]
+	  Total: 6
 ** Complex Data Structures (Quest 3 -> 2 days)
 *** Structs
     - [[file:circle/src/main.rs][circle]]
@@ -50,6 +52,7 @@
     - [[file:simple-hash/src/main.rs][simple-hash]]
 *** Methods
     - [[file:collect/src/main.rs][collect]]
+	  Total: 12
 ** Error Handling (Quest 4 -> 1 day)
 *** unwrap and expect
     - [[file:unwrap_or_expert/src/lib.rs][unwrap_and_expect]]
@@ -64,10 +67,12 @@
 *** Multiple error types
     - [[file:error_types/src/lib.rs][error_types]]
     - [[file:boxing/src/lib.rs][boxing]]
+	  Total: 8
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:drawing/src/main.rs][modules]]
    - [[file:drawing/src/main.rs][drawing]]
+	 Total: 2
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
 *** Generics
@@ -77,15 +82,20 @@
 	- [[file:blood_types/src/main.rs][blood_types]]
 	- [[file:vehicles/src/lib.rs][vehicles]]
 	- [[file:roman_numbers/src/lib.rs][roman_numbers]]
+	- [[file:vector_operations/src/lib.rs][vector_operations]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
+	  Total: 7
 ** Functional Languages Features (Quest 7 -> 2 days) 
 *** Closures
     - [[file:closures/src/main.rs][closures]]
 *** Iterators
+	Total: 1
 ** Object Oriented Programming Features (Quest 8 -> 1 day)
    Using Trait Objects That Allow for Values of Different Types.
+   Total: 0
 ** Pattern Matching (Quest 9 -> 1 day)
    Pattern matching syntax
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
+	  Total: 2
