@@ -1,4 +1,9 @@
-#[derive(Debug, Clone, Copy)]
+// Implement the struct `Color` with the function `swap`
+// This function must allow you to swap the values of the struct, for example:
+// If the struct has this values -> Color { r: 255,g: 200,b: 10,a: 30,} and
+// you want to `swap(c.a, c.g)` you will get -> Color { r: 255, g: 30, b: 10, a: 200 }
+
+#[derive(Debug, Clone, Copy, PartialEq)]
 struct Color {
     r: u8,
     g: u8,
@@ -8,52 +13,9 @@ struct Color {
 
 impl Color {
     fn swap(mut self, first: u8, second: u8) -> Color {
-        // match first {
-        //     v if v == self.r => {
-        //         match second {
-        //             v if v == self.b => {
-        //                 self.r = second;
-        //                 self.b = first;
-        //             },
-        //             v if v == self.g => {
-        //                 self.r = second;
-        //                 self.g = first;
-        //             },
-        //             v if v == self.a => {
-        //                 self.r = second;
-        //                 self.a = first;
-        //             },
-        //             _ => {},
-        //         }
-        //     },
-        //     _ => {}
-        // }
-        let x1 = (first == self.r, first == self.g, first == self.b, first == self.a);
-        let x2 = (second == self.r, second == self.g, second == self.b, second == self.a);
-        
-        match (x1, x2) {
-            ((true, _, _, _), (_, true, _, _)) => {
-                self.r = second;
-                self.b = first;
-                }
-            ((true, _, _, _), (_, _, true, _)) => {
-                self.r = second;
-                self.g = first;
-                }
-            ((true, _, _, _), (_, _, _, true)) => {
-                self.r = second;
-                self.a = first;
-            }
-            _ => {}
-        }
-        Color {
-            r: self.r,
-            g: self.g,
-            b: self.b,
-            a: self.a,
-        }
-    }
+
 }
+
 fn main() {
     let c = Color {
         r: 255,
@@ -62,7 +24,149 @@ fn main() {
         a: 30,
     };
 
-    let color = c.swap(c.b, c.a);
+    println!("{:?}", c.swap(c.r, c.b));
+    println!("{:?}", c.swap(c.r, c.g));
+    println!("{:?}", c.swap(c.r, c.a));
+    println!();
+    println!("{:?}", c.swap(c.g, c.r));
+    println!("{:?}", c.swap(c.g, c.b));
+    println!("{:?}", c.swap(c.g, c.a));
+    println!();
+    println!("{:?}", c.swap(c.b, c.r));
+    println!("{:?}", c.swap(c.b, c.g));
+    println!("{:?}", c.swap(c.b, c.a));
+    println!();
+    println!("{:?}", c.swap(c.a, c.r));
+    println!("{:?}", c.swap(c.a, c.b));
+    println!("{:?}", c.swap(c.a, c.g));
+}
 
-    println!("{:?}", color);
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_one() {
+        let c = Color {
+            r: 255,
+            g: 200,
+            b: 10,
+            a: 30,
+        };
+        // swap r
+        assert_eq!(
+            c.swap(c.r, c.b),
+            Color {
+                r: 10,
+                g: 200,
+                b: 255,
+                a: 30
+            }
+        );
+        assert_eq!(
+            c.swap(c.r, c.g),
+            Color {
+                r: 200,
+                g: 255,
+                b: 10,
+                a: 30
+            }
+        );
+        assert_eq!(
+            c.swap(c.r, c.a),
+            Color {
+                r: 30,
+                g: 200,
+                b: 10,
+                a: 255
+            }
+        );
+
+        // swap g
+        assert_eq!(
+            c.swap(c.g, c.r),
+            Color {
+                r: 200,
+                g: 255,
+                b: 10,
+                a: 30
+            }
+        );
+        assert_eq!(
+            c.swap(c.g, c.b),
+            Color {
+                r: 255,
+                g: 10,
+                b: 200,
+                a: 30
+            }
+        );
+        assert_eq!(
+            c.swap(c.g, c.a),
+            Color {
+                r: 255,
+                g: 30,
+                b: 10,
+                a: 200
+            }
+        );
+
+        // swap b
+        assert_eq!(
+            c.swap(c.b, c.r),
+            Color {
+                r: 10,
+                g: 200,
+                b: 255,
+                a: 30
+            }
+        );
+        assert_eq!(
+            c.swap(c.b, c.g),
+            Color {
+                r: 255,
+                g: 10,
+                b: 200,
+                a: 30
+            }
+        );
+        assert_eq!(
+            c.swap(c.b, c.a),
+            Color {
+                r: 255,
+                g: 200,
+                b: 30,
+                a: 10
+            }
+        );
+
+        // swap a
+        assert_eq!(
+            c.swap(c.a, c.r),
+            Color {
+                r: 30,
+                g: 200,
+                b: 10,
+                a: 255
+            }
+        );
+        assert_eq!(
+            c.swap(c.a, c.b),
+            Color {
+                r: 255,
+                g: 200,
+                b: 30,
+                a: 10
+            }
+        );
+        assert_eq!(
+            c.swap(c.a, c.g),
+            Color {
+                r: 255,
+                g: 30,
+                b: 10,
+                a: 200
+            }
+        );
+    }
 }

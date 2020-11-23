@@ -1,10 +1,11 @@
 // Build a program called talking that allows you to talk with
-// your computer. His responses will be very limited and you will create them.
+// your computer. His answers will be very limited and you will create them.
 
 // The computer answers "Let me check" if you ask him a question, such as "How old are you?".
-// He answers "There is no need to yell, calm down!" if you yell at him, for example "HOW ARE YOU?"
-// (it is consider yelling wen the sentence is all written in capital letters).
-// He answers "Quiet, I know what I"m doing!" if you yell a question at him.
+// He answers "There is no need to yell, calm down!" if you yell at him, for example "LEAVE ME ALONE!"
+// (it is consider yelling when the sentence is all written in capital letters).
+// He answers "Sure" if you ask him something without yelling, for example "Is everything ok with you?"
+// He answers "Quiet, I know what I"m doing!" if you yell a question at him. "HOW ARE YOU?"
 // He says "Just say something!" if you address him without actually saying anything.
 // He answers "Interesting" to anything else.
 
