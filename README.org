@@ -79,6 +79,7 @@
     - [[file:generics/src/main.rs][generics]]
     - [[file:matrix/src/scalar.rs][scalar]]
     - [[file:matrix/src/lib.rs][matrix]]
+	- [[file:matrix/src/ops.rs][matrix_addition]]
 *** Traits
     - [[file:traits/src/main.rs][traits]]
     - [[file:blood_types/src/main.rs][blood_types]]
