@@ -101,6 +101,15 @@
    Total: 0
 ** Pattern Matching (Quest 10 -> 1 day)
    Pattern matching syntax
+    - [[file:stars/src/main.rs][stars]]
+    - [[file:ordinal/src/main.rs][ordinal]]
+    - [[file:panaram//src/main.rs][panaram]]
+    - [[file:talking/src/main.rs][talking]]
+    - [[file:triangle/src/main.rs][triangle]]
+    - [[file:diamond_creation/src/main.rs][diamond_creation]]
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
+    - [[file:pig_latin/src/main.rs][pig_latin]]
+    - [[file:spelling/src/main.rs][spelling]]
+    - [[file:rgb_match/src/main.rs][rgb_match]]
       Total: 2
