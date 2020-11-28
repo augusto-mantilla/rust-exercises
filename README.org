@@ -21,7 +21,9 @@
     - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
     - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
     - [[file:tuples/src/main.rs][tuples]]
-** Memory Management (Quest 2 -> 2 days)
+    -  Total: 11
+** Memory Management (Quest 2 -> 1 days)
+    - [[file:crud/src/lib.rs][crud]]
 *** Ownership
     Understanding the ownership rules and how to deal with different types of data
     - [[file:ownership/src/main.rs][ownership]]
@@ -30,6 +32,7 @@
 *** References
     - [[file:reference_rules/src/main.rs][reference_rules]]
     - [[file:changes/src/main.rs][changes]]
+      Total: 6
 ** Complex Data Structures (Quest 3 -> 2 days)
 *** Structs
     - [[file:circle/src/main.rs][circle]]
@@ -49,34 +52,54 @@
     - [[file:simple-hash/src/main.rs][simple-hash]]
 *** Methods
     - [[file:collect/src/main.rs][collect]]
+      Total: 12
 ** Error Handling (Quest 4 -> 1 day)
+*** unwrap and expect
+    - [[file:unwrap_or_expert/src/lib.rs][unwrap_and_expect]]
 *** Panic
     - [[file:panic/src/main.rs][panic]]
+    - [[file:handling/src/main.rs][handling]]
 *** Option
     - [[file:options/src/lib.rs][options]]
     - [[file:question_mark/src/lib.rs][question_mark]]
 *** Result<T,E>
-    - [[file:handling/src/main.rs][handling]]
     - [[file:banner/src/lib.rs][banner]]
+*** Multiple error types
+    - [[file:error_types/src/lib.rs][error_types]]
+    - [[file:boxing/src/lib.rs][boxing]]
+      Total: 8
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:drawing/src/main.rs][modules]]
    - [[file:drawing/src/main.rs][drawing]]
+     Total: 2
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
 *** Generics
     - [[file:generics/src/main.rs][generics]]
+    - [[file:matrix/src/scalar.rs][scalar]]
+    - [[file:matrix/src/lib.rs][matrix]]
+	- [[file:matrix/src/ops.rs][matrix_addition]]
 *** Traits
-    - [[file:traits/src/main.rs][traits]], [[file:blood_types/src/main.rs][blood_types]], [[file:vehicles/src/lib.rs][vehicles]]
+    - [[file:traits/src/main.rs][traits]]
+    - [[file:blood_types/src/main.rs][blood_types]]
+    - [[file:vehicles/src/lib.rs][vehicles]]
+    - [[file:roman_numbers/src/lib.rs][roman_numbers]]
+    - [[file:vector_operations/src/lib.rs][vector_operations]]
+    - [[file:roman_numbers/src/iterator.rs][iterating]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
-** Functional Languages Features (Quest 7 -> 2 days)
+      Total: 10
+** Smart Pointers (Quest 7 -> 1 day)
+** Functional Languages Features (Quest 8 -> 2 days)
 *** Closures
     - [[file:closures/src/main.rs][closures]]
 *** Iterators
-** Object Oriented Programming Features (Quest 8 -> 1 day)
+    Total: 1
+** Object Oriented Programming Features (Quest 9 -> 1 day)
    Using Trait Objects That Allow for Values of Different Types.
-** Pattern Matching (Quest 9 -> 1 day)
+   Total: 0
+** Pattern Matching (Quest 10 -> 1 day)
    Pattern matching syntax
     - [[file:stars/src/main.rs][stars]]
     - [[file:ordinal/src/main.rs][ordinal]]
@@ -89,3 +112,4 @@
     - [[file:pig_latin/src/main.rs][pig_latin]]
     - [[file:spelling/src/main.rs][spelling]]
     - [[file:rgb_match/src/main.rs][rgb_match]]
+      Total: 2
