@@ -30,7 +30,7 @@ Also create two submodules of mob:
   - a `Boss` struct that consists of:
     - a String `name`
     - an u8 `age`
-  - a function `new_boss` that returns a Boss on receiving a name (&str) and an age (u8)
+  - a function `new` that returns a Boss on receiving a name (&str) and an age (u8)
 - `member` submodule which consists of:
   - a enum `Role` with the variants:
     - Underboss
@@ -42,7 +42,7 @@ Also create two submodules of mob:
     - a enum Role `role`
     - a u8 `age`
   - the Member struct should implement a function `get_promotion` which will change the member role. If a member is an Associate, it will get promoted to Soldier; a Soldier is promoted to a Caporegime and a Caporegime is promoted to Underboss
-  - a function `new_member` that return a Member on receiving a name(&str), a role (Role) and an age (u8)
+  - a function `new` that return a Member on receiving a name(&str), a role (Role) and an age (u8)
 
   You must include `#[derive(Debug, CLone, PartialEq)]` on top of every struct and the enum.
 
@@ -60,14 +60,14 @@ mod test {
   #[test]
   fn create_boss_and_members() {
     assert_eq!(
-      boss::new_boss("Scarface", 43),
+      boss::new("Scarface", 43),
       boss::Boss {
         name: "Scarface".to_string(),
         age: 43
       }
     );
     assert_eq!(
-      member::new_member("Crazy Joe", member::Role::Soldier, 27),
+      member::new("Crazy Joe", member::Role::Soldier, 27),
       member::Member {
         name: "Crazy Joe".to_string(),
         role: member::Role::Soldier,
@@ -75,7 +75,7 @@ mod test {
       }
     );
     assert_eq!(
-      member::new_member("Louie HaHa", member::Role::Caporegime, 30),
+      member::new("Louie HaHa", member::Role::Caporegime, 30),
       member::Member {
         name: "Louie HaHa".to_string(),
         role: member::Role::Caporegime,
@@ -88,24 +88,24 @@ mod test {
     (
       mob::Mob {
         name: "Hairy Giants".to_string(),
-        boss: boss::new_boss("Louie HaHa", 36),
+        boss: boss::new("Louie HaHa", 36),
         cities: vec![("San Francisco".to_string(), 7)],
         members: vec![
-          member::new_member("Benny Eggs", member::Role::Soldier, 28),
-          member::new_member("Jhonny", member::Role::Associate, 17),
-          member::new_member("Greasy Thumb", member::Role::Soldier, 30),
-          member::new_member("No Finger", member::Role::Caporegime, 32),
+          member::new("Benny Eggs", member::Role::Soldier, 28),
+          member::new("Jhonny", member::Role::Associate, 17),
+          member::new("Greasy Thumb", member::Role::Soldier, 30),
+          member::new("No Finger", member::Role::Caporegime, 32),
         ],
         wealth: 100000,
       },
       mob::Mob {
         name: "Red Thorns".to_string(),
-        boss: boss::new_boss("Big Tuna", 30),
+        boss: boss::new("Big Tuna", 30),
         cities: vec![("San Jose".to_string(), 5)],
         members: vec![
-          member::new_member("Knuckles", member::Role::Soldier, 25),
-          member::new_member("Baldy Dom", member::Role::Caporegime, 36),
-          member::new_member("Crazy Joe", member::Role::Underboss, 23),
+          member::new("Knuckles", member::Role::Soldier, 25),
+          member::new("Baldy Dom", member::Role::Caporegime, 36),
+          member::new("Crazy Joe", member::Role::Underboss, 23),
         ],
         wealth: 70000,
       },
@@ -119,7 +119,7 @@ mod test {
 
     assert_eq!(
       a.members[a.members.len() - 1],
-      member::new_member("Rusty", member::Role::Associate, 37)
+      member::new("Rusty", member::Role::Associate, 37)
     );
   }
 
