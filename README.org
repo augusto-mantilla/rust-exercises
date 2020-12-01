@@ -77,7 +77,7 @@
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
 *** Generics
     - [[file:generics/src/main.rs][generics]]
-    - [[file:matrix/src/scalar.rs][scalar]]
+    - [[file:lalgebra_scalar/src/lib.rs][lalgebra_scalar]]
     - [[file:matrix/src/lib.rs][matrix]]
 	- [[file:matrix/src/ops.rs][matrix_addition]]
 *** Traits
@@ -112,4 +112,4 @@
     - [[file:pig_latin/src/main.rs][pig_latin]]
     - [[file:spelling/src/main.rs][spelling]]
     - [[file:rgb_match/src/main.rs][rgb_match]]
-      Total: 2
+      Total: 11
