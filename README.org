@@ -81,6 +81,7 @@
     - [[file:matrix/src/lib.rs][matrix]]
 	- [[file:matrix/src/ops.rs][matrix_addition]]
 	- [[file:matrix/src/mult.rs][matrix_multiplication]]
+	- [[file:lalgebra_vector/src/lib.rs][lalgebra_vector]]
 *** Traits
     - [[file:traits/src/main.rs][traits]]
     - [[file:blood_types/src/main.rs][blood_types]]
@@ -90,7 +91,7 @@
     - [[file:roman_numbers/src/iterator.rs][iterating]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
-      Total: 10
+      Total: 13
 ** Smart Pointers (Quest 7 -> 1 day)
 ** Functional Languages Features (Quest 8 -> 2 days)
 *** Closures
