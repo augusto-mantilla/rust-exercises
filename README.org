@@ -80,6 +80,7 @@
     - [[file:lalgebra_scalar/src/lib.rs][lalgebra_scalar]]
     - [[file:matrix/src/lib.rs][matrix]]
 	- [[file:matrix/src/ops.rs][matrix_addition]]
+	- [[file:matrix/src/mult.rs][matrix_multiplication]]
 *** Traits
     - [[file:traits/src/main.rs][traits]]
     - [[file:blood_types/src/main.rs][blood_types]]
