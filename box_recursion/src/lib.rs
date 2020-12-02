@@ -5,12 +5,14 @@
 
 Using the given code create the following functions:
 
+- `new` that will initialize the `WorkEnvironment` as `None`
 - `add_worker`, that receives two strings, one being the type of worker and the other the name of the worker.
-- `remove_worker`, that removes the last worker that was placed in the `WorkEnvironment`, this functions should
+- `remove_worker`, that removes the last worker that was placed in the `WorkEnvironment`, this functions should 
   return a Option with the name of the worker.
 - `search_worker`, that return a tuple with the name and type of worker.
 
-Note that something is **missing** from the code given.
+You must also create a type called `Link` this will be the connection of the structures `WorkEnvironment` and `Worker`.
+Do not forget that this will be a recursion type and it must point to `None` if there is no workers.
 
 ### Notions
 
@@ -26,8 +28,6 @@ struct WorkEnvironment {
     grade: Link,
 }
 
-type Link = Option<Worker>;
-
 #[derive(Debug)]
 struct Worker {
     worker_type: String,
@@ -36,9 +36,7 @@ struct Worker {
 }
 
 impl WorkEnvironment {
-    fn new() -> WorkEnvironment {
-        WorkEnvironment { grade: None }
-    }
+    fn new() -> WorkEnvironment {}
     fn add_worker(&mut self, t: String, name: String) {}
     fn remove_worker(&mut self) -> Option<String> {}
     fn search_worker(&self) -> Option<(String, String)> {}
