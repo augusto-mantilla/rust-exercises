@@ -91,10 +91,7 @@ mod tests {
         new_node.add_ele(b.clone());
         new_node.add_ele(c.clone());
 
-        assert_eq!(
-            new_node.value,
-            vec![a.clone(), a.clone(), b.clone(), c.clone()]
-        );
+        assert_eq!(new_node.value, vec![a.clone(), a, b, c]);
     }
     #[test]
     fn test_how_many_references() {
@@ -107,11 +104,8 @@ mod tests {
         new_node.add_ele(a.clone());
         new_node.add_ele(c.clone());
         new_node.add_ele(a.clone());
-        {
-            new_node.add_ele(d.clone());
-            assert_eq!(how_many_references(&d), 2); // ??????
-        }
-        assert_eq!(how_many_references(&d), 2);
+
+        assert_eq!(how_many_references(&d), 1);
         assert_eq!(how_many_references(&a), 3);
         assert_eq!(how_many_references(&b), 2);
         assert_eq!(how_many_references(&c), 2);
@@ -128,12 +122,15 @@ mod tests {
         let b1 = Rc::new(String::from("b"));
         let c1 = Rc::new(String::from("c"));
         let d1 = Rc::new(String::from("d"));
-        let mut new_node = Node::new(vec![d.clone(), d.clone()]);
-        new_node.add_ele(b.clone());
-        new_node.add_ele(a.clone());
-        new_node.add_ele(c.clone());
-        new_node.add_ele(a.clone());
-        new_node.add_ele(d.clone());
+        let mut new_node = Node::new(vec![
+            d.clone(),
+            d.clone(),
+            b.clone(),
+            a.clone(),
+            c.clone(),
+            a.clone(),
+            d.clone(),
+        ]);
 
         new_node.rm_all_ref(a1.clone());
         assert_eq!(how_many_references(&a), 3);
