@@ -19,7 +19,7 @@ Create the following functions :
     ```rust
         fn main() {
           let mut b: Vec<&str> = vec!["2+2=4", "3+2=5", "10-3=3", "5+5=10"];
-            let a = delete_and_backspace(&mut b);
+            let a = is_correct(&mut b);
             println!("{:?}", (b, a));
             // output: (["✔", "✔", "✘", "✔"], 75)
         }
