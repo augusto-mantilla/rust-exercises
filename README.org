@@ -83,9 +83,11 @@
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
 *** Generics
     - [[file:generics/src/main.rs][generics]]
-    - [[file:matrix/src/scalar.rs][scalar]]
+    - [[file:lalgebra_scalar/src/lib.rs][lalgebra_scalar]]
     - [[file:matrix/src/lib.rs][matrix]]
-	- [[file:matrix/src/ops.rs][matrix_addition]]
+	  - [[file:matrix/src/ops.rs][matrix_addition]]
+	  - [[file:matrix/src/mult.rs][matrix_multiplication]]
+	  - [[file:lalgebra_vector/src/lib.rs][lalgebra_vector]]
 *** Traits
     - [[file:traits/src/main.rs][traits]]
     - [[file:blood_types/src/main.rs][blood_types]]
@@ -95,7 +97,8 @@
     - [[file:roman_numbers/src/iterator.rs][iterating]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
-      Total: 10
+    - [[file:delete_prefix/src/lib.rs][delete_prefix]]
+      Total: 14
 ** Smart Pointers (Quest 7 -> 1 day)
     - [[file:box_it/src/lib.rs][box_it]]
     - [[file:borrow_box/src/lib.rs][borrow_box]]
@@ -114,7 +117,10 @@
     - [[file:closures/src/main.rs][closures]]
 *** Iterators
     Total: 1
-** Pattern Matching (Quest 9 -> 1 day)
+** Object Oriented Programming Features (Quest 9 -> 1 day)
+   Using Trait Objects That Allow for Values of Different Types.
+   Total: 0
+** Pattern Matching (Quest 10 -> 1 day)
    Pattern matching syntax
     - [[file:stars/src/main.rs][stars]]
     - [[file:ordinal/src/main.rs][ordinal]]
