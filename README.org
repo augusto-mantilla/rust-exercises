@@ -71,9 +71,10 @@
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:drawing/src/main.rs][modules]]
+   - [[file:drawing/src/main.rs][does_it_fit]]
    - [[file:drawing/src/main.rs][macro_calculator]]
    - [[file:drawing/src/main.rs][mobs]]
-     Total: 2
+     Total: 4
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
 *** Generics
