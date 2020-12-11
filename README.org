@@ -73,6 +73,7 @@
    - [[file:drawing/src/main.rs][modules]]
    - [[file:drawing/src/main.rs][does_it_fit]]
    - [[file:drawing/src/main.rs][macro_calculator]]
+   - [[file:drawing/src/main.rs][expected_variable]]
    - [[file:drawing/src/main.rs][mobs]]
      Total: 4
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
