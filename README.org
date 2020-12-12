@@ -114,10 +114,11 @@
     # - [[file:graph/src/lib.rs][graph]]
     # - [[file:dijkstra/src/lib.rs][dijkstra]]
 ** Functional Languages Features (Quest 8 -> 2 days)
-   Total: 1
+   Total: 2
 *** Closures
     - [[file:closures/src/main.rs][closures]]
 *** Iterators
+	- [[file:slices_to_map/src/lib.rs][slices_to_map]]
 ** Pattern Matching (Quest 9 -> 1 day)
    Pattern matching syntax
     - [[file:stars/src/main.rs][stars]]
