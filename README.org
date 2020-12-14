@@ -115,12 +115,18 @@
     # - [[file:graph/src/lib.rs][graph]]
     # - [[file:dijkstra/src/lib.rs][dijkstra]]
 ** Functional Languages Features (Quest 8 -> 2 days)
-   Total: 3
+   Total: 7
 *** Closures
     - [[file:closures/src/main.rs][closures]]
+*** Curry
+    - [[file:adding/src/main.rs][adding]]
+*** Higher-order-functions
+    - [[file:adding_twice/src/main.rs][adding_twice]]
 *** Iterators
-	- [[file:slices_to_map/src/lib.rs][slices_to_map]]
-	- [[file:step_iterator/src/lib.rs][step_iterator]]
+    - [[file:highest/src/main.rs][highest]]
+    - [[file:iterators/src/main.rs][iterators]]
+	  - [[file:slices_to_map/src/lib.rs][slices_to_map]]
+	  - [[file:step_iterator/src/lib.rs][step_iterator]]
 ** Pattern Matching (Quest 9 -> 1 day)
    Pattern matching syntax
     - [[file:stars/src/main.rs][stars]]
@@ -129,6 +135,8 @@
     - [[file:talking/src/main.rs][talking]]
     - [[file:triangle/src/main.rs][triangle]]
     - [[file:diamond_creation/src/main.rs][diamond_creation]]
+    - [[file:scores/src/main.rs][scores]]
+    - [[file:searching/src/main.rs][searching]]
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
     - [[file:pig_latin/src/main.rs][pig_latin]]
