@@ -73,7 +73,7 @@
     - [[file:banner/src/lib.rs][banner]]
 *** Multiple error types
     - [[file:error_types/src/lib.rs][error_types]]
-    - [[file:boxing/src/lib.rs][boxing]]
+    - [[file:boxing_todo/src/lib.rs][boxing_todo]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Total: 2
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
