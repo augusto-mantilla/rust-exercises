@@ -50,6 +50,7 @@ struct Macros {
     fats: f64,
 }
 
+#[cfg(test)]
 fn main() {
     let a = serde_json::json!(
         {
