@@ -1,30 +1,22 @@
-// First exercise
-
 // # Instructions
 // Define a data structure to represent a matrix of any size and
-// implement the basic operations for this you will need to follow the
+// Hint: You can use wrappers and Vec<T>
+// We will consider a matrix as a rectangular arrangements of scalars
+// (Use the trait defined in the exercise before (lalgebra_scalar))
+// implement the basic functions identity and zero
+
+// ## Matrix::identity
+// Matrix::identity(n) must return the identity matrix of the size n
+// Ex:
+// Matrix::identity(2) == [[1, 0],[0, 1]]
 // next steps:
 
-// We will consider a matrix as a rectangular arrangements of scalars
-// Therefore you will have to create the definition of a Scalar by
-// defining a trait Scalar in a new file called `scalar.rs`.
-
-// A scalar type must implement the operations
-// Addition, Subtraction, Multiplication, Modulo, Division (you might
-// also have to use more restrictions). For this use a trait
-// inheritance (supertraits)
-
-// Another condition for a number to be a scalar is to have a zero
-// (neutral element in the addition) and a one (neutral element in the
-// multiplication). Therefore the Scalar trait will require 2
-// functions zero() and one()
-
-// After finishing implement the Scalar trait for u32
+// ## Matrix::zero
+// Matrix::zero(row, col) returns the zero matrix of size row x col
+// Ex:
+// Matrix::zero(3, 2) == [[0,0],[0,0],[0,0]]
 
 // Resources: https://doc.rust-lang.org/book/ch19-03-advanced-traits.html
-
-mod scalar;
-use scalar::Scalar;
 
 #[cfg(test)]
 mod tests {

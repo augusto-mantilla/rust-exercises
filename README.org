@@ -6,6 +6,7 @@
   - Run: *cargo test* to check your solution
 * Content Structure
 ** Variables and Definitions (Quest 1 -> 1 day)
+   Total: 11
 *** Variables (Scalar type), control flow (if, while, loop, for), functions
     Defining and using the basic types with simple functions
     - [[file:fibonacci/src/main.rs][fibonacci]] (int, boolean)
@@ -14,26 +15,32 @@
     - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
     - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
     - [[file:groceries/src/main.rs][groceries]] (Vec)
-    - [[file:reverse-string/src/main.rs][reverse-string]]
+    - [[file:reverse-string/src/main.rs][reverse_string]]
     - [[file:find_factorial/src/main.rs][find_factorial]]
 *** Tuples:
     Practicing tuple definition, accessing, destructuring and matching
     - [[file:matrix_transposition/src/main.rs][matrix_transposition]]
     - [[file:division_and_remainder/src/main.rs][division_and_remainder]]
     - [[file:tuples/src/main.rs][tuples]]
-    -  Total: 11
 ** Memory Management (Quest 2 -> 1 days)
-    - [[file:crud/src/lib.rs][crud]]
+   Total: 11
 *** Ownership
     Understanding the ownership rules and how to deal with different types of data
     - [[file:ownership/src/main.rs][ownership]]
+    - [[file:copy/src/lib.rs][copy]]
     - [[file:borrow/src/main.rs][borrow]]
     - [[file:mutability/src/main.rs][mutability]]
 *** References
     - [[file:reference_rules/src/main.rs][reference_rules]]
+    - [[file:borrow_me_the_reference/src/lib.rs][borrow_me_the_reference]]
     - [[file:changes/src/main.rs][changes]]
-      Total: 6
+    - [[file:tic_tac_toe/src/lib.rs][tic_tac_toe]]
+    - [[file:string_literals/src/lib.js][string_literals]]
+*** Both
+    - [[file:name_initials/src/lib.rs][name_initials]]
+    - [[file:arrange_it/src/lib.rs][arrange_it]]
 ** Complex Data Structures (Quest 3 -> 2 days)
+   Total: 12
 *** Structs
     - [[file:circle/src/main.rs][circle]]
 *** Enums
@@ -52,8 +59,8 @@
     - [[file:simple-hash/src/main.rs][simple-hash]]
 *** Methods
     - [[file:collect/src/main.rs][collect]]
-      Total: 12
 ** Error Handling (Quest 4 -> 1 day)
+   Total: 8
 *** unwrap and expect
     - [[file:unwrap_or_expert/src/lib.rs][unwrap_and_expect]]
 *** Panic
@@ -66,9 +73,9 @@
     - [[file:banner/src/lib.rs][banner]]
 *** Multiple error types
     - [[file:error_types/src/lib.rs][error_types]]
-    - [[file:boxing/src/lib.rs][boxing]]
-      Total: 8
+    - [[file:boxing_todo/src/lib.rs][boxing_todo]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
+   Total: 6
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:modules/src/main.rs][modules]]
    - [[file:does_it_fit/src/main.rs][does_it_fit]]
@@ -76,13 +83,16 @@
    - [[file:shopping_mall/src/main.rs][shopping_mall]]
    - [[file:expected_variable/src/main.rs][expected_variable]]
    - [[file:mobs/src/main.rs][mobs]]
-     Total: 4
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
+   Total: 15
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
 *** Generics
     - [[file:generics/src/main.rs][generics]]
-    - [[file:matrix/src/scalar.rs][scalar]]
+    - [[file:lalgebra_scalar/src/lib.rs][lalgebra_scalar]]
     - [[file:matrix/src/lib.rs][matrix]]
+	- [[file:matrix/src/ops.rs][matrix_addition]]
+	- [[file:matrix/src/mult.rs][matrix_multiplication]]
+	- [[file:lalgebra_vector/src/lib.rs][lalgebra_vector]]
 *** Traits
     - [[file:traits/src/main.rs][traits]]
     - [[file:blood_types/src/main.rs][blood_types]]
@@ -92,18 +102,48 @@
     - [[file:roman_numbers/src/iterator.rs][iterating]]
 *** Lifetimes
     - [[file:lifetimes/src/main.rs][lifetimes]]
-      Total: 10
+	- [[file:events/src/lib.rs][events]]
+    - [[file:delete_prefix/src/lib.rs][delete_prefix]]
+	- [[file:commits_stats/src/lib.rs][commits_stats]]
 ** Smart Pointers (Quest 7 -> 1 day)
+   Total: 6
+    - [[file:box_it/src/lib.rs][box_it]]
+    - [[file:borrow_box/src/lib.rs][borrow_box]]
+    - [[file:box_recursion/src/lib.rs][box_recursion]]
+*** (Rc refence counter, constructing a graph using the linked list done above)
+    - [[file:how_many_references/src/lib.rs][how_many_references]]
+*** (RefCell and Cell)
+    - [[file:ref_cell/src/lib.rs][ref_cell]]
+*** (Drop for box deallocates the memory that was allocated when it was created)
+    - [[file:drop_the_thread/src/lib.rs][drop_the_thread]]
+    # - [[file:graph/src/lib.rs][graph]]
+    # - [[file:dijkstra/src/lib.rs][dijkstra]]
 ** Functional Languages Features (Quest 8 -> 2 days)
+   Total: 7
 *** Closures
     - [[file:closures/src/main.rs][closures]]
+*** Curry
+    - [[file:adding/src/main.rs][adding]]
+*** Higher-order-functions
+    - [[file:adding_twice/src/main.rs][adding_twice]]
 *** Iterators
-    Total: 1
-** Object Oriented Programming Features (Quest 9 -> 1 day)
-   Using Trait Objects That Allow for Values of Different Types.
-   Total: 0
-** Pattern Matching (Quest 10 -> 1 day)
+    - [[file:highest/src/main.rs][highest]]
+    - [[file:iterators/src/main.rs][iterators]]
+	  - [[file:slices_to_map/src/lib.rs][slices_to_map]]
+	  - [[file:step_iterator/src/lib.rs][step_iterator]]
+** Pattern Matching (Quest 9 -> 1 day)
    Pattern matching syntax
+    - [[file:stars/src/main.rs][stars]]
+    - [[file:ordinal/src/main.rs][ordinal]]
+    - [[file:panaram//src/main.rs][panaram]]
+    - [[file:talking/src/main.rs][talking]]
+    - [[file:triangle/src/main.rs][triangle]]
+    - [[file:diamond_creation/src/main.rs][diamond_creation]]
+    - [[file:scores/src/main.rs][scores]]
+    - [[file:searching/src/main.rs][searching]]
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
-      Total: 2
+    - [[file:pig_latin/src/main.rs][pig_latin]]
+    - [[file:spelling/src/main.rs][spelling]]
+    - [[file:rgb_match/src/main.rs][rgb_match]]
+      Total: 11
