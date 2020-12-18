@@ -1,26 +1,35 @@
-// Create an associated function "new" that compute Pascal's triangle up to a given number of rows.
-// In Pascal's Triangle each number is computed by adding the numbers to the right
-// and left of the current position in the previous row.
+/*
+## pascal_triangle
 
-//    1
-//   1 1
-//  1 2 1
-// 1 3 3 1
-//1 4 6 4 1
-// # ... etc
+### Instructions
 
-#[derive(Debug)]
-pub struct PascalsTriangle {
-    data: Vec<Vec<u32>>,
-}
+Create an associated function "new" that compute Pascal's triangle up to a given number of rows.
+In Pascal's Triangle each number is computed by adding the numbers to the right and left of the 
+current position in the previous row.
 
-impl PascalsTriangle {
-}
+### Example:
 
+1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+# ... etc
+
+```rust
 fn main() {
     let pt = PascalsTriangle::new(5);
     println!("{:?}", pt.rows());
 }
+```
+*/
+
+#[derive(Debug)]
+struct PascalsTriangle {
+    data: Vec<Vec<u32>>,
+}
+
+impl PascalsTriangle {}
 
 #[cfg(test)]
 mod test {

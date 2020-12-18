@@ -144,7 +144,6 @@
     - [[file:scores/src/main.rs][scores]]
     - [[file:talking/src/main.rs][talking]]
     - [[file:searching/src/main.rs][searching]]
-    - [[file:talking/src/main.rs][talking]]
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
     - [[file:pig_latin/src/main.rs][pig_latin]]
