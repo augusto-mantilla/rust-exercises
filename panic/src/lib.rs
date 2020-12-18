@@ -1,5 +1,5 @@
 /*
-## error types
+## panic
 
 ### Instructions
 
