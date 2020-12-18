@@ -128,6 +128,7 @@
 *** Higher-order-functions
     - [[file:adding_twice/src/main.rs][adding_twice]]
 *** Iterators
+    - [[file:get_products/src/main.rs][get_products]]
     - [[file:highest/src/main.rs][highest]]
     - [[file:iterators/src/main.rs][iterators]]
     - [[file:project_motion/src/main.rs][project_motion]]
@@ -138,11 +139,12 @@
     - [[file:stars/src/main.rs][stars]]
     - [[file:ordinal/src/main.rs][ordinal]]
     - [[file:panaram//src/main.rs][panaram]]
-    - [[file:talking/src/main.rs][talking]]
     - [[file:pascal_triangle/src/main.rs][pascal_triangle]]
     - [[file:diamond_creation/src/main.rs][diamond_creation]]
     - [[file:scores/src/main.rs][scores]]
+    - [[file:talking/src/main.rs][talking]]
     - [[file:searching/src/main.rs][searching]]
+    - [[file:talking/src/main.rs][talking]]
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
     - [[file:pig_latin/src/main.rs][pig_latin]]
