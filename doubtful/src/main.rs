@@ -1,8 +1,14 @@
-// Write a function called `doubtful` that adds to every string passed
-// to it a question mark (?)
+/*
+## error types
 
-// You have to fix the code to make it compile an for that you can
-// only modify the code where is indicated
+### Instructions
+
+Write a function called `doubtful` that adds to every string passed
+to it a question mark (?)
+
+You have to fix the code to make it compile an for that you can
+only modify the code where is indicated
+*/
 
 fn main() {
 	//You can add code in the next line before `s`

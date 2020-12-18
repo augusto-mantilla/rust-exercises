@@ -122,7 +122,7 @@
    Total: 9
 *** Closures
     - [[file:closures/src/main.rs][closures]]
-    - [[file:captirung/src/lib.rs][captirung]]
+    - [[file:sales/src/lib.rs][sales]]
 *** Curry
     - [[file:adding/src/main.rs][adding]]
 *** Higher-order-functions
