@@ -1,4 +1,10 @@
-// Why does this code not compile
+/*
+## error types
+
+### Instructions
+
+Why does this code not compile
+*/
 
 fn main() {
 	let ref mut a = String::from("Hello");

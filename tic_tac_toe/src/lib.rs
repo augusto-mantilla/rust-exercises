@@ -12,16 +12,9 @@ Create the following functions:
 - `horizontal` that will receive a player and a table. It should return a boolean, this must return true if one of the horizontal lines are completed by the player
 - `vertical` that will receive a player and a table. It should return a boolean, this must return true if one of the vertical lines are completed by the player
 
-### Notions
+### Example
 
-- https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
-
-*/
-
-// CODE HERE
-
-/*
-// Example:
+```rust
 fn main() {
     println!(
         "{:?}",
@@ -42,39 +35,24 @@ fn main() {
     );
     // "player O won"
 
-    let hor = vec![
-            vec!["X", "X", "O"],
-            vec!["O", "O", "O"],
-            vec!["O", "#", "X"]
-        ]
-    println!("{:?}", (horizontal("O", &hor), horizontal("X", &hor)));
-    // (true, false)
-
-    println!("{:?}", tic_tac_toe(hor));
-    // "player O won"
-
     let dig = vec![
             vec!["O", "O", "X"],
             vec!["O", "X", "O"],
             vec!["X", "#", "X"]
-        ]
-    println!("{:?}", (horizontal("O", &dig), horizontal("X", &dig)));
-    // (false, true)
+        ];
 
     println!("{:?}",tic_tac_toe(dig));
     // "player X won"
-
-    println!(
-        "{:?}",
-        tic_tac_toe(vec![
-            vec!["O", "X", "O"],
-            vec!["X", "O", "O"],
-            vec!["X", "#", "O"]
-        ])
-    );
-    // "player O won"
 }
+```
+
+### Notions
+
+- https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
+
 */
+
+// CODE HERE
 
 #[cfg(test)]
 mod tests {
