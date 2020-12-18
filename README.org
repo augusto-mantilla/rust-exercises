@@ -29,7 +29,7 @@
     - [[file:ownership/src/main.rs][ownership]]
     - [[file:copy/src/lib.rs][copy]]
     - [[file:borrow/src/main.rs][borrow]]
-    - [[file:mutability/src/main.rs][mutability]]
+    - [[file:doubtful/src/main.rs][doubtful]]
 *** References
     - [[file:reference_rules/src/main.rs][reference_rules]]
     - [[file:borrow_me_the_reference/src/lib.rs][borrow_me_the_reference]]
@@ -67,7 +67,7 @@
     - [[file:panic/src/main.rs][panic]]
     - [[file:handling/src/main.rs][handling]]
 *** Option
-    - [[file:options/src/lib.rs][options]]
+    - [[file:profanity_filter/src/lib.rs][profanity_filter]]
     - [[file:question_mark/src/lib.rs][question_mark]]
 *** Result<T,E>
     - [[file:banner/src/lib.rs][banner]]
@@ -139,7 +139,7 @@
     - [[file:ordinal/src/main.rs][ordinal]]
     - [[file:panaram//src/main.rs][panaram]]
     - [[file:talking/src/main.rs][talking]]
-    - [[file:triangle/src/main.rs][triangle]]
+    - [[file:pascal_triangle/src/main.rs][pascal_triangle]]
     - [[file:diamond_creation/src/main.rs][diamond_creation]]
     - [[file:scores/src/main.rs][scores]]
     - [[file:searching/src/main.rs][searching]]
