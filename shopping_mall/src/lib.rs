@@ -5,16 +5,17 @@
 
 You will have to create several functions to help run a shopping mall, with the help of the `mall` module provided:
 
-- `biggest_store`: receives a `mall::Mall` and returns the `mall::floor::store::Store` with the biggest `square_meters`;
-- `highest_paid_employees`: receives a `mall::Mall` and returns a vector containing all of the `mall::floor::store::employee::Employee`s with the highest salaries;
+- `biggest_store`: receives a `mall::Mall` and returns the `Store` with the biggest `square_meters`;
+- `highest_paid_employees`: receives a `mall::Mall` and returns a vector containing the `Employee`(s) with the highest salaries;
 - `nbr_of_employees`: receives a `mall::Mall` and returns the number of employees and securities, as an `usize`, in that mall.
 - `fire_old_securities`: receives a `mall::Mall` and removes from the `mall::Mall.securities` all securities who are 50 years old or older.
-- `check_securities`: receives a `mall::Mall` and a vector of `mall::security::Security` and if there are not at least 1 security for every 200 square meters of floor size, there should be added a security to the `mall::Mall.securities`
+- `check_securities`: receives a `mall::Mall` and a vector of `Security` and if there are not at least 1 security for every 200 square meters of floor size, there should be added a security to the `mall::Mall.securities`
 - `cut_or_raise`: receives a `mall::Mall and raises or cuts the salary  of every employee in the mall by 10% depending if the employee works for more than 10 hours
+
 
 ### Example
 
-```rs
+```rust
 fn main() {
     let secs = vec![
         mall::security::Security::new("John Oliver", 34, 7),
@@ -69,24 +70,20 @@ fn main() {
     ];
 
     let ground_stores = vec![
-        mall::floor::store::Store::new("Footzo", 50, footzo_emp),
-        mall::floor::store::Store::new("Swashion", 43, swashion_emp),
+        store::Store::new("Footzo", 50, footzo_emp),
+        store::Store::new("Swashion", 43, swashion_emp),
     ];
     let food_stores = vec![
-        mall::floor::store::Store::new("PizBite", 60, pizbite_emp),
-        mall::floor::store::Store::new("Chillout Grill", 50, grill_emp),
-        mall::floor::store::Store::new("Sumo Food", 30, sumo_emp),
+        store::Store::new("PizBite", 60, pizbite_emp),
+        store::Store::new("Chillout Grill", 50, grill_emp),
+        store::Store::new("Sumo Food", 30, sumo_emp),
     ];
-    let supermarket = vec![mall::floor::store::Store::new(
-        "Pretail",
-        950,
-        supermaket_emp,
-    )];
+    let supermarket = vec![store::Store::new("Pretail", 950, supermaket_emp)];
 
     let floors = vec![
-        mall::floor::Floor::new("Ground Floor", ground_stores, 300),
-        mall::floor::Floor::new("Food Floor", food_stores, 500),
-        mall::floor::Floor::new("Supermarket", supermarket, 1000),
+        floor::Floor::new("Ground Floor", ground_stores, 300),
+        floor::Floor::new("Food Floor", food_stores, 500),
+        floor::Floor::new("Supermarket", supermarket, 1000),
     ];
 
     let mall_la_vie = mall::Mall::new("La Vie Funchal", secs, floors);
@@ -94,11 +91,10 @@ fn main() {
     println!("{:?}", &mall_la_vie); //prints the whole mall
 }
 ```
+
 */
 
-
 mod mall;
-
 
 mod tests {
     use super::*;
