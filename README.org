@@ -72,7 +72,7 @@
 *** Result<T,E>
     - [[file:banner/src/lib.rs][banner]]
 *** Multiple error types
-    - [[file:error_types/src/lib.rs][error_types]]
+    - [[file:error_type/src/lib.rs][error_type]]
     - [[file:boxing_todo/src/lib.rs][boxing_todo]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Total: 6

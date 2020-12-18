@@ -13,13 +13,9 @@ You will have to create 3 structures:
 Beside the structure you must create a function named `get_fourth_layer` that is associated to the `One` structure.
 This function should return the `Option` value in the `Four` structure.
 
-### Notions
+### Example
 
-- https://doc.rust-lang.org/stable/rust-by-example/error/option_unwrap/question_mark.html
-
-*/
-
-/*
+```rust
 fn main() {
     let a = One {
         first_layer : Some(Two {
@@ -37,6 +33,11 @@ fn main() {
         None => 0
     })
 }
+```
+
+### Notions
+
+- https://doc.rust-lang.org/stable/rust-by-example/error/option_unwrap/question_mark.html
 */
 
 #[cfg(test)]

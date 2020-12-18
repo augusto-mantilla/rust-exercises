@@ -31,25 +31,9 @@ content of the message sent.
 - `date_format` that creates and formats the date and time that the message was sent, the format should
 look like this: **Mon Oct  5 10:22:19 2020**
 
-### Notions
+### Example
 
-- https://docs.rs/chrono/0.4.19/chrono/
-- https://doc.rust-lang.org/stable/book/ch06-01-defining-an-enum.html?highlight=option#the-option-enum-and-its-advantages-over-null-values
-
-*/
-use chrono::prelude::Utc;
-
-#[derive(Debug)]
-struct Message {}
-
-impl Message {}
-
-fn check_ms(ms: &Message) -> (bool, &str) {}
-
-fn format_date() -> String {}
-
-/*
-// example
+```rust
 fn main() {
   let m0 = Message::new_ms("hello there".to_string(), "toby".to_string(), format_date());
   println!("{:?}", check_ms(&m0));
@@ -67,7 +51,24 @@ fn main() {
   println!("{:?}", check_ms(&m3));
   // output: (false, "ERROR: illegal")
 }
+```
+
+### Notions
+
+- https://docs.rs/chrono/0.4.19/chrono/
+- https://doc.rust-lang.org/stable/book/ch06-01-defining-an-enum.html?highlight=option#the-option-enum-and-its-advantages-over-null-values
+
 */
+use chrono::prelude::Utc;
+
+#[derive(Debug)]
+struct Message {}
+
+impl Message {}
+
+fn check_ms(ms: &Message) -> (bool, &str) {}
+
+fn format_date() -> String {}
 
 #[cfg(test)]
 mod tests {

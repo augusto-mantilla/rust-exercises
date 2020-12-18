@@ -39,30 +39,9 @@ You will have to create the following callback functions :
   - `rem`, that converts the reference strings to `float`s and returns the `Result`, being the remainder of the division
   of the `float`s or the standard (std) error `ParseFloatError`.
 
-### Notions
+### Example
 
-- https://doc.rust-lang.org/rust-by-example/error/result.html
-- https://docs.rs/getopts/0.2.18/getopts/struct.Options.html#method.optflag
-
-*/
-use std::collections::HashMap;
-
-#[allow(dead_code)]
-type Callback = fn(&str, &str) -> Result<String, ParseFloatError>;
-
-#[allow(dead_code)]
-struct FlagsHandler {
-    flags: HashMap<(String, String), Callback>,
-}
-impl FlagsHandler {
-    #[allow(dead_code)]
-    fn add_flag(&mut self, flag: (String, String), func: Callback) {}
-
-    #[allow(dead_code)]
-    fn exec_func(&mut self, flag: (String, String), argv: &[&str]) -> String {}
-}
-
-/* Example
+```rust
 fn main() {
     let mut handler = FlagsHandler { flags: HashMap::new() };
 
@@ -87,7 +66,30 @@ fn main() {
     println!("{:?}",handler.exec_func(("-r".to_string(), "--remainder".to_string()), &["2.0", "fd"]));
     // output: "invalid float literal"
 }
+```
+
+### Notions
+
+- https://doc.rust-lang.org/rust-by-example/error/result.html
+- https://docs.rs/getopts/0.2.18/getopts/struct.Options.html#method.optflag
 */
+
+use std::collections::HashMap;
+
+#[allow(dead_code)]
+type Callback = fn(&str, &str) -> Result<String, ParseFloatError>;
+
+#[allow(dead_code)]
+struct FlagsHandler {
+    flags: HashMap<(String, String), Callback>,
+}
+impl FlagsHandler {
+    #[allow(dead_code)]
+    fn add_flag(&mut self, flag: (String, String), func: Callback) {}
+
+    #[allow(dead_code)]
+    fn exec_func(&mut self, flag: (String, String), argv: &[&str]) -> String {}
+}
 
 #[cfg(test)]
 mod tests {

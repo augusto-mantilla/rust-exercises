@@ -1,5 +1,5 @@
 /*
-## boxing
+## boxing_todo
 
 ### Instructions
 
@@ -30,38 +30,9 @@ out the message **"Fail to parse todo"** in case it's a parsing error, otherwise
 In the main file you will have to implement a function called `get_todo` that receives a string and returns a Result
 that can be the structure `TodoList` or a boxing error. This function must be able to deserialize the json file.
 
-### Notions
+### Example
 
-- https://serde.rs/
-- https://doc.rust-lang.org/stable/rust-by-example/error/multiple_error_types/boxing_errors.html
-- https://doc.rust-lang.org/stable/rust-by-example/trait/dyn.html
-
-*/
-
-mod error;
-use error::{ ParseErr, ReadErr };
-
-use std::error::Error;
-
-use serde::{ Deserialize, Serialize };
-use std::fs::read_to_string;
-
-#[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
-pub struct Task {
-    id: u32,
-    description: String,
-    level: u32,
-}
-
-#[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
-pub struct TodoList {
-    title: String,
-    tasks: Vec<Task>,
-}
-
-/*
-// Example:
-
+```rust
 mod lib;
 use lib::{ TodoList };
 
@@ -93,8 +64,35 @@ fn main() {
     }
     // output : "Todo List read failed: Os { code: 13, kind: PermissionDenied, message: "Permission denied" }"
 }
+```
 
+### Notions
+
+- https://serde.rs/
+- https://doc.rust-lang.org/stable/rust-by-example/error/multiple_error_types/boxing_errors.html
+- https://doc.rust-lang.org/stable/rust-by-example/trait/dyn.html
 */
+
+mod error;
+use error::{ ParseErr, ReadErr };
+
+use std::error::Error;
+
+use serde::{ Deserialize, Serialize };
+use std::fs::read_to_string;
+
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
+pub struct Task {
+    id: u32,
+    description: String,
+    level: u32,
+}
+
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq)]
+pub struct TodoList {
+    title: String,
+    tasks: Vec<Task>,
+}
 
 #[cfg(test)]
 mod tests {

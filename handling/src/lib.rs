@@ -10,12 +10,9 @@ Write a function, called `open_or_create` that as two arguments:
 This functions should try to open a file, if it does not exist creates it.
 You should panic, with the error, in case something goes wrong.
 
-### Notions
+### Example
 
-- https://doc.rust-lang.org/std/io/enum.ErrorKind.html
-- https://doc.rust-lang.org/std/fs/struct.File.html
-*/
-
+```rust
 fn main() {
 	let path = "a.txt";
 	File::create(path).unwrap();
@@ -28,6 +25,13 @@ fn main() {
    println!("{}", s);
    // output: content to be written
 }
+```
+
+### Notions
+
+- https://doc.rust-lang.org/std/io/enum.ErrorKind.html
+- https://doc.rust-lang.org/std/fs/struct.File.html
+*/
 
 fn open_or_create(s: &str, content: &str) {
 }
