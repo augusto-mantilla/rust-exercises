@@ -56,7 +56,7 @@
     - [[file:hashing/src/main.rs][hashing]]
     - [[file:string_permutation/src/main.rs][string_permutation]]
     - [[file:bigger/src/main.rs][bigger]]
-    - [[file:simple-hash/src/main.rs][simple-hash]]
+    - [[file:simple_hash/src/main.rs][simple_hash]]
 *** Methods
     - [[file:collect/src/main.rs][collect]]
 ** Error Handling (Quest 4 -> 1 day)
@@ -78,11 +78,11 @@
    Total: 6
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:modules/src/main.rs][modules]]
-   - [[file:does_it_fit/src/main.rs][does_it_fit]]
-   - [[file:macro_calculator/src/main.rs][macro_calculator]]
-   - [[file:shopping_mall/src/main.rs][shopping_mall]]
-   - [[file:expected_variable/src/main.rs][expected_variable]]
-   - [[file:mobs/src/main.rs][mobs]]
+   - [[file:does_it_fit/src/lib.rs][does_it_fit]]
+   - [[file:macro_calculator/src/lib.rs][macro_calculator]]
+   - [[file:shopping_mall/src/lib.rs][shopping_mall]]
+   - [[file:expected_variable/src/lib.rs][expected_variable]]
+   - [[file:mobs/src/lib.rs][mobs]]
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
    Total: 15
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes

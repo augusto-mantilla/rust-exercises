@@ -11,22 +11,9 @@ Otherwise the evaluated string should be compared to the expected string using t
 If the result of `edit_distance` has more than 50% of 'alikeness' to the expected string, considering the length of the expected string and the result of `edit_distance`, return that same percentage with a '%' symbol in front of the number.
 Otherwise `expected_value` should return None.
 
-Example:
+### Example:
 
 ```rs
-edit_distance("On_Point", "on_point").unwrap(); // -> 100%
-edit_distance("soClose", "So Close").unwrap(); // -> 88%
-edit_distance("something", "something_completely_different"); // -> None
-```
-
-*/
-
-extern crate case;
-extern crate edit_distance;
-
-use case::CaseExt;
-use edit_distance::edit_distance;
-
 fn main() {
     println!(
         "{} close to it",
@@ -45,6 +32,16 @@ fn main() {
         expected_variable("BenedictCumberbatch", "BeneficialCucumbersnatch").unwrap()
     ); // -> 73%
 }
+```
+
+*/
+
+extern crate case;
+extern crate edit_distance;
+
+use case::CaseExt;
+use edit_distance::edit_distance;
+
 
 fn expected_variable(evaluated: &str, expected: &str) -> Option<String> {}
 
