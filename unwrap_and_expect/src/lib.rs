@@ -1,5 +1,5 @@
 /*
-## unwrap
+## unwrap_and_expect
 
 ### Instructions
 
@@ -18,26 +18,9 @@ Create the following functions that receives a vector :
   - `unwrap_or_else` that in case of error returns a the 
     vector that justifies the error
 
-### Notions
+### Example
 
-- https://doc.rust-lang.org/std/?search=unwrap
-
-*/
-fn odd_to_even(data: Vec<u32>) -> Result<Vec<u32>, (String, Vec<u32>)> {
-    let mut a = Vec::new();
-    a.extend(data.iter().filter(|&value| value % 2 == 0));
-    if a.len() != 0 {
-        return Err(("There is a even value in the vector!".to_string(), a));
-    }
-    a.extend(data.iter().map(|&value| {
-        value + 1
-    }));
-    Ok(a)
-}
-
-/*
-Example:
-
+```rust
 fn main() {
     // println!("{:?}", expect(vec![1, 3, 2, 5]));
     println!("{:?}", unwrap_or(vec![1, 3, 2, 5]));
@@ -55,7 +38,23 @@ fn main() {
     println!("{:?}", unwrap_or_else(vec![3, 2, 6, 5]));
     // output : [2, 6]
 }
+```
+### Notions
+
+- https://doc.rust-lang.org/std/?search=unwrap
 */
+
+fn odd_to_even(data: Vec<u32>) -> Result<Vec<u32>, (String, Vec<u32>)> {
+    let mut a = Vec::new();
+    a.extend(data.iter().filter(|&value| value % 2 == 0));
+    if a.len() != 0 {
+        return Err(("There is a even value in the vector!".to_string(), a));
+    }
+    a.extend(data.iter().map(|&value| {
+        value + 1
+    }));
+    Ok(a)
+}
 
 #[cfg(test)]
 mod tests {

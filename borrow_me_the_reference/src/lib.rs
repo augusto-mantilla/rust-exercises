@@ -6,7 +6,6 @@
 Ownership is Rust's most unique feature, and it enables Rust to make memory safety guarantees without
 needing garbage collector. Therefore you must understand ownership in rust.
 
-
 Create the following functions :
 
   - `delete_and_backspace`, imagine that `-` represents the backspace key and the `+` represents the
@@ -15,15 +14,23 @@ Create the following functions :
   - `is_correct` that borrows a Vector of string literals with some correct and incorrect math equations
     and replaces the correct equations with `✔` and the wrong with `✘` and returns a `usize` with the percentage
     of correct equations.
-    Example:
-    ```rust
-        fn main() {
-          let mut b: Vec<&str> = vec!["2+2=4", "3+2=5", "10-3=3", "5+5=10"];
-            let a = is_correct(&mut b);
-            println!("{:?}", (b, a));
-            // output: (["✔", "✔", "✘", "✔"], 75)
-        }
-    ```
+
+
+### Example
+
+```rust
+fn main() {
+    let mut a = String::from("bpp--o+er+++sskroi-++lcw");
+    let mut b: Vec<&str> = vec!["2+2=4", "3+2=5", "10-3=3", "5+5=10"];
+    
+    // - If a value does **not implement Copy**, it must be **borrowed** and so will be passed by **reference**.
+    delete_and_backspace(&mut a); // the reference of  the value
+    let per = is_correct(&mut b); // the reference of  the value
+
+    println!("{:?}", (a, b, per));
+    // output: ("borrow", ["✔", "✔", "✘", "✔"], 75)
+}
+```
 
 ### Notions
 
@@ -42,19 +49,6 @@ fn delete_and_backspace(s: &mut String) {
 fn is_correct(v: &mut Vec<&str>) -> usize {
 
 }
-
-/*
-// Example:
-fn main() {
-    let mut a = String::from("bpp--o+er+++sskroi-++lcw");
-    let mut b: Vec<&str> = vec!["2+2=4", "3+2=5", "10-3=3", "5+5=10"];
-    delete_and_backspace(&mut a); // the reference of  the value
-    let per = is_correct(&mut b); // the reference of  the value
-
-    println!("{:?}", (a, b, per));
-    // output: ("borrow", ["✔", "✔", "✘", "✔"], 75)
-}
-*/
 
 #[cfg(test)]
 mod tests {

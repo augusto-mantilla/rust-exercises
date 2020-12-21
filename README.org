@@ -15,7 +15,7 @@
     - [[file:looping/src/main.rs][looping]] (chars and bytes, boolean)
     - [[file:speed_transformation/src/main.rs][speed_transformation]] (float)
     - [[file:groceries/src/main.rs][groceries]] (Vec)
-    - [[file:reverse-string/src/main.rs][reverse_string]]
+    - [[file:reverse_string/src/main.rs][reverse_string]]
     - [[file:find_factorial/src/main.rs][find_factorial]]
 *** Tuples:
     Practicing tuple definition, accessing, destructuring and matching
@@ -29,9 +29,8 @@
     - [[file:ownership/src/main.rs][ownership]]
     - [[file:copy/src/lib.rs][copy]]
     - [[file:borrow/src/main.rs][borrow]]
-    - [[file:mutability/src/main.rs][mutability]]
+    - [[file:doubtful/src/main.rs][doubtful]]
 *** References
-    - [[file:reference_rules/src/main.rs][reference_rules]]
     - [[file:borrow_me_the_reference/src/lib.rs][borrow_me_the_reference]]
     - [[file:changes/src/main.rs][changes]]
     - [[file:tic_tac_toe/src/lib.rs][tic_tac_toe]]
@@ -56,7 +55,7 @@
     - [[file:hashing/src/main.rs][hashing]]
     - [[file:string_permutation/src/main.rs][string_permutation]]
     - [[file:bigger/src/main.rs][bigger]]
-    - [[file:simple-hash/src/main.rs][simple-hash]]
+    - [[file:simple_hash/src/main.rs][simple_hash]]
 *** Methods
     - [[file:collect/src/main.rs][collect]]
 ** Error Handling (Quest 4 -> 1 day)
@@ -67,22 +66,22 @@
     - [[file:panic/src/main.rs][panic]]
     - [[file:handling/src/main.rs][handling]]
 *** Option
-    - [[file:options/src/lib.rs][options]]
+    - [[file:profanity_filter/src/lib.rs][profanity_filter]]
     - [[file:question_mark/src/lib.rs][question_mark]]
 *** Result<T,E>
     - [[file:banner/src/lib.rs][banner]]
 *** Multiple error types
-    - [[file:error_types/src/lib.rs][error_types]]
+    - [[file:error_type/src/lib.rs][error_type]]
     - [[file:boxing_todo/src/lib.rs][boxing_todo]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
    Total: 6
    Learning how to organize projects separating them into components (packages and modules), unit testing and importing crates
    - [[file:modules/src/main.rs][modules]]
-   - [[file:does_it_fit/src/main.rs][does_it_fit]]
-   - [[file:macro_calculator/src/main.rs][macro_calculator]]
-   - [[file:shopping_mall/src/main.rs][shopping_mall]]
-   - [[file:expected_variable/src/main.rs][expected_variable]]
-   - [[file:mobs/src/main.rs][mobs]]
+   - [[file:does_it_fit/src/lib.rs][does_it_fit]]
+   - [[file:macro_calculator/src/lib.rs][macro_calculator]]
+   - [[file:shopping_mall/src/lib.rs][shopping_mall]]
+   - [[file:expected_variable/src/lib.rs][expected_variable]]
+   - [[file:mobs/src/lib.rs][mobs]]
 ** Generic Types, Traits and Lifetimes (Quest 6 -> 2 days)
    Total: 15
    Using generics to create flexible data structures, creating polymorphic code using traits and learning to deal with references through lifetimes
@@ -119,16 +118,19 @@
     # - [[file:graph/src/lib.rs][graph]]
     # - [[file:dijkstra/src/lib.rs][dijkstra]]
 ** Functional Languages Features (Quest 8 -> 2 days)
-   Total: 7
+   Total: 9
 *** Closures
     - [[file:closures/src/main.rs][closures]]
+    - [[file:sales/src/lib.rs][sales]]
 *** Curry
     - [[file:adding/src/main.rs][adding]]
 *** Higher-order-functions
     - [[file:adding_twice/src/main.rs][adding_twice]]
 *** Iterators
+    - [[file:get_products/src/main.rs][get_products]]
     - [[file:highest/src/main.rs][highest]]
     - [[file:iterators/src/main.rs][iterators]]
+    - [[file:project_motion/src/main.rs][project_motion]]
 	  - [[file:slices_to_map/src/lib.rs][slices_to_map]]
 	  - [[file:step_iterator/src/lib.rs][step_iterator]]
 ** Pattern Matching (Quest 9 -> 1 day)
@@ -136,10 +138,10 @@
     - [[file:stars/src/main.rs][stars]]
     - [[file:ordinal/src/main.rs][ordinal]]
     - [[file:panaram//src/main.rs][panaram]]
-    - [[file:talking/src/main.rs][talking]]
-    - [[file:triangle/src/main.rs][triangle]]
+    - [[file:pascal_triangle/src/main.rs][pascal_triangle]]
     - [[file:diamond_creation/src/main.rs][diamond_creation]]
     - [[file:scores/src/main.rs][scores]]
+    - [[file:talking/src/main.rs][talking]]
     - [[file:searching/src/main.rs][searching]]
     - [[file:logic-number/src/main.rs][logic-number]]
     - [[file:rot/src/main.rs][rot]]
