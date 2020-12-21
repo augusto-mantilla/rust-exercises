@@ -6,13 +6,14 @@
 Write a function called `doubtful` that adds to every string passed
 to it a question mark (?)
 
-You have to fix the code to make it compile an for that you can
+You have to fix the code to make it compile and for that you can
 only modify the code where is indicated
 */
 
 fn main() {
-	//You can add code in the next line before `s`
+	// You can add code in the next line before `s`
 	s = String::from("Hello");
+
 	println!("Before changing the string: {}", s);
 	doubtful(/*you can add code here*/);
 	println!("After changing the string: {}", s);
@@ -26,6 +27,7 @@ fn doubtful(/*you can add code here*/) {
 #[cfg(test)]
 mod test {
 	use super::*;
+	use assert_cmd::Command;
 
 	#[test]
 	fn it_works() {
@@ -35,5 +37,11 @@ mod test {
 		doubtful(&mut s);
 
 		assert_eq!(s, s_copy + "?");
+	}
+
+	#[test]
+	fn test_main() {
+		let mut cmd = Command::cargo_bin("doubtful").unwrap();
+		cmd.assert().success();
 	}
 }
