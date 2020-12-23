@@ -61,7 +61,7 @@
 ** Error Handling (Quest 4 -> 1 day)
    Total: 8
 *** unwrap and expect
-    - [[file:unwrap_or_expert/src/lib.rs][unwrap_and_expect]]
+    - [[file:unwrap_or_expect/src/lib.rs][unwrap_and_expect]]
 *** Panic
     - [[file:panic/src/main.rs][panic]]
     - [[file:handling/src/main.rs][handling]]
@@ -71,6 +71,7 @@
 *** Result<T,E>
     - [[file:banner/src/lib.rs][banner]]
 *** Multiple error types
+    - [[file:cipher/src/lib.rs][cipher]]
     - [[file:error_type/src/lib.rs][error_type]]
     - [[file:boxing_todo/src/lib.rs][boxing_todo]]
 ** Packages, Crates and modules (Quest 5 -> 1 day)
@@ -137,13 +138,13 @@
    Pattern matching syntax
     - [[file:stars/src/main.rs][stars]]
     - [[file:ordinal/src/main.rs][ordinal]]
-    - [[file:panaram//src/main.rs][panaram]]
+    - [[file:panaram/src/main.rs][panaram]]
     - [[file:pascal_triangle/src/main.rs][pascal_triangle]]
     - [[file:diamond_creation/src/main.rs][diamond_creation]]
     - [[file:scores/src/main.rs][scores]]
     - [[file:talking/src/main.rs][talking]]
     - [[file:searching/src/main.rs][searching]]
-    - [[file:logic-number/src/main.rs][logic-number]]
+    - [[file:logic_number/src/main.rs][logic_number]]
     - [[file:rot/src/main.rs][rot]]
     - [[file:pig_latin/src/main.rs][pig_latin]]
     - [[file:spelling/src/main.rs][spelling]]
